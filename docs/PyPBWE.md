@@ -107,13 +107,13 @@ We thus recommend to acquire a "free-space" measurement for each polarimetric ch
 
 ## Functions
 
-### PyPBWE.PBWE(spec_mat,freq,extra_factor,model_order,zp_factor,side_cut)
+### PyPBWE.PBWE(spec_mat,df,extra_factor,model_order,zp_factor,side_cut)
 
 The PyPBWE.PBWE function applies the Polarimetric Bandwidth Extrapolation to a radar polarimetric channels spectra.
 
 **Inputs:**
 * spec_mat: _complex 2D array_, each row containing the spectrum of a polarimetric channel to be extrapolated.
-* freq: _float 1D array_ containing the frequency axis corresponding to spec_mat [Hz].
+* df: _float_ frequency step corresponding to spec_mat [Hz].
 * extra_factor: _float_ factor between the extrapolated and the original spectra's bandwidths.
 * model_order: _float_ order of the AR models for extrapolation, expressed as a ratio of the original spectra's bandwidth.
 * zp_factor: _float_ factor between the zero-padded and original spectra's bandwidth.
@@ -267,6 +267,11 @@ Cut 5% of samples on each side of the 2 spectra:
 side_cut = True
 ~~~
 
+Calculate the spectrum's frequency step:
+~~~bash
+df = freq_vect[1]-freq_vect[0]
+~~~
+
 Application of the PBWE to the 2 polarimetric channels' spectra:
 ~~~bash
 output_pbwe, time_pbwe_vect = PyPBWE.PBWE(spec_mat,freq_vect,extra_factor,model_order,zp_factor,side_cut)
@@ -277,11 +282,6 @@ output_bwe matrix contains the time-domain radar soundings after PBWE, ready to 
 ### Display of the PBWE results:
 
 In this section we display the PBWE results compared to the original radar soundings for polarimetric channels 00 and 11.
-
-Calculate the spectrum's frequency step:
-~~~bash
-df = freq_vect[1]-freq_vect[0]
-~~~
 
 Generate a time vector corresponding to the time-domain transform:
 ~~~bash

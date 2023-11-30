@@ -122,7 +122,7 @@ See Akaike (1974).
 **Notes:**
 The type of noise ("white" or "colored") is an optional input. The noise will be considered "white" by default.
 
-### PySSBWE.SSBWE(spec,freq,extra_factor,zp_factor,side_cut,order=0,noise_type="white")
+### PySSBWE.SSBWE(spec,df,extra_factor,zp_factor,side_cut,order=0,noise_type="white")
 
 The PySSBWE.SSBWE function applies the State-Space Bandwidth Extrapolation (SSBWE) to a radar signal's spectrum.
 The State-Space model is estimated using two methods:
@@ -132,7 +132,7 @@ Both models' results are returned by the function.
 
 **Inputs:**
 * spec: _complex 1D array_ containing the spectrum to which the SSBWE will be applied.
-* freq: _float 1D array_ containing the frequency axis corresponding to spec [Hz].
+* df: _float_ frequency step corresponding to spec [Hz].
 * extra_factor: _float_ factor between the extrapolated and the original spectrum's bandwidths.
 * zp_factor: _float_ factor between the zero-padded and original spectrum's bandwidth.
 * side_cut: _boolean_, 5% of samples are cut on each side of the spectrum if True.
@@ -318,6 +318,11 @@ Cut 5% of samples on each side of the spectrum:
 side_cut = True
 ~~~
 
+Calculate the spectrum's frequency step:
+~~~bash
+df = freq_vect[1]-freq_vect[0]
+~~~
+
 Application of the BWE to the spectrum:
 ~~~bash
 output_ssbwe_1, output_ssbwe_2, time_ssbwe_vect = PySSBWE.SSBWE(spec_vect,freq_vect,extra_factor,zp_factor,side_cut)
@@ -328,11 +333,6 @@ output_ssbwe_1 and output_ssbwe_2 contains the time-domain radar soundings after
 ### Display of the SSBWE results:
 
 In this section we display the SSBWE results compared to the original radar sounding, for methods 1 and 2.
-
-Calculate the spectrum's frequency step:
-~~~bash
-df = freq_vect[1]-freq_vect[0]
-~~~
 
 Generate a time vector corresponding to the time-domain transform:
 ~~~bash

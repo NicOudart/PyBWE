@@ -10,7 +10,7 @@
 
 #-Inputs:
 #   -spec: frequency spectrum to be extrapolated
-#   -freq: frequency vector associated with spec
+#   -df: frequency step of spec
 #   -extra_factor: factor by which spec will be extrapolated
 #   -model_order: order of the AR model expressed as a ratio of the total number
 #                 of samples in spec
@@ -42,11 +42,10 @@ from .function_ar_extrapolation import ar_extrapolation
 
 #Function definition:-----------------------------------------------------------
 
-def BWE(spec,freq,extra_factor,model_order,zp_factor,side_cut):
+def BWE(spec,df,extra_factor,model_order,zp_factor,side_cut):
 
     #Cutting 5% of frequencies on each side of the spectrum:
     spec = spec[round(len(spec)*0.05):len(spec)-round(len(spec)*0.05)]
-    freq = freq[round(len(freq)*0.05):len(freq)-round(len(freq)*0.05)]
 
     #Retrieve the number of samples in the spectrum:
     N = len(spec)
@@ -74,7 +73,6 @@ def BWE(spec,freq,extra_factor,model_order,zp_factor,side_cut):
     output_bwe = np.fft.fft(np.conjugate(spec_extra),round(zp_factor*len(spec_extra)))/scale_factor
 
     #Create a new time vector for output_bwe:
-    df = freq[1]-freq[0] #Frequency step
     time_bwe_vect = np.linspace(0,1/df,zp_factor*len(spec_extra))
 
     return output_bwe, time_bwe_vect

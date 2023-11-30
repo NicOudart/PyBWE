@@ -108,13 +108,14 @@ zp_factor = 10
 #Cut 5% of samples on each side of the 2 spectra:
 side_cut = True
 
+#Calculate the spectrum's frequency step:
+df = freq_vect[1]-freq_vect[0]
+
 #Application of the PBWE to the 2 polarimetric channels' spectra:
-output_pbwe, time_pbwe_vect = PyPBWE.PBWE(spec_mat,freq_vect,extra_factor,model_order,zp_factor,side_cut)
+output_pbwe, time_pbwe_vect = PyPBWE.PBWE(spec_mat,df,extra_factor,model_order,zp_factor,side_cut)
 
 #Figure display:----------------------------------------------------------------
 
-#Calculate the spectrum's frequency step:
-df = freq_vect[1]-freq_vect[0]
 #Generate a time vector corresponding to the time-domain transform:
 time_vect = np.linspace(0,1/df,zp_factor*np.shape(spec_mat)[1])
 

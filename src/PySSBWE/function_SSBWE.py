@@ -12,7 +12,7 @@
 
 #-Inputs:
 #   -spec: frequency spectrum to be extrapolated
-#   -freq: frequency vector associated with spec
+#   -df: frequency step of spec
 #   -extra_factor: factor by which spec will be extrapolated
 #   -zp_factor: zero-padding factor, a 10 zp_factor will lead to a X10
 #               interpolation in the time-domain output signal output_bwe. This
@@ -51,11 +51,10 @@ from .function_statespace_extrapolation import statespace_extrapolation
 
 #Function definition:-----------------------------------------------------------
 
-def SSBWE(spec,freq,extra_factor,zp_factor,side_cut,order=0,noise_type="white"):
+def SSBWE(spec,df,extra_factor,zp_factor,side_cut,order=0,noise_type="white"):
 
     #Cutting 5% of frequencies on each side of the spectrum:
     spec = spec[round(len(spec)*0.05):len(spec)-round(len(spec)*0.05)]
-    freq = freq[round(len(freq)*0.05):len(freq)-round(len(freq)*0.05)]
 
     #Convert y to Numpy array:
     y = np.array(spec)
@@ -101,7 +100,6 @@ def SSBWE(spec,freq,extra_factor,zp_factor,side_cut,order=0,noise_type="white"):
     output_ssbwe_2 = np.fft.fft(np.conjugate(y_extra_2),round(zp_factor*len(y_extra_2)))/len(y_extra_2) #Method 2
 
     #Create a new time vector for output_bwe:
-    df = freq[1]-freq[0] #Frequency step
     time_ssbwe_vect = np.linspace(0,1/df,zp_factor*len(y_extra_1))
 
     return output_ssbwe_1, output_ssbwe_2, time_ssbwe_vect

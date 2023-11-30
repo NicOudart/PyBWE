@@ -103,13 +103,14 @@ zp_factor = 10
 #Cut 5% of samples on each side of the spectrum:
 side_cut = True
 
+#Calculate the spectrum's frequency step:
+df = freq_vect[1]-freq_vect[0]
+
 #Application of the BWE to the spectrum:
-output_ssbwe_1, output_ssbwe_2, time_ssbwe_vect = PySSBWE.SSBWE(spec_vect,freq_vect,extra_factor,zp_factor,side_cut)
+output_ssbwe_1, output_ssbwe_2, time_ssbwe_vect = PySSBWE.SSBWE(spec_vect,df,extra_factor,zp_factor,side_cut)
 
 #Figure display:----------------------------------------------------------------
 
-#Calculate the spectrum's frequency step:
-df = freq_vect[1]-freq_vect[0]
 #Generate a time vector corresponding to the time-domain transform:
 time_vect = np.linspace(0,1/df,zp_factor*len(spec_vect))
 

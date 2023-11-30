@@ -128,13 +128,13 @@ The PyBWE.burg function fits an AR model to a spectrum, using the Burg algorithm
 * e: _float_ estimated white-noise variance.
 * rc: _complex 1D array_ containing the Burg algorithm's reflection coefficients.
 
-### PyBWE.BWE(spec,freq,extra_factor,model_order,zp_factor,side_cut)
+### PyBWE.BWE(spec,df,extra_factor,model_order,zp_factor,side_cut)
 
 The PyBWE.BWE function applies the Bandwidth Extrapolation to a radar signal's spectrum.
 
 **Inputs:**
 * spec: _complex 1D array_ containing the spectrum to which the BWE will be applied.
-* freq: _float 1D array_ containing the frequency axis corresponding to spec [Hz].
+* df: _float_ frequency step corresponding to spec [Hz].
 * extra_factor: _float_ factor between the extrapolated and the original spectrum's bandwidths.
 * model_order: _float_ order of the AR model for extrapolation, expressed as a ratio of the original spectrum's bandwidth.
 * zp_factor: _float_ factor between the zero-padded and original spectrum's bandwidth.
@@ -244,6 +244,11 @@ Cut 5% of samples on each side of the spectrum:
 side_cut = True
 ~~~
 
+Calculate the original spectrum's frequency step:
+~~~bash
+df = freq_vect[1]-freq_vect[0]
+~~~
+
 Application of the BWE to the spectrum:
 ~~~bash
 output_bwe, time_bwe_vect = PyBWE.BWE(spec_vect,freq_vect,extra_factor,model_order,zp_factor,side_cut)
@@ -254,11 +259,6 @@ output_bwe contains the time-domain radar sounding after BWE, ready to be displa
 ### Display of the BWE results:
 
 In this section we display the BWE results compared to the original radar sounding.
-
-Calculate the original spectrum's frequency step:
-~~~bash
-df = freq_vect[1]-freq_vect[0]
-~~~
 
 Generate a time vector corresponding to the time-domain transform:
 ~~~bash
