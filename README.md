@@ -1,4 +1,4 @@
-[<img src="https://github.com/NicOudart/PyBWE/blob/main/Logo_PyBWE.png" width="500"/>](Logo_PyBWE.png)
+[<img src="https://github.com/NicOudart/PyBWE/raw/main/Logo_PyBWE.png" width="500"/>](Logo_PyBWE.png)
 
 # PyBWE: Python tools for Bandwidth Extrapolation of radar signals
 
