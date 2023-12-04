@@ -3,7 +3,7 @@ from setuptools import setup,find_packages
 setup(name='PyBWE',
 version='1.0',
 description='Python tools for Bandwidth Extrapolation (BWE) of radar data',
-long_description=open("requirements.txt").read(),
+long_description=open("README.md").read(),
 long_description_content_type='text/markdown',
 url='https://github.com/NicOudart/PyBWE',
 author='Nicolas OUDART',
