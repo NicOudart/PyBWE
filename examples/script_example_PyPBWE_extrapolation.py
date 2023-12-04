@@ -28,8 +28,8 @@
 #   -The measured spectrum is corrupted by a white-noise of standard deviation
 #    10X smaller than the complex sine-waves' amplitudes.
 
-#The Polarimetric Bandwidth Extrapolation (PBWE) is applied to this radar's
-#signal using the PyBWE function_PBWE:
+#The polarimetric extrapolation used in the PBWE is applied manually to this
+#multi-channel spectrum:
 #   -Most of the estimation errors when reconstructing a complex spectrum with
 #    the Hilbert transform are on the far sides of the spectrum. For this reason,
 #    we cut 5% of frequencies on each side of the spectrum before PBWE. We would
@@ -41,14 +41,11 @@
 #    to 1/3 of the spectrum samples, as recommended by Cuomo (1992).
 #   -We use this model to extrapolate the spectrum on each side, to obtain a
 #    bandwidth 3X larger (maximum extrapolation factor recommended by Cuomo
-#    (1992)). A bandwidth X3 yields a resolution X3 better in time-domain.
-#   -The extrapolated multi-channel spectrum is eventually converted to a
-#    one time-domain signal per channel with IFFT, and zero-padding to
-#    interpolate the signal X10. This interpolation is purely aesthetic.
+#    (1992)).
 
-#NB: The PBWE is expected to yield better performances than the classic BWE only
-#in cases where targets have different scattering coefficients in the different
-#polarimetric channels of the radar.
+#NB: The polarimetric extrapolation is expected to perform better than the
+#classic AR extrapolation only in cases where the targets have different radar
+#responses in the different polarimetric channels of the radar.
 
 #References: Suwa and Iwamoto (2003,2007)
 

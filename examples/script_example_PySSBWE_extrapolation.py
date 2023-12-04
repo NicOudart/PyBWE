@@ -18,8 +18,8 @@
 #   -The measured spectrum is corrupted by a white-noise of standard deviation
 #    10X smaller than the complex sine-waves' amplitudes.
 
-#The State-Space Bandwidth Extrapolation (SSBWE) is applied to this radar's
-#signal using the PyBWE function_SSBWE:
+#The state-space extrapolation used in the SSBWE is applied manually to this
+#spectrum, using the 2 possible methods:
 #   -Most of the estimation errors when reconstructing a complex spectrum with
 #    the Hilbert transform are on the far sides of the spectrum. For this reason,
 #    we cut 5% of frequencies on each side of the spectrum before SSBWE. We
@@ -31,14 +31,7 @@
 #    then the backward directions.
 #   -We use these 2 models to extrapolate the spectrum on each side, to obtain a
 #    bandwidth 3X larger (maximum extrapolation factor recommended by Cuomo
-#    (1992)). A bandwidth X3 yields a resolution X3 better in time-domain.
-#   -The extrapolated spectrum is eventually converted to a time-domain signal
-#    by IFFT, with zero-padding to interpolate the signal X10. This
-#    interpolation is purely aesthetic.
-
-#From the state-space model of the spectrum, the properties of each echo
-#(amplitude, time-delay, frequency-domain decay) can be estimated. This is done
-#in the last part of this example.
+#    (1992)).
 
 #NB:
 #   -In the following example the order of the model (= number of echoes) is

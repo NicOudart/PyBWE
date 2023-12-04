@@ -18,8 +18,7 @@
 #   -The measured spectrum is corrupted by a white-noise of standard deviation
 #    10X smaller than the complex sine-waves' amplitudes.
 
-#The Bandwidth Extrapolation (BWE) is applied to this radar's signal using the
-#PyBWE function_BWE:
+#The AR extrapolation used in the BWE is applied manually to this spectrum:
 #   -Most of the estimation errors when reconstructing a complex spectrum with
 #    the Hilbert transform are on the far sides of the spectrum. For this reason,
 #    we cut 5% of frequencies on each side of the spectrum before BWE. We would
@@ -31,10 +30,7 @@
 #    spectrum samples, as recommended by Cuomo (1992).
 #   -We use this model to extrapolate the spectrum on each side, to obtain a
 #    bandwidth 3X larger (maximum extrapolation factor recommended by Cuomo
-#    (1992)). A bandwidth X3 yields a resolution X3 better in time-domain.
-#   -The extrapolated spectrum is eventually converted to a time-domain signal
-#    by IFFT, with zero-padding to interpolate the signal X10. This
-#    interpolation is purely aesthetic.
+#    (1992)).
 
 #References: Bowling (1977), Cuomo (1992)
 
