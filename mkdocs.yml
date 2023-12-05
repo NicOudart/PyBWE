@@ -60,7 +60,7 @@ plugins:
       default_handler: python
       handlers:
         python:
-          paths: [omegapy]
+          paths: [PyBWE]
           options:
             docstring_style: numpy
             docstring_section_style: table
