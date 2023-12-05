@@ -5,3 +5,4 @@ mkdocs-gen-files
 mkdocs-literate-nav
 mkdocstrings
 mkdocstrings-python
+jinja2==3.0.0
