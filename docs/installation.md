@@ -17,7 +17,9 @@ pip install PyBWE --upgrade
 This library contains 3 packages:
 
 * **PyBWE:** _Plain vanilla package_. It contains the BWE functions, as well as the sub-functions allowing you to model and extrapolate a radar spectrum.
+
 * **PyPBWE:** _Advanced package_. It contains the PBWE function, as well as the sub-functions allowing you to model and extrapolate a polarimetric radar spectra.
+
 * **PySSBWE:** _Advanced package_. It contains the SSBWE function, as well as the sub-functions allowing you to model and extrapolate a radar spectrum, as well as extracting echoes information from it.
 
 PyBWE should be used by default. PyPBWE can be used only if the radar has more than one polarimetric channel. SSBWE 

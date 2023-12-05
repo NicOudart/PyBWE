@@ -7,16 +7,22 @@ It allows you to apply the classic Bandwidth Extrapolation (BWE) technique as de
 The BWE is a super-resolution technique, as it yields a better range resolution in time-domain than classic spectral estimation techniques (FFT).
 
 The BWE works this way:
+
 * The input is the frequency-domain spectrum of the radar's reponse signal from a series of targets. In this situation, the signal should in theory be a sum of complex sine-waves.
+
 * An autoregressive (AR) model is fitted to this spectrum, using the Burg algorithm. The order of the model is a user-defined parameter.
+
 * This model is used to extrapolate the spectrum forward and backward. The extrapolating factor is a user-defined parameter.
+
 * The super-resolved time-domain sounding is obtained by IFFT. Zero-padding can be used for time-domain interpolation (this process is purely aesthetic).
 
 The spectrum's extrapolation factor is equal to the resolution enhancement factor after IFFT.
 
 The PyBWE package contains the **PyBWE.BWE** function, allowing you to apply the BWE directly to a given radar spectrum and get a super-resolved sounding.
 This function calls several other functions from the package, that you can call independently if needed:
+
 * **PyBWE.burg:** fits an AR model to a spectrum, using the Burg algorithm.
+
 * **PyBWE.ar_extrapolation:** extrapolates forward, backward or both a spectrum, given an AR model.
 
 ## Importation
@@ -44,7 +50,9 @@ For the BWE, Cuomo (1992) recommends an extrapolation factor of maximum 3.
 ### The effect of side-lobes
 
 In the case of a radar signal spectrum obtained by FFT, 2 effects must be mitigated before BWE:
+
 * If a window was applied to the signal, it must be inverted.
+
 * The application of the FFT generates side-lobes effects on the borders of the spectrum. For this reason, Cuomo (1992) recommends to remove 5% of frequencies on each side of a spectrum before BWE.
 
 In the case of a radar measuring only the real-part of a frequency spectrum, the imaginary part can be reconstructed by Hilbert transform.
@@ -105,14 +113,19 @@ The PyBWE.ar_extrapolation function extrapolates a spectrum given its AR model, 
 **Inputs:**
 
 * x: _complex 1D array_ containing the spectrum to be extrapolated.
+
 * ar_coeff: _complex 1D array_ containing the coefficients of the spectrum's AR model.
+
 * Nextra: _integer_ number of samples to be extrapolated forward, backward or both.
+
 * extra_mode: _string_ containing the extrapolation mode, "forward"/"backward"/"both".
 
 **Outputs:**
 
 * x_extra: _complex 1D array_ containing the extrapolated spectrum.
+
 * x_forward: _complex 1D array_ containing the forward extrapolation, empty if in "backward" mode.
+
 * x_backward: _complex 1D array_ containing the backward extrapolation, empty if in "forward" mode.
 
 ### PyBWE.burg(x,p)
@@ -120,12 +133,17 @@ The PyBWE.ar_extrapolation function extrapolates a spectrum given its AR model, 
 The PyBWE.burg function fits an AR model to a spectrum, using the Burg algorithm.
 
 **Inputs:**
+
 * x: _complex 1D array_ containing the spectrum to be modelled.
+
 * p: _integer_ order of the AR model.
 
 **Outputs:**
+
 * a: _complex 1D array_ containing the AR model coefficients.
+
 * e: _float_ estimated white-noise variance.
+
 * rc: _complex 1D array_ containing the Burg algorithm's reflection coefficients.
 
 ### PyBWE.BWE(spec,df,extra_factor,model_order,zp_factor,side_cut)
@@ -133,15 +151,23 @@ The PyBWE.burg function fits an AR model to a spectrum, using the Burg algorithm
 The PyBWE.BWE function applies the Bandwidth Extrapolation to a radar signal's spectrum.
 
 **Inputs:**
+
 * spec: _complex 1D array_ containing the spectrum to which the BWE will be applied.
+
 * df: _float_ frequency step corresponding to spec [Hz].
+
 * extra_factor: _float_ factor between the extrapolated and the original spectrum's bandwidths.
+
 * model_order: _float_ order of the AR model for extrapolation, expressed as a ratio of the original spectrum's bandwidth.
+
 * zp_factor: _float_ factor between the zero-padded and original spectrum's bandwidth.
+
 * side_cut: _boolean_, 5% of samples are cut on each side of the spectrum if True.
 
 **Outputs:**
+
 * output_bwe: _complex 1D array_ containing the time-domain radar signal after BWE.
+
 * time_bwe_vect: _float 1D array_ containing the time axis corresponding to output_bwe [s].
 
 **Notes:**
@@ -151,7 +177,9 @@ A Hamming window is applied to the spectrum before IFFT.
 ## Example
 
 2 example scripts are proposed with the same synthetic radar scenario for the PyBWE package:
+
 * An application of PyBWE.BWE on a synthetic radar signal is proposed in _examples/script_example_PyBWE_BWE.py_.
+
 * A manual use of PyBWE.burg and PyBWE.ar_extrapolation on a synthetic radar signal is proposed in _examples/script_example_PyBWE_extrapolation.py_.
 
 In the following, these 2 scripts are explained as a single tutorial:
@@ -159,15 +187,23 @@ In the following, these 2 scripts are explained as a single tutorial:
 ### Presentation of the scenario
 
 The synthetic radar signal example (inspired by the WISDOM GPR of the ExoMars rover mission, Ciarletti et al. (2017)):
+
 * A FMCW radar working between 0.5 and 3 GHz measures a 1001 frequencies spectrum when sounding.
+
 * Only the In-phase component (real part of the spectrum) is measured, the Quadrature component (imaginary part of the spectrum) is reconstructed by Hilbert transform.
+
 * Two targets in free-space are seperated by 5 cm, slightly below the radar's free-space resolution. These targets generate echoes of equal amplitudes in the radar's signal, or complex sine-waves in the measured spectrum.
+
 * The measured spectrum is corrupted by a white-noise of standard deviation 10X smaller than the complex sine-waves' amplitudes.
 
 The Bandwidth Extrapolation (BWE) is applied to this radar's signal using the PyBWE function_BWE:
+
 * Most of the estimation errors when reconstructing a complex spectrum with the Hilbert transform are on the far sides of the spectrum. For this reason, we cut 5% of frequencies on each side of the spectrum before BWE. We would do the same for a radar working in time-domain, as most errors in FFT estimation are also on each side of the spectrum. This process is useless for a radar working in the frequency-domain and measuring both In-Phase and Quadrature components of the spectrum.
+
 * We then fit an AR model to the spectrum, with an order equal to 1/3 of the spectrum samples, as recommended by Cuomo (1992).
+
 * We use this model to extrapolate the spectrum on each side, to obtain a bandwidth 3X larger (maximum extrapolation factor recommended by Cuomo (1992)). A bandwidth X3 yields a resolution X3 better in time-domain.
+
 * The extrapolated spectrum is eventually converted to a time-domain signal by IFFT, with zero-padding to interpolate the signal X10. This interpolation is purely aesthetic.
 
 This scenario requires the following libraries:
@@ -369,8 +405,13 @@ plt.show()
 ## References
 
 * [Cuomo (1992)](https://apps.dtic.mil/sti/tr/pdf/ADA258462.pdf)
+
 * [Ciarletti et al. (2017)](https://doi.org/10.1089/ast.2016.1532)
+
 * [Raguso et al. (2018)](https://doi.org/10.1109/MetroAeroSpace.2018.8453529)
+
 * [Hervé et al. (2020)](https://doi.org/10.1016/j.pss.2020.104939)
+
 * [Oudart et al. (2021)](https://doi.org/10.1016/j.pss.2021.105173)
+
 * [Gambacorta et al. (2022)](https://doi.org/10.1109/TGRS.2022.3216893)

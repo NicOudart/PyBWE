@@ -44,9 +44,13 @@ given radar instrument.
 Here is a non-exhaustive list of successful BWE applications in planetary science:
 
 * The 1st bathymetry of a Titan sea using Cassini radar data (Mastrogiuseppe et al., 2014)
+
 * The improvement of the stratigraphic analysis of Martian polar ice sheets using SHARAD (MRO) radar sounder data (Raguso et al., 2018)
+
 * The improvement of the WISDOM (ExoMars) Ground Penetrating Radar soundings in preparation of the Rosalind Franklin rover mission (Oudart et al., 2021)
+
 * The improvement of the MARSIS (Mars Express) radar sounder resolution by a factor of 6 using both BWE and BWI (Gambacorta et al., 2022)
+
 * The BWE helped the estimation of attenuations in the Martian subsurface with the RIMFAX (Mars 2020) Ground Penetrating Radar data (Eide et al., 2022)
 
 With the arrival of WISDOM (ExoMars) on Mars in 2028, as well as new radar sounders selected for the exploration of 
@@ -73,7 +77,9 @@ pip install PyBWE --upgrade
 This library contains 3 packages:
 
 * **PyBWE:** _Plain vanilla package_. It contains the BWE functions, as well as the sub-functions allowing you to model and extrapolate a radar spectrum.
+
 * **PyPBWE:** _Advanced package_. It contains the PBWE function, as well as the sub-functions allowing you to model and extrapolate a polarimetric radar spectra.
+
 * **PySSBWE:** _Advanced package_. It contains the SSBWE function, as well as the sub-functions allowing you to model and extrapolate a radar spectrum, as well as extracting echoes information from it.
 
 PyBWE should be used by default. PyPBWE can be used only if the radar has more than one polarimetric channel. SSBWE 
@@ -112,20 +118,31 @@ This package is released under a MIT open source license. See **LICENSE**.
 ## References
 
 BWE:
+
 * [Bowling (1977)](https://apps.dtic.mil/sti/pdfs/ADA042817.pdf)
+
 * [Cuomo (1992)](https://apps.dtic.mil/sti/tr/pdf/ADA258462.pdf)
+
 * [Moore (1997)](https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=5e09b4f4c00f6f660495a38c279961031a376e59)
 
 PBWE:
+
 * [Suwa and Iwamoto (2003)](https://doi.org/10.1109/IGARSS.2003.1295505)
+
 * [Suwa and Iwamoto (2007)](https://doi.org/10.1109/TGRS.2006.885406)
 
 SSBWE:
+
 * [Piou (1999):](https://apps.dtic.mil/sti/pdfs/ADA366105.pdf)
 
 Planetary science applications:
+
 * [Mastrogiuseppe et al. (2014)](https://doi.org/10.1002/2013GL058618)
+
 * [Raguso et al. (2018)](https://doi.org/10.1109/MetroAeroSpace.2018.8453529)
+
 * [Oudart et al. (2021)](https://doi.org/10.1016/j.pss.2021.105173)
+
 * [Gambacorta et al. (2022)](https://doi.org/10.1109/TGRS.2022.3216893)
+
 * [Eide et al. (2022)](https://doi.org/10.1029/2022GL101429)

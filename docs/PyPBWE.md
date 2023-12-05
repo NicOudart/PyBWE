@@ -8,9 +8,13 @@ The PBWE is a super-resolution technique, as it yields a better range resolution
 It is a multi-channel version of the classic Bandwidth Extrapolation (BWE), taking advantage of the polarimetric capabilities of a radar.
 
 The PBWE works this way:
+
 * The input is a set of frequency-domain spectra of the radar's reponse signals from a series of targets, received by different polarimetric channels of the instrument. In this situation, each channel signal should in theory be a sum of complex sine-waves.
+
 * A set of autoregressive (AR) models is fitted to this set of spectra, using a multi-channel version of the Burg algorithm. The order of the model is a user-defined parameter.
+
 * These models are used to extrapolate each spectrum forward and backward. The extrapolating factor is a user-defined parameter.
+
 * The super-resolved time-domain soundings for each channel are obtained by IFFT. Zero-padding can be used for time-domain interpolation (this process is purely aesthetic).
 
 Each spectrum's extrapolation factor is equal to the resolution enhancement factor after IFFT.
@@ -20,7 +24,9 @@ For this reason, in the case where a target's scattering coefficients are differ
 
 The PyPBWE package contains the **PyPBWE.PBWE** function, allowing you to apply the PBWE directly to a given set of multi-polarimetric-channel radar spectra and get a super-resolved sounding per channel.
 This function calls several other functions from the package, that you can call independently if needed:
+
 * **PyPBWE.polar_burg:** fits an AR model to each polarimetric channel of a spectrum, using a multi-channel version of the Burg algorithm.
+
 * **PyPBWE.polar_extrapolation:** extrapolates forward, backward or both a multi-polarimetric-channel spectrum, given a set of AR models.
 
 ## Importation
@@ -49,7 +55,9 @@ Higher values can be tried for the PBWE, as the model is expected to be more rob
 ### The effect of side-lobes
 
 In the case of a radar signal spectrum obtained by FFT, 2 effects must be mitigated before PBWE:
+
 * If a window was applied to any signal channel, it must be inverted.
+
 * The application of the FFT generates side-lobes effects on the borders of a spectrum. For this reason, Cuomo (1992) recommends to remove 5% of frequencies on each side of a spectrum before PBWE. The same goes for PBWE.
 
 In the case of a radar measuring only the real-part of each frequency spectrum, the imaginary part can be reconstructed by Hilbert transform.
@@ -112,15 +120,23 @@ We thus recommend to acquire a "free-space" measurement for each polarimetric ch
 The PyPBWE.PBWE function applies the Polarimetric Bandwidth Extrapolation to a radar polarimetric channels spectra.
 
 **Inputs:**
+
 * spec_mat: _complex 2D array_, each row containing the spectrum of a polarimetric channel to be extrapolated.
+
 * df: _float_ frequency step corresponding to spec_mat [Hz].
+
 * extra_factor: _float_ factor between the extrapolated and the original spectra's bandwidths.
+
 * model_order: _float_ order of the AR models for extrapolation, expressed as a ratio of the original spectra's bandwidth.
+
 * zp_factor: _float_ factor between the zero-padded and original spectra's bandwidth.
+
 * side_cut: _boolean_, 5% of samples are cut on each side of each spectra if True.
 
 **Outputs:**
+
 * output_pbwe: _complex 2D array_, each row containing the time-domain radar signal of a polarimetric channel after PBWE.
+
 * time_pbwe_vect: _float 1D array_ containing the time axis corresponding to output_pbwe [s].
 
 **Notes:**
@@ -132,12 +148,17 @@ A Hamming window is applied to each spectrum before IFFT.
 The PyPBWE.polar_burg function fits an AR model to each polarimetric channel's spectrum, using a multi-channel version of the Burg algorithm.
 
 **Inputs:**
+
 * X: _complex 2D array_, each row containing the spectrum of a polarimetric channel to be modelled.
+
 * p: _integer_ order of the AR models.
 
 **Outputs:**
+
 * Thetaf: _complex 2D array_ containing the coefficients of the multi-channel AR forward model.
+
 * Thetab: _complex 2D array_ containing the coefficients of the multi-channel AR backward model.
+
 * err: _float 1D array_ of prediction errors (forward/backward). 
 
 ### PyPBWE.polar_extrapolation(X,Thetaf,Thetab,Mextra,extra_mode)
@@ -145,21 +166,31 @@ The PyPBWE.polar_burg function fits an AR model to each polarimetric channel's s
 The PyPBWE.polar_extrapolation function extrapolates a set of polarimetric channel spectra given their multi-channel AR model, forward, backward or both.
 
 **Inputs:**
+
 * X: _complex 2D array_, each row containing the spectrum of a polarimetric channel to be extrapolated.
+
 * Thetaf: _complex 2D array_ containing the coefficients of the multi-channel AR forward model.
+
 * Thetab: _complex 2D array_ containing the coefficients of the multi-channel AR backward model.
+
 * Mextra: _integer_ number of samples to be extrapolated forward, backward or both for each channel.
+
 * extra_mode: _string_ containing the extrapolation mode, "forward"/"backward"/"both".
 
 **Outputs:**
+
 * X_extra: _complex 2D array_, each row containing the extrapolated spectrum of a polarimetric channel.
+
 * X_forward: _complex 2D array_, each row containing the forward extrapolation of a polarimetric channel.
+
 * X_backward: _complex 2D array_, each row containing the backward extrapolation of a polarimetric channel.
 
 ## Example
 
 2 example scripts are proposed with the same synthetic radar scenario for the PyBWE package:
+
 * An application of PyPBWE.PBWE on a synthetic radar signal is proposed in _examples/script_example_PyPBWE_PBWE.py_.
+
 * A manual use of PyPBWE.polar_burg and PyPBWE.polar_extrapolation on a synthetic radar signal is proposed in _examples/script_example_PyPBWE_extrapolation.py_.
 
 In the following, these 2 scripts are explained as a single tutorial:
@@ -167,16 +198,25 @@ In the following, these 2 scripts are explained as a single tutorial:
 ### Presentation of the scenario
 
 The synthetic radar signal example (inspired by the WISDOM GPR of the ExoMars rover mission, Ciarletti et al. (2017)):
+
 * A FMCW radar working between 0.5 and 3 GHz measures a 1001 frequencies spectrum when sounding.
+
 * This radar can transmit and receive signals in two linear polarizations named 0 and 1. This leads to 4 polirization channels: 2 co-polar named 00 and 11 (emission and reception in the same polarization), and 2 cross-polar named 01 and 10 (emission and reception in different polarizations). For simplicity, we will only consider the co-polar channels 00 and 11 in this example.
+
 * Only the In-phase component (real part of the spectrum) is measured, the Quadrature component (imaginary part of the spectrum) is reconstructed by Hilbert transform.
+
 * Two targets in free-space are seperated by 5 cm, slightly below the radar's free-space resolution. These targets generate echoes of equal amplitudes in the radar's signal, or complex sine-waves in the measured spectrum. The two targets are perfect reflectors, the 1st a perfect plate, the 2nd a perfect dihedral corner. Echoes received by the 00 and 11 channels therefore have the same scattering coefficients (1,1) for the 1st reflector, and different coefficients for the 2nd (1,-1).
+
 * The measured spectrum is corrupted by a white-noise of standard deviation 10X smaller than the complex sine-waves' amplitudes.
 
 The Polarimetric Bandwidth Extrapolation (PBWE) is applied to this radar's signal using the PyBWE function_PBWE:
+
 * Most of the estimation errors when reconstructing a complex spectrum with the Hilbert transform are on the far sides of the spectrum. For this reason, we cut 5% of frequencies on each side of the spectrum before PBWE. We would do the same for a radar working in time-domain, as most errors in FFT estimation are also on each side of the multi-channel spectrum. This process is useless for a radar working in the frequency-domain and measuring both In-Phase and Quadrature components of the spectrum.
+
 * We then fit an AR model to the multi-channel spectrum, with an order equal to 1/3 of the spectrum samples, as recommended by Cuomo (1992).
+
 * We use this model to extrapolate the spectrum on each side, to obtain a bandwidth 3X larger (maximum extrapolation factor recommended by Cuomo (1992)). A bandwidth X3 yields a resolution X3 better in time-domain.
+
 * The extrapolated multi-channel spectrum is eventually converted to a one time-domain signal per channel with IFFT, and zero-padding to interpolate the signal X10. This interpolation is purely aesthetic.
 
 This scenario requires the following libraries:
@@ -436,10 +476,17 @@ plt.show()
 ## References
 
 * [Cuomo (1992)](https://apps.dtic.mil/sti/tr/pdf/ADA258462.pdf)
+
 * [Suwa and Iwamoto (2003)](https://doi.org/10.1109/IGARSS.2003.1295505)
+
 * [Suwa and Iwamoto (2007)](https://doi.org/10.1109/TGRS.2006.885406)
+
 * [Ciarletti et al. (2017)](https://doi.org/10.1089/ast.2016.1532)
+
 * [Raguso et al. (2018)](https://doi.org/10.1109/MetroAeroSpace.2018.8453529)
+
 * [Hervé et al. (2020)](https://doi.org/10.1016/j.pss.2020.104939)
+
 * [Oudart et al. (2021)](https://doi.org/10.1016/j.pss.2021.105173)
+
 * [Gambacorta et al. (2022)](https://doi.org/10.1109/TGRS.2022.3216893)

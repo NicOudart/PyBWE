@@ -44,9 +44,13 @@ given radar instrument.
 Here is a non-exhaustive list of successful BWE applications in planetary science:
 
 * The 1st bathymetry of a Titan sea using Cassini radar data (Mastrogiuseppe et al., 2014)
+
 * The improvement of the stratigraphic analysis of Martian polar ice sheets using SHARAD (MRO) radar sounder data (Raguso et al., 2018)
+
 * The improvement of the WISDOM (ExoMars) Ground Penetrating Radar soundings in preparation of the Rosalind Franklin rover mission (Oudart et al., 2021)
+
 * The improvement of the MARSIS (Mars Express) radar sounder resolution by a factor of 6 using both BWE and BWI (Gambacorta et al., 2022)
+
 * The BWE helped the estimation of attenuations in the Martian subsurface with the RIMFAX (Mars 2020) Ground Penetrating Radar data (Eide et al., 2022)
 
 With the arrival of WISDOM (ExoMars) on Mars in 2028, as well as new radar sounders selected for the exploration of 

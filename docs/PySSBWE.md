@@ -8,20 +8,28 @@ The SSBWE is a super-resolution technique, as it yields a better range resolutio
 It is a state-space modelling version of the classic Bandwidth Extrapolation (BWE), this improved model making the technique more robust to noise and sub-surface attenuations.
 
 The SSBWE works this way:
+
 * The input is the frequency-domain spectrum of the radar's reponse signal from a series of targets, with sub-surface attenuations. In this situation, the signal should in theory be a sum of complex sine-waves, with distortions following decreasing exponentials.
+
 * A state-space model is fitted to this spectrum, using a state-space identification technique. The order of the model is estimated by Akaike's Information Criterion (AIC).
+
 * One model is used to extrapolate the spectrum forward, and another to extrapolate the spectrum backward. The extrapolating factor is a user-defined parameter.
+
 * The super-resolved time-domain sounding is obtained by IFFT. Zero-padding can be used for time-domain interpolation (this process is purely aesthetic).
 
 The spectrum's extrapolation factor is equal to the resolution enhancement factor after IFFT.
 
 The PySSBWE package contains the **PySSBWE.SSBWE** function, allowing you to apply the SSBWE directly to a given radar spectrum and get a super-resolved sounding.
 This function calls several other functions from the package, that you can call independently if needed:
+
 * **PySSBWE.statespace_model:** fits a state-space model to a spectrum, using 2 state-space identification methods.
+
 * **PySSBWE.AIC:** estimates the ideal order for a spectrum's state-space model using Akaike's Information Criterion.
+
 * **PySSBWE.statespace_extrapolation:** extrapolates forward, backward or both a spectrum, given an AR model.
 
 In addition, this package also contains a function that can be used to retrieve information on the different targets' echoes from a spectrum's state-space model:
+
 * **PySSBWE.statespace_properties:** retrieve the amplitudes, time-delays, and frequency-decays estimations of each echoes from a spectrum's state-space model.
 
 ## Importation
@@ -52,7 +60,9 @@ For the BWE, Cuomo (1992) recommends an extrapolation factor of maximum 3. This 
 ### The effect of side-lobes
 
 In the case of a radar signal spectrum obtained by FFT, 2 effects must be mitigated before SSBWE:
+
 * If a window was applied to the signal, it must be inverted.
+
 * The application of the FFT generates side-lobes effects on the borders of the spectrum. For this reason, Cuomo (1992) recommends to remove 5% of frequencies on each side of a spectrum before SSBWE. The same goes for SSBWE.
 
 In the case of a radar measuring only the real-part of a frequency spectrum, the imaginary part can be reconstructed by Hilbert transform.
@@ -112,11 +122,15 @@ The PySSBWE.AIC function estimates the ideal state-space model order from the sp
 See Akaike (1974).
 
 **Inputs:**
+
 * sv: _float 1D array_ of the spectrum's Hankel matrix singular values, in decreasing order.
+
 * N: _integer_ number of samples in the spectrum.
+
 * noise_type: (optional) _string_, "white" if the spectrum is affected by a white-noise, "colored" if the spectrum is affected by a colored-noise.
 
 **Outputs:**
+
 * output_order: _integer_ ideal state-space model order according to AIC.
 
 **Notes:**
@@ -126,22 +140,35 @@ The type of noise ("white" or "colored") is an optional input. The noise will be
 
 The PySSBWE.SSBWE function applies the State-Space Bandwidth Extrapolation (SSBWE) to a radar signal's spectrum.
 The State-Space model is estimated using two methods:
+
 * Method 1: estimation of the state-space model from the observability matrix.
+
 * Method 2: estimation of the state-space model from the controllability matrix.
+
 Both models' results are returned by the function.
 
 **Inputs:**
+
 * spec: _complex 1D array_ containing the spectrum to which the SSBWE will be applied.
+
 * df: _float_ frequency step corresponding to spec [Hz].
+
 * extra_factor: _float_ factor between the extrapolated and the original spectrum's bandwidths.
+
 * zp_factor: _float_ factor between the zero-padded and original spectrum's bandwidth.
+
 * side_cut: _boolean_, 5% of samples are cut on each side of the spectrum if True.
+
 * order: (optional) _integer_ order of the state-space model, if =0 the order is estimated using AIC.
+
 * noise_type: (optional) _string_, "white" if the spectrum is affected by a white-noise, "colored" if the spectrum is affected by a colored-noise.
 
 **Outputs:**
+
 * output_ssbwe_1: _complex 1D array_ extrapolated spectrum using SSBWE method 1.
+
 * output_ssbwe_2: _complex 1D array_ extrapolated spectrum using SSBWE method 2.
+
 * time_ssbwe_vect: _complex 1D array_ time axis corresponding to output_ssbwe_1 and output_ssbwe_2 [s].
 
 **Notes:**
@@ -153,13 +180,19 @@ The order of the model is by default estimated using AIC. It can also be set by 
 The PySSBWE.statespace_extrapolation function extrapolates forward a spectrum given its state-space model.
 
 **Inputs:**
+
 * y: _complex 1D array_ containing the spectrum to be extrapolated.
+
 * A: _complex 2D array_ containing the state-space model's "state matrix".
+
 * B: _complex 1D array_ containing the state-space model's "input matrix".
+
 * C: _complex 1D array_ containing the state-space model's "output matrix".
+
 * Nextra: _integer_ number of samples to extrapolate from y.
 
 **Outputs:**
+
 * y_extra: _complex 1D array_ containing the forward extrapolation of y.
 
 **Notes:**
@@ -170,21 +203,33 @@ To extrapolate a spectrum backward, you must flip the spectrum, fit a state-spac
 
 The PySSBWE.statespace_model function fits a state-space model to a spectrum.
 The State-Space model is estimated using two methods:
+
 * Method 1: estimation of the state-space model from the observability matrix.
+
 * Method 2: estimation of the state-space model from the controllability matrix.
+
 Both models are returned by the function.
 
 **Inputs:**
+
 * y: _complex 1D array_ containing the spectrum to be modelled.
+
 * order: (optional) _integer_ order of the state-space model, if =0 the order is estimated using AIC.
+
 * noise_type: (optional) _string_, "white" if the spectrum is affected by a white-noise, "colored" if the spectrum is affected by a colored-noise.
 
 **Outputs:**
+
 * A1: _complex 2D array_ containing the state-space model's "state matrix" obtained with method 1.
+
 * B1: _complex 2D array_ containing the state-space model's "input matrix" obtained with method 1.
+
 * C1: _complex 2D array_ containing the state-space model's "output matrix" obtained with method 1.
+
 * A2: _complex 2D array_ containing the state-space model's "state matrix" obtained with method 2.
+
 * B2: _complex 2D array_ containing the state-space model's "input matrix" obtained with method 2.
+
 * C2: _complex 2D array_ containing the state-space model's "output matrix" obtained with method 2.
 
 **Notes:**
@@ -196,21 +241,31 @@ The order of the model is by default estimated using AIC. It can also be set by 
 The PySSBWE.statespace_properties function retrieves the different echoes properties (complex amplitudes, time-delays, frequency-decays) from a spectrum's state-space model.
 
 **Inputs:**
+
 * A: _complex 2D array_ containing the spectrum state-space model's "state matrix".
+
 * B: _complex 1D array_ containing the spectrum state-space model's "input matrix".
+
 * C: _complex 1D array_ containing the spectrum state-space model's "output matrix".
+
 * df: _float_ frequency step of the modelled spectrum [Hz].
+
 * f1: _float_ 1st frequency of the modelled spectrum [Hz].
 
 **Outputs:**
+
 * amp: _complex 1D array_ containing the estimated echoes complex amplitudes in the signal.
+
 * td: _float 1D array_ containing the estimated echoes time-delays [s].
+
 * dec: _float_1D_array_ containing the estimated echoes frequency-decay [1/Hz].
 
 ## Example
 
 2 example scripts are proposed with the same synthetic radar scenario for the PySSBWE package:
+
 * An application of PySSBWE.SSBWE and PySSBWE.statespace_properties on a synthetic radar signal is proposed in _examples/script_example_PySSBWE_SSBWE.py_.
+
 * A manual use of PySSBWE.statespace_model and PySSBWE.statespace_extrapolation on a synthetic radar signal is proposed in _examples/script_example_PySSBWE_extrapolation.py_.
 
 In the following, these 2 scripts are explained as a single tutorial:
@@ -218,15 +273,23 @@ In the following, these 2 scripts are explained as a single tutorial:
 ### Presentation of the scenario
 
 The synthetic radar signal example (inspired by the WISDOM GPR of the ExoMars rover mission, Ciarletti et al. (2017)):
+
 * A FMCW radar working between 0.5 and 3 GHz measures a 1001 frequencies spectrum when sounding.
+
 * Only the In-phase component (real part of the spectrum) is measured, the Quadrature component (imaginary part of the spectrum) is reconstructed by Hilbert transform.
+
 * Two targets in free-space are seperated by 5 cm, slightly below the radar's free-space resolution. With these targets' echoes are associated different amplitudes and different decays in frequency-domain.
+
 * The measured spectrum is corrupted by a white-noise of standard deviation 10X smaller than the complex sine-waves' amplitudes.
 
 The State-Space Bandwidth Extrapolation (SSBWE) is applied to this radar's signal using the PyBWE function_SSBWE:
+
 * Most of the estimation errors when reconstructing a complex spectrum with the Hilbert transform are on the far sides of the spectrum. For this reason, we cut 5% of frequencies on each side of the spectrum before SSBWE. We would do the same for a radar working in time-domain, as most errors in FFT estimation are also on each side of the spectrum. This process is useless for a radar working in the frequency-domain and measuring both In-Phase and Quadrature components of the spectrum.
+
 * We then fit a state-space model to the spectrum, first in the forward and then the backward directions.
+
 * We use these 2 models to extrapolate the spectrum on each side, to obtain a bandwidth 3X larger (maximum extrapolation factor recommended by Cuomo (1992)). A bandwidth X3 yields a resolution X3 better in time-domain.
+
 * The extrapolated spectrum is eventually converted to a time-domain signal by IFFT, with zero-padding to interpolate the signal X10. This interpolation is purely aesthetic.
 
 From the state-space model of the spectrum, the properties of each echo (amplitude, time-delay, frequency-domain decay) can be estimated. This is done in the last part of this example.
@@ -234,7 +297,9 @@ From the state-space model of the spectrum, the properties of each echo (amplitu
 In the following example the order of the model (= number of echoes) is estimated using AIC. The order can also be forced by the user in the PySSBWE functions statespace_model and SSBWE with an optional parameter "order" if the number of echoes is known.
 
 2 methods can be used to fit a state-space model to a spectrum:
+
 *Method 1: using the observability matrix.
+
 *Method 2: using the controllability matrix.
 
 This scenario requires the following libraries:
@@ -543,10 +608,17 @@ plt.show()
 ## References
 
 * [Akaike (1974)](https://doi.org/10.1109/TAC.1974.1100705)
+
 * [Cuomo (1992)](https://apps.dtic.mil/sti/tr/pdf/ADA258462.pdf)
+
 * [Piou (1999):](https://apps.dtic.mil/sti/pdfs/ADA366105.pdf)
+
 * [Ciarletti et al. (2017)](https://doi.org/10.1089/ast.2016.1532)
+
 * [Raguso et al. (2018)](https://doi.org/10.1109/MetroAeroSpace.2018.8453529)
+
 * [Hervé et al. (2020)](https://doi.org/10.1016/j.pss.2020.104939)
+
 * [Oudart et al. (2021)](https://doi.org/10.1016/j.pss.2021.105173)
+
 * [Gambacorta et al. (2022)](https://doi.org/10.1109/TGRS.2022.3216893)
