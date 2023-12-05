@@ -1,6 +1,6 @@
 [![DOI](https://zenodo.org/badge/724105763.svg)](https://zenodo.org/doi/10.5281/zenodo.10259072)
 
-[<img src="https://github.com/NicOudart/PyBWE/raw/main/Logo_PyBWE.png" width="500"/>](Logo_PyBWE.png)
+[<img src="https://github.com/NicOudart/PyBWE/raw/main/Logo_PyBWE.png" width="500"/>]
 
 # PyBWE: Python tools for Bandwidth Extrapolation of radar signals
 
