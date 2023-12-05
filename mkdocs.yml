@@ -1,0 +1,152 @@
+---
+# Project Information
+site_name: "PyBWE"
+site_url: "https://noudart.github.io/PyBWE"
+site_author: "Nicolas OUDART"
+site_description: "Python tools for Bandwidth Extrapolation of radar signals"
+
+# Repository information
+repo_name: "NicOudart/PyBWE"
+repo_url: "https://github.com/NicOudart/PyBWE"
+edit_uri: "edit/main/docs/"
+
+# Copyright
+copyright: Copyright &copy; 2023 Nicolas OUDART
+
+# Configuration
+theme:
+  name: material
+  icon:
+    repo: fontawesome/brands/github
+    view: material/eye
+  logo: Logo_PyBWE.svg
+  favicon: Logo_PyBWE.ico
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Dark mode
+      primary: blue
+      accent: yellow
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Light mode
+      primary: blue
+      accent: yellow
+  features:
+    - navigation.instant
+    #- navigation.tabs
+    #- navigation.tabs.sticky
+    #- navigation.sections
+    #- navigation.path
+    #- navigation.expand
+    - navigation.indexes
+    - toc.integrate
+    - toc.follow
+    - content.code.copy
+    #- content.code.select
+    - content.code.annotate
+    #- content.tabs.link
+  language: en
+
+plugins:
+  - search
+  - autorefs
+  - gen-files:
+      scripts:
+      - docs/gen_api_pages.py
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          paths: [omegapy]
+          options:
+            docstring_style: numpy
+            docstring_section_style: table
+            #docstring_section_style: list
+            docstring_options:
+              ignore_init_summary: true
+            merge_init_into_class: true
+            show_object_full_path: true
+            members_order: alphabetical
+            #members_order: source
+            #separate_signature: true
+  - literate-nav:
+      nav_file: SUMMARY.md
+
+markdown_extensions:
+  # Code highlighting (with Pygments)
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      use_pygments: true
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  #- pymdownx.snippets
+  - pymdownx.snippets:
+      auto_append:
+        - docs/abbreviations.md
+  - pymdownx.superfences
+  # footnotes
+  - footnotes
+  # image support
+  - attr_list
+  - md_in_html
+  # lists
+  - def_list
+  #- pymdownx.tasklist:
+    #custom_checkbox: true
+  - admonition
+  - pymdownx.details
+  #- pymdownx.superfences
+  # content tabs
+  #- pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true 
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.smartsymbols
+  # Annotations
+  #- attr_list
+  #- md_in_html
+  #- pymdownx.superfences
+  # Emojis
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  # Abbreviations
+  - abbr
+  #- attr_list
+  #- pymdownx.snippets
+
+
+# Footer
+extra:
+  #history_buttons: false
+  version: v2.4
+  #nav_links:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/NicOudart
+      name: Nicolas OUDART on GitHub
+    - icon: fontawesome/brands/researchgate
+      link: https://www.researchgate.net/profile/Nicolas-Oudart
+      name: Nicolas OUDART on ResearchGate
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/nicolas-oudart-683aab109/
+      name: Nicolas OUDART on LinkedIn
+
+# Page tree
+nav:
+  - Home: home.md
+  - Installation: installation.md
+  - User Guide:
+    - PyBWE: PyBWE.md
+    - PyPBWE: PyPBWE.md
+    - PySSBWE: PySSBWE.md
+  - References: references.md
+  - Credits: credits.md
