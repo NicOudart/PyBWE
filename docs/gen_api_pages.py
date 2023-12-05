@@ -7,7 +7,7 @@ import mkdocs_gen_files
 nav = mkdocs_gen_files.Nav()
 
 for path in sorted(Path("PyBWE").rglob("*.py")):
-    if path.name in ["__init__.py"]:#, "config.py", "cli.py"]:
+    if path.name in ["__init__.py"]:
         continue
 
     module_path = path.relative_to("PyBWE").with_suffix("")
