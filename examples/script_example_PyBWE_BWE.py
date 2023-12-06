@@ -6,8 +6,8 @@
 
 #The synthetic radar signal example (inspired by the WISDOM GPR of the ExoMars
 #rover mission, Ciarletti et al. (2017)):
-#   -A FMCW radar working between 0.5 and 3 GHz measures a 1001 frequencies
-#    spectrum when sounding.
+#   -A SFCW (Stepped Frequency Continuous Wave) radar working between 0.5 and 3
+#    GHz measures a 1001 frequencies spectrum when sounding.
 #   -Only the In-phase component (real part of the spectrum) is measured, the
 #    Quadrature component (imaginary part of the spectrum) is reconstructed by
 #    Hilbert transform.

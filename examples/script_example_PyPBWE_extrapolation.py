@@ -7,8 +7,8 @@
 
 #The synthetic radar signal example (inspired by the WISDOM GPR of the ExoMars
 #rover mission, Ciarletti et al. (2017)):
-#   -A FMCW radar working between 0.5 and 3 GHz measures a 1001 frequencies
-#    spectrum when sounding.
+#   -A SFCW (Stepped Frequency Continuous Wave) radar working between 0.5 and 3
+#    GHz measures a 1001 frequencies spectrum when sounding.
 #   -This radar can transmit and receive signals in two linear polarizations
 #    named 0 and 1. This leads to 4 polirization channels: 2 co-polar named 00
 #    and 11 (emission and reception in the same polarization), and 2 cross-polar
