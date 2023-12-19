@@ -70,7 +70,7 @@ def BWE(spec,df,extra_factor,model_order,zp_factor,side_cut):
 
     #Hamming windowing (a good compromise for resolution) and IFFT:
     spec_extra = np.hamming(len(spec_extra))*spec_extra
-    output_bwe = np.fft.fft(np.conjugate(spec_extra),round(zp_factor*len(spec_extra)))/scale_factor
+    output_bwe = 1.85*np.fft.fft(np.conjugate(spec_extra),round(zp_factor*len(spec_extra)))/scale_factor
 
     #Create a new time vector for output_bwe:
     time_bwe_vect = np.linspace(0,1/df,zp_factor*len(spec_extra))

@@ -97,7 +97,7 @@ time_vect = np.linspace(0,1/df,zp_factor*len(spec_vect))
 
 
 #Display the original radar sounding and the BWE version:
-plt.plot(time_vect*1e9,abs(np.fft.fft(np.conjugate(spec_vect)*np.hamming(len(spec_vect)),zp_factor*len(spec_vect)))/len(spec_vect),'k-')
+plt.plot(time_vect*1e9,abs(1.85*np.fft.fft(np.conjugate(spec_vect)*np.hamming(len(spec_vect)),zp_factor*len(spec_vect)))/len(spec_vect),'k-')
 plt.plot(time_bwe_vect*1e9,abs(output_bwe),'r-')
 plt.xlim([5,9])
 plt.xlabel('Time delays (ns)')

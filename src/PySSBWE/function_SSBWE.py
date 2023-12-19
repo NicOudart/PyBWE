@@ -96,8 +96,8 @@ def SSBWE(spec,df,extra_factor,zp_factor,side_cut,order=0,noise_type="white"):
     #Hamming windowing (a good compromise for resolution) and IFFT:
     y_extra_1 = np.hamming(len(y_extra_1))*y_extra_1 #Method 1
     y_extra_2 = np.hamming(len(y_extra_2))*y_extra_2 #Method 2
-    output_ssbwe_1 = np.fft.fft(np.conjugate(y_extra_1),round(zp_factor*len(y_extra_1)))/len(y_extra_1) #Method 1
-    output_ssbwe_2 = np.fft.fft(np.conjugate(y_extra_2),round(zp_factor*len(y_extra_2)))/len(y_extra_2) #Method 2
+    output_ssbwe_1 = 1.85*np.fft.fft(np.conjugate(y_extra_1),round(zp_factor*len(y_extra_1)))/len(y_extra_1) #Method 1
+    output_ssbwe_2 = 1.85*np.fft.fft(np.conjugate(y_extra_2),round(zp_factor*len(y_extra_2)))/len(y_extra_2) #Method 2
 
     #Create a new time vector for output_bwe:
     time_ssbwe_vect = np.linspace(0,1/df,zp_factor*len(y_extra_1))

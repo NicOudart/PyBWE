@@ -121,7 +121,7 @@ time_vect = np.linspace(0,1/df,zp_factor*np.shape(spec_mat)[1])
 
 #Display the original radar sounding and the PBWE version for channel 00:
 plt.subplot(1,2,1)
-plt.plot(time_vect*1e9,abs(np.fft.fft(np.conjugate(spec_mat[0,:])*np.hamming(len(spec_mat[0,:])),zp_factor*len(spec_mat[0,:])))/len(spec_mat[0,:]),'k-')
+plt.plot(time_vect*1e9,abs(1.85*np.fft.fft(np.conjugate(spec_mat[0,:])*np.hamming(len(spec_mat[0,:])),zp_factor*len(spec_mat[0,:])))/len(spec_mat[0,:]),'k-')
 plt.plot(time_pbwe_vect*1e9,abs(output_pbwe[0,:]),'r-')
 plt.xlim([5,9])
 plt.xlabel('Time delays (ns)')
@@ -132,7 +132,7 @@ plt.grid()
 
 #Display the original radar sounding and the PBWE version for channel 00:
 plt.subplot(1,2,2)
-plt.plot(time_vect*1e9,abs(np.fft.fft(np.conjugate(spec_mat[1,:])*np.hamming(len(spec_mat[1,:])),zp_factor*len(spec_mat[1,:])))/len(spec_mat[1,:]),'k-')
+plt.plot(time_vect*1e9,abs(1.85*np.fft.fft(np.conjugate(spec_mat[1,:])*np.hamming(len(spec_mat[1,:])),zp_factor*len(spec_mat[1,:])))/len(spec_mat[1,:]),'k-')
 plt.plot(time_pbwe_vect*1e9,abs(output_pbwe[1,:]),'r-')
 plt.xlim([5,9])
 plt.xlabel('Time delays (ns)')

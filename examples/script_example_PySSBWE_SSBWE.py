@@ -115,7 +115,7 @@ output_ssbwe_1, output_ssbwe_2, time_ssbwe_vect = PySSBWE.SSBWE(spec_vect,df,ext
 time_vect = np.linspace(0,1/df,zp_factor*len(spec_vect))
 
 #Display the original radar sounding and the SSBWE version using method 1:
-plt.plot(time_vect*1e9,abs(np.fft.fft(np.conjugate(spec_vect)*np.hamming(len(spec_vect)),zp_factor*len(spec_vect)))/len(spec_vect),'k-')
+plt.plot(time_vect*1e9,abs(1.85*np.fft.fft(np.conjugate(spec_vect)*np.hamming(len(spec_vect)),zp_factor*len(spec_vect)))/len(spec_vect),'k-')
 plt.plot(time_ssbwe_vect*1e9,abs(output_ssbwe_1),'r-')
 plt.xlim([5,9])
 plt.xlabel('Time delays (ns)')
@@ -126,7 +126,7 @@ plt.grid()
 plt.show()
 
 #Display the original radar sounding and the SSBWE version using method 2:
-plt.plot(time_vect*1e9,abs(np.fft.fft(np.conjugate(spec_vect)*np.hamming(len(spec_vect)),zp_factor*len(spec_vect)))/len(spec_vect),'k-')
+plt.plot(time_vect*1e9,abs(1.85*np.fft.fft(np.conjugate(spec_vect)*np.hamming(len(spec_vect)),zp_factor*len(spec_vect)))/len(spec_vect),'k-')
 plt.plot(time_ssbwe_vect*1e9,abs(output_ssbwe_2),'r-')
 plt.xlim([5,9])
 plt.xlabel('Time delays (ns)')
