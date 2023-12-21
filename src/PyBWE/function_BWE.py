@@ -62,15 +62,9 @@ def BWE(spec,df,extra_factor,model_order,zp_factor,side_cut):
     #Extrapolation on each side of the spectrum:
     spec_extra,spec_forward,spec_backward = ar_extrapolation(spec,ar_coeff,Nextra,"both")
 
-    #Scaling (adding more frequencies adds more energy to the spectrum):
-    v0 = var(map(abs,spec))
-    vF = var(map(abs,spec_forward))
-    vB = var(map(abs,spec_backward))
-    scale_factor = ((vB*Nextra)+(v0*N)+(vF*Nextra))/v0
-
     #Hamming windowing (a good compromise for resolution) and IFFT:
     spec_extra = np.hamming(len(spec_extra))*spec_extra
-    output_bwe = 1.85*np.fft.fft(np.conjugate(spec_extra),round(zp_factor*len(spec_extra)))/scale_factor
+    output_bwe = 1.85*np.fft.fft(np.conjugate(spec_extra),round(zp_factor*len(spec_extra)))/len(spec_extra)
 
     #Create a new time vector for output_bwe:
     time_bwe_vect = np.linspace(0,1/df,zp_factor*len(spec_extra))

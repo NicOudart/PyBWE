@@ -66,15 +66,12 @@ def PBWE(spec_mat,df,extra_factor,model_order,zp_factor,side_cut):
     #Extrapolation of spec_mat in both directions:
     spec_mat_extra,spec_mat_extra_forward,spec_mat_extra_backward = polar_extrapolation(spec_mat,Thetaf,Thetab,Mextra,"both")
 
-    #Scale factor as BWE increases the energy in the spectrum:
-    scale_factor = np.shape(spec_mat_extra)[1]
-
     #Hamming windowing (a good compromise for resolution) and IFFT for each
     #spectrum channel:
     output_pbwe = np.zeros((Npol,round(zp_factor*np.shape(spec_mat_extra)[1])),dtype=complex)
     for idx_channel in range(Npol):
         spec_mat_extra[idx_channel,:] = np.hamming(np.shape(spec_mat_extra)[1])*spec_mat_extra[idx_channel,:]
-        output_pbwe[idx_channel,:] = 1.85*np.fft.fft(np.conjugate(spec_mat_extra[idx_channel,:]),round(zp_factor*np.shape(spec_mat_extra)[1]))/scale_factor
+        output_pbwe[idx_channel,:] = 1.85*np.fft.fft(np.conjugate(spec_mat_extra[idx_channel,:]),round(zp_factor*np.shape(spec_mat_extra)[1]))/np.shape(spec_mat_extra)[1]
 
     #Create a new time vector for output_bwe:
     time_pbwe_vect = np.linspace(0,1/df,zp_factor*np.shape(spec_mat_extra)[1])
