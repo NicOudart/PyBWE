@@ -235,10 +235,10 @@ for dist in list_dist_targets:
                 list_distance_bwe += [0.5*abs(time_bwe_vect[peaks_bwe[0]]-time_bwe_vect[peaks_bwe[1]])*3e8]
 
                 #Stock the amplitude of the 1st echo:
-                list_amplitude_target1_bwe += [abs(output_bwe[0])]
+                list_amplitude_target1_bwe += [abs(output_bwe[peaks_bwe[0]])]
 
                 #Stock the amplitude of the 2nd echo:
-                list_amplitude_target2_bwe += [abs(output_bwe[1])]
+                list_amplitude_target2_bwe += [abs(output_bwe[peaks_bwe[1]])]
 
             #Testing the PBWE - polar 00:---------------------------------------
 
@@ -255,10 +255,10 @@ for dist in list_dist_targets:
                 list_distance_pbwe00 += [0.5*abs(time_pbwe_vect[peaks_pbwe_00[0]]-time_pbwe_vect[peaks_pbwe_00[1]])*3e8]
 
                 #Stock the amplitude of the 1st echo:
-                list_amplitude_target1_pbwe00 += [abs(output_pbwe[0,0])]
+                list_amplitude_target1_pbwe00 += [abs(output_pbwe[0,peaks_pbwe_00[0]])]
 
                 #Stock the amplitude of the 2nd echo:
-                list_amplitude_target2_pbwe00 += [abs(output_pbwe[0,1])]
+                list_amplitude_target2_pbwe00 += [abs(output_pbwe[0,peaks_pbwe_00[1]])]
 
             #Testing the PBWE - polar 11:---------------------------------------
 
@@ -275,10 +275,10 @@ for dist in list_dist_targets:
                 list_distance_pbwe11 += [0.5*abs(time_pbwe_vect[peaks_pbwe_11[0]]-time_pbwe_vect[peaks_pbwe_11[1]])*3e8]
 
                 #Stock the amplitude of the 1st echo:
-                list_amplitude_target1_pbwe11 += [abs(output_pbwe[1,0])]
+                list_amplitude_target1_pbwe11 += [abs(output_pbwe[1,peaks_pbwe_11[0]])]
 
                 #Stock the amplitude of the 2nd echo:
-                list_amplitude_target2_pbwe11 += [abs(output_pbwe[1,1])]
+                list_amplitude_target2_pbwe11 += [abs(output_pbwe[1,peaks_pbwe_11[1]])]
 
             #Testing the SSBWE - method 1:--------------------------------------
 
@@ -295,10 +295,10 @@ for dist in list_dist_targets:
                 list_distance_ssbwe1 += [0.5*abs(time_ssbwe_vect[peaks_ssbwe_1[0]]-time_ssbwe_vect[peaks_ssbwe_1[1]])*3e8]
 
                 #Stock the amplitude of the 1st echo:
-                list_amplitude_target1_ssbwe1 += [abs(output_ssbwe_1[0])]
+                list_amplitude_target1_ssbwe1 += [abs(output_ssbwe_1[peaks_ssbwe_1[0]])]
 
                 #Stock the amplitude of the 2nd echo:
-                list_amplitude_target2_ssbwe1 += [abs(output_ssbwe_1[1])]
+                list_amplitude_target2_ssbwe1 += [abs(output_ssbwe_1[peaks_ssbwe_1[1]])]
 
             #Testing the SSBWE - method 2:--------------------------------------
 
@@ -315,10 +315,10 @@ for dist in list_dist_targets:
                 list_distance_ssbwe2 += [0.5*abs(time_ssbwe_vect[peaks_ssbwe_2[0]]-time_ssbwe_vect[peaks_ssbwe_2[1]])*3e8]
 
                 #Stock the amplitude of the 1st echo:
-                list_amplitude_target1_ssbwe2 += [abs(output_ssbwe_2[0])]
+                list_amplitude_target1_ssbwe2 += [abs(output_ssbwe_2[peaks_ssbwe_2[0]])]
 
                 #Stock the amplitude of the 2nd echo:
-                list_amplitude_target2_ssbwe2 += [abs(output_ssbwe_2[1])]
+                list_amplitude_target2_ssbwe2 += [abs(output_ssbwe_2[peaks_ssbwe_2[1]])]
 
 
         #Tests calculations:----------------------------------------------------
@@ -404,6 +404,12 @@ with pd.ExcelWriter(test_report_path) as writer:
 
     #Excel sheets corresponding to the BWE tests:-------------------------------
 
+    dataframe_bwe_percentage_echoes_detection.to_excel(writer, sheet_name='BWE_echoes_detection',index_label='SNR (dB)',startrow = 1)
+    worksheet = writer.sheets['BWE_echoes_detection']
+    worksheet['B1'] = 'Distance between targets (m)'
+    worksheet['B1'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+
     dataframe_bwe_distance_mean_error.to_excel(writer, sheet_name='BWE_mean_distance_error',index_label='SNR (dB)',startrow = 1)
     worksheet = writer.sheets['BWE_mean_distance_error']
     worksheet['B1'] = 'Distance between targets (m)'
@@ -441,6 +447,12 @@ with pd.ExcelWriter(test_report_path) as writer:
     worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
 
     #Excel sheets corresponding to the PBWE - polar 00 tests:-------------------
+
+    dataframe_pbwe_polar00_percentage_echoes_detection.to_excel(writer, sheet_name='PBWE_00_echoes_detection',index_label='SNR (dB)',startrow = 1)
+    worksheet = writer.sheets['PBWE_00_echoes_detection']
+    worksheet['B1'] = 'Distance between targets (m)'
+    worksheet['B1'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
 
     dataframe_pbwe_polar00_distance_mean_error.to_excel(writer, sheet_name='PBWE_00_mean_distance_error',index_label='SNR (dB)',startrow = 1)
     worksheet = writer.sheets['PBWE_00_mean_distance_error']
@@ -480,6 +492,12 @@ with pd.ExcelWriter(test_report_path) as writer:
 
     #Excel sheets corresponding to the PBWE - polar 11 tests:-------------------
 
+    dataframe_pbwe_polar11_percentage_echoes_detection.to_excel(writer, sheet_name='PBWE_11_echoes_detection',index_label='SNR (dB)',startrow = 1)
+    worksheet = writer.sheets['PBWE_11_echoes_detection']
+    worksheet['B1'] = 'Distance between targets (m)'
+    worksheet['B1'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+
     dataframe_pbwe_polar11_distance_mean_error.to_excel(writer, sheet_name='PBWE_11_mean_distance_error',index_label='SNR (dB)',startrow = 1)
     worksheet = writer.sheets['PBWE_11_mean_distance_error']
     worksheet['B1'] = 'Distance between targets (m)'
@@ -518,6 +536,12 @@ with pd.ExcelWriter(test_report_path) as writer:
 
     #Excel sheets corresponding to the SSBWE - method 1 tests:------------------
 
+    dataframe_ssbwe_method1_percentage_echoes_detection.to_excel(writer, sheet_name='SSBWE_v1_echoes_detection',index_label='SNR (dB)',startrow = 1)
+    worksheet = writer.sheets['SSBWE_v1_echoes_detection']
+    worksheet['B1'] = 'Distance between targets (m)'
+    worksheet['B1'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+
     dataframe_ssbwe_method1_distance_mean_error.to_excel(writer, sheet_name='SSBWE_v1_mean_distance_error',index_label='SNR (dB)',startrow = 1)
     worksheet = writer.sheets['SSBWE_v1_mean_distance_error']
     worksheet['B1'] = 'Distance between targets (m)'
@@ -555,6 +579,12 @@ with pd.ExcelWriter(test_report_path) as writer:
     worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
 
     #Excel sheets corresponding to the SSBWE - method 2 tests:------------------
+
+    dataframe_ssbwe_method2_percentage_echoes_detection.to_excel(writer, sheet_name='SSBWE_v2_echoes_detection',index_label='SNR (dB)',startrow = 1)
+    worksheet = writer.sheets['SSBWE_v2_echoes_detection']
+    worksheet['B1'] = 'Distance between targets (m)'
+    worksheet['B1'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
 
     dataframe_ssbwe_method2_distance_mean_error.to_excel(writer, sheet_name='SSBWE_v2_mean_distance_error',index_label='SNR (dB)',startrow = 1)
     worksheet = writer.sheets['SSBWE_v2_mean_distance_error']
