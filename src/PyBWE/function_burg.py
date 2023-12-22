@@ -30,6 +30,9 @@ def burg(x,p):
     N = len(x) #number of elements
     x = np.array(x) #numpy array conversion of the input spectrum
 
+    if p > N:
+        raise ValueError("The order must be less than the number of samples")
+
     #Variables initialization:
     e = sum(abs(x)**2.) / float(N) #white-noise variance
     a = np.zeros(0, dtype=complex) #AR model coefficients vector
@@ -53,6 +56,11 @@ def burg(x,p):
 
         #Update of the estimated white-noise variance:
         e = e*(1.-abs(rc_idx)**2)
+
+        #Check if the estimated white-noise variance is strictly positive:
+        if e<0:
+            print('[PyBWE.burg] Warning: Order too high - iteration stopped at '+str(idx_order))
+            break
 
         #Add the new reflection coefficient to the AR model coefficients vector:
         a.resize(a.size+1)
