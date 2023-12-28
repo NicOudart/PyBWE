@@ -46,7 +46,7 @@ import pandas as pd
 import os
 from math import pi
 from scipy.signal import hilbert,find_peaks
-from openpyxl.styles import Font
+from openpyxl.styles import Font,PatternFill
 
 import PyBWE
 import PyPBWE
@@ -338,18 +338,18 @@ for dist in list_dist_targets:
         error_distance_ssbwe2 = np.array(list_distance_ssbwe2)-dist
 
         #Calculate the error on the amplitude of the 1st echo:
-        error_amplitude_target1_bwe = np.array(list_amplitude_target1_bwe)-amp_target1
-        error_amplitude_target1_pbwe00 = np.array(list_amplitude_target1_pbwe00)-amp_target1
-        error_amplitude_target1_pbwe11 = np.array(list_amplitude_target1_pbwe11)-amp_target1
-        error_amplitude_target1_ssbwe1 = np.array(list_amplitude_target1_ssbwe1)-amp_target1
-        error_amplitude_target1_ssbwe2 = np.array(list_amplitude_target1_ssbwe2)-amp_target1
+        error_amplitude_target1_bwe = 100*(np.array(list_amplitude_target1_bwe)-amp_target1)/amp_target1
+        error_amplitude_target1_pbwe00 = 100*(np.array(list_amplitude_target1_pbwe00)-amp_target1)/amp_target1
+        error_amplitude_target1_pbwe11 = 100*(np.array(list_amplitude_target1_pbwe11)-amp_target1)/amp_target1
+        error_amplitude_target1_ssbwe1 = 100*(np.array(list_amplitude_target1_ssbwe1)-amp_target1)/amp_target1
+        error_amplitude_target1_ssbwe2 = 100*(np.array(list_amplitude_target1_ssbwe2)-amp_target1)/amp_target1
 
         #Calculate the error on the amplitude of the 2nd echo:
-        error_amplitude_target2_bwe = np.array(list_amplitude_target2_bwe)-amp_target2
-        error_amplitude_target2_pbwe00 = np.array(list_amplitude_target2_pbwe00)-amp_target2
-        error_amplitude_target2_pbwe11 = np.array(list_amplitude_target2_pbwe11)-amp_target2
-        error_amplitude_target2_ssbwe1 = np.array(list_amplitude_target2_ssbwe1)-amp_target2
-        error_amplitude_target2_ssbwe2 = np.array(list_amplitude_target2_ssbwe2)-amp_target2
+        error_amplitude_target2_bwe = 100*(np.array(list_amplitude_target2_bwe)-amp_target2)/amp_target2
+        error_amplitude_target2_pbwe00 = 100*(np.array(list_amplitude_target2_pbwe00)-amp_target2)/amp_target2
+        error_amplitude_target2_pbwe11 = 100*(np.array(list_amplitude_target2_pbwe11)-amp_target2)/amp_target2
+        error_amplitude_target2_ssbwe1 = 100*(np.array(list_amplitude_target2_ssbwe1)-amp_target2)/amp_target2
+        error_amplitude_target2_ssbwe2 = 100*(np.array(list_amplitude_target2_ssbwe2)-amp_target2)/amp_target2
 
         #Add the tests results to the dataframes:-------------------------------
 
@@ -404,220 +404,360 @@ with pd.ExcelWriter(test_report_path) as writer:
 
     #Excel sheets corresponding to the BWE tests:-------------------------------
 
-    dataframe_bwe_percentage_echoes_detection.to_excel(writer, sheet_name='BWE_echoes_detection',index_label='SNR (dB)',startrow = 1)
+    dataframe_bwe_percentage_echoes_detection.to_excel(writer, sheet_name='BWE_echoes_detection',index_label='SNR (dB)',startrow = 2)
     worksheet = writer.sheets['BWE_echoes_detection']
-    worksheet['B1'] = 'Distance between targets (m)'
-    worksheet['B1'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['A1'] = 'BWE: Detection of the 2 echoes (%)'
+    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
+    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
+    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['B2'] = 'Distance between targets (m)'
+    worksheet['B2'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
 
-    dataframe_bwe_distance_mean_error.to_excel(writer, sheet_name='BWE_mean_distance_error',index_label='SNR (dB)',startrow = 1)
+    dataframe_bwe_distance_mean_error.to_excel(writer, sheet_name='BWE_mean_distance_error',index_label='SNR (dB)',startrow = 2)
     worksheet = writer.sheets['BWE_mean_distance_error']
-    worksheet['B1'] = 'Distance between targets (m)'
-    worksheet['B1'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['A1'] = 'BWE: Mean error on the distance between targets (m)'
+    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
+    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
+    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['B2'] = 'Distance between targets (m)'
+    worksheet['B2'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
 
-    dataframe_bwe_distance_std_error.to_excel(writer, sheet_name='BWE_STD_distance_error',index_label='SNR (dB)',startrow = 1)
+    dataframe_bwe_distance_std_error.to_excel(writer, sheet_name='BWE_STD_distance_error',index_label='SNR (dB)',startrow = 2)
     worksheet = writer.sheets['BWE_STD_distance_error']
-    worksheet['B1'] = 'Distance between targets (m)'
-    worksheet['B1'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['A1'] = 'BWE: STD of the error on the distance between targets (m)'
+    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
+    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
+    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['B2'] = 'Distance between targets (m)'
+    worksheet['B2'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
 
-    dataframe_bwe_amplitude_1_mean_error.to_excel(writer, sheet_name='BWE_mean_amplitude_error_1',index_label='SNR (dB)',startrow = 1)
+    dataframe_bwe_amplitude_1_mean_error.to_excel(writer, sheet_name='BWE_mean_amplitude_error_1',index_label='SNR (dB)',startrow = 2)
     worksheet = writer.sheets['BWE_mean_amplitude_error_1']
-    worksheet['B1'] = 'Distance between targets (m)'
-    worksheet['B1'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['A1'] = 'BWE: Mean error on the amplitude of the 1st echo (%)'
+    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
+    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
+    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['B2'] = 'Distance between targets (m)'
+    worksheet['B2'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
 
-    dataframe_bwe_amplitude_1_std_error.to_excel(writer, sheet_name='BWE_STD_amplitude_error_1',index_label='SNR (dB)',startrow = 1)
+    dataframe_bwe_amplitude_1_std_error.to_excel(writer, sheet_name='BWE_STD_amplitude_error_1',index_label='SNR (dB)',startrow = 2)
     worksheet = writer.sheets['BWE_STD_amplitude_error_1']
-    worksheet['B1'] = 'Distance between targets (m)'
-    worksheet['B1'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['A1'] = 'BWE: STD of the error on the amplitude of the 1st echo (%)'
+    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
+    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
+    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['B2'] = 'Distance between targets (m)'
+    worksheet['B2'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
 
-    dataframe_bwe_amplitude_2_mean_error.to_excel(writer, sheet_name='BWE_mean_amplitude_error_2',index_label='SNR (dB)',startrow = 1)
+    dataframe_bwe_amplitude_2_mean_error.to_excel(writer, sheet_name='BWE_mean_amplitude_error_2',index_label='SNR (dB)',startrow = 2)
     worksheet = writer.sheets['BWE_mean_amplitude_error_2']
-    worksheet['B1'] = 'Distance between targets (m)'
-    worksheet['B1'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['A1'] = 'BWE: Mean error on the amplitude of the 2nd echo (%)'
+    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
+    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
+    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['B2'] = 'Distance between targets (m)'
+    worksheet['B2'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
 
-    dataframe_bwe_amplitude_2_std_error.to_excel(writer, sheet_name='BWE_STD_amplitude_error_2',index_label='SNR (dB)',startrow = 1)
+    dataframe_bwe_amplitude_2_std_error.to_excel(writer, sheet_name='BWE_STD_amplitude_error_2',index_label='SNR (dB)',startrow = 2)
     worksheet = writer.sheets['BWE_STD_amplitude_error_2']
-    worksheet['B1'] = 'Distance between targets (m)'
-    worksheet['B1'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['A1'] = 'BWE: STD of the error on the amplitude of the 2nd echo (%)'
+    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
+    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
+    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['B2'] = 'Distance between targets (m)'
+    worksheet['B2'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
 
     #Excel sheets corresponding to the PBWE - polar 00 tests:-------------------
 
-    dataframe_pbwe_polar00_percentage_echoes_detection.to_excel(writer, sheet_name='PBWE_00_echoes_detection',index_label='SNR (dB)',startrow = 1)
+    dataframe_pbwe_polar00_percentage_echoes_detection.to_excel(writer, sheet_name='PBWE_00_echoes_detection',index_label='SNR (dB)',startrow = 2)
     worksheet = writer.sheets['PBWE_00_echoes_detection']
-    worksheet['B1'] = 'Distance between targets (m)'
-    worksheet['B1'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['A1'] = 'PBWE - polar 00: Detection of the 2 echoes (%)'
+    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
+    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
+    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['B2'] = 'Distance between targets (m)'
+    worksheet['B2'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
 
-    dataframe_pbwe_polar00_distance_mean_error.to_excel(writer, sheet_name='PBWE_00_mean_distance_error',index_label='SNR (dB)',startrow = 1)
+    dataframe_pbwe_polar00_distance_mean_error.to_excel(writer, sheet_name='PBWE_00_mean_distance_error',index_label='SNR (dB)',startrow = 2)
     worksheet = writer.sheets['PBWE_00_mean_distance_error']
-    worksheet['B1'] = 'Distance between targets (m)'
-    worksheet['B1'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['A1'] = 'PBWE - polar 00: Mean error on the distance between targets (m)'
+    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
+    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
+    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['B2'] = 'Distance between targets (m)'
+    worksheet['B2'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
 
-    dataframe_pbwe_polar00_distance_std_error.to_excel(writer, sheet_name='PBWE_00_STD_distance_error',index_label='SNR (dB)',startrow = 1)
+    dataframe_pbwe_polar00_distance_std_error.to_excel(writer, sheet_name='PBWE_00_STD_distance_error',index_label='SNR (dB)',startrow = 2)
     worksheet = writer.sheets['PBWE_00_STD_distance_error']
-    worksheet['B1'] = 'Distance between targets (m)'
-    worksheet['B1'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['A1'] = 'PBWE - polar 00: STD of the error on the distance between targets (m)'
+    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
+    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
+    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['B2'] = 'Distance between targets (m)'
+    worksheet['B2'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
 
-    dataframe_pbwe_polar00_amplitude_1_mean_error.to_excel(writer, sheet_name='PBWE_00_mean_amplitude_error_1',index_label='SNR (dB)',startrow = 1)
+    dataframe_pbwe_polar00_amplitude_1_mean_error.to_excel(writer, sheet_name='PBWE_00_mean_amplitude_error_1',index_label='SNR (dB)',startrow = 2)
     worksheet = writer.sheets['PBWE_00_mean_amplitude_error_1']
-    worksheet['B1'] = 'Distance between targets (m)'
-    worksheet['B1'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['A1'] = 'PBWE - polar 00: Mean error on the amplitude of the 1st echo (%)'
+    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
+    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
+    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['B2'] = 'Distance between targets (m)'
+    worksheet['B2'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
 
-    dataframe_pbwe_polar00_amplitude_1_std_error.to_excel(writer, sheet_name='PBWE_00_STD_amplitude_error_1',index_label='SNR (dB)',startrow = 1)
+    dataframe_pbwe_polar00_amplitude_1_std_error.to_excel(writer, sheet_name='PBWE_00_STD_amplitude_error_1',index_label='SNR (dB)',startrow = 2)
     worksheet = writer.sheets['PBWE_00_STD_amplitude_error_1']
-    worksheet['B1'] = 'Distance between targets (m)'
-    worksheet['B1'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['A1'] = 'PBWE - polar 00: STD of the error on the amplitude of the 1st echo (%)'
+    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
+    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
+    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['B2'] = 'Distance between targets (m)'
+    worksheet['B2'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
 
-    dataframe_pbwe_polar00_amplitude_2_mean_error.to_excel(writer, sheet_name='PBWE_00_mean_amplitude_error_2',index_label='SNR (dB)',startrow = 1)
+    dataframe_pbwe_polar00_amplitude_2_mean_error.to_excel(writer, sheet_name='PBWE_00_mean_amplitude_error_2',index_label='SNR (dB)',startrow = 2)
     worksheet = writer.sheets['PBWE_00_mean_amplitude_error_2']
-    worksheet['B1'] = 'Distance between targets (m)'
-    worksheet['B1'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['A1'] = 'PBWE - polar 00: Mean error on the amplitude of the 2nd echo (%)'
+    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
+    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
+    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['B2'] = 'Distance between targets (m)'
+    worksheet['B2'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
 
-    dataframe_pbwe_polar00_amplitude_2_std_error.to_excel(writer, sheet_name='PBWE_00_STD_amplitude_error_2',index_label='SNR (dB)',startrow = 1)
+    dataframe_pbwe_polar00_amplitude_2_std_error.to_excel(writer, sheet_name='PBWE_00_STD_amplitude_error_2',index_label='SNR (dB)',startrow = 2)
     worksheet = writer.sheets['PBWE_00_STD_amplitude_error_2']
-    worksheet['B1'] = 'Distance between targets (m)'
-    worksheet['B1'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['A1'] = 'PBWE - polar 00: STD of the error on the amplitude of the 2nd echo (%)'
+    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
+    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
+    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['B2'] = 'Distance between targets (m)'
+    worksheet['B2'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
 
     #Excel sheets corresponding to the PBWE - polar 11 tests:-------------------
 
-    dataframe_pbwe_polar11_percentage_echoes_detection.to_excel(writer, sheet_name='PBWE_11_echoes_detection',index_label='SNR (dB)',startrow = 1)
+    dataframe_pbwe_polar11_percentage_echoes_detection.to_excel(writer, sheet_name='PBWE_11_echoes_detection',index_label='SNR (dB)',startrow = 2)
     worksheet = writer.sheets['PBWE_11_echoes_detection']
-    worksheet['B1'] = 'Distance between targets (m)'
-    worksheet['B1'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['A1'] = 'PBWE - polar 11: Detection of the 2 echoes (%)'
+    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
+    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
+    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['B2'] = 'Distance between targets (m)'
+    worksheet['B2'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
 
-    dataframe_pbwe_polar11_distance_mean_error.to_excel(writer, sheet_name='PBWE_11_mean_distance_error',index_label='SNR (dB)',startrow = 1)
+    dataframe_pbwe_polar11_distance_mean_error.to_excel(writer, sheet_name='PBWE_11_mean_distance_error',index_label='SNR (dB)',startrow = 2)
     worksheet = writer.sheets['PBWE_11_mean_distance_error']
-    worksheet['B1'] = 'Distance between targets (m)'
-    worksheet['B1'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['A1'] = 'PBWE - polar 11: Mean error on the distance between targets (m)'
+    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
+    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
+    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['B2'] = 'Distance between targets (m)'
+    worksheet['B2'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
 
-    dataframe_pbwe_polar11_distance_std_error.to_excel(writer,sheet_name='PBWE_11_STD_distance_error',index_label='SNR (dB)',startrow = 1)
+    dataframe_pbwe_polar11_distance_std_error.to_excel(writer,sheet_name='PBWE_11_STD_distance_error',index_label='SNR (dB)',startrow = 2)
     worksheet = writer.sheets['PBWE_11_STD_distance_error']
-    worksheet['B1'] = 'Distance between targets (m)'
-    worksheet['B1'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['A1'] = 'PBWE - polar 11: STD of the error on the distance between targets (m)'
+    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
+    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
+    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['B2'] = 'Distance between targets (m)'
+    worksheet['B2'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
 
-    dataframe_pbwe_polar11_amplitude_1_mean_error.to_excel(writer, sheet_name='PBWE_11_mean_amplitude_error_1',index_label='SNR (dB)',startrow = 1)
+    dataframe_pbwe_polar11_amplitude_1_mean_error.to_excel(writer, sheet_name='PBWE_11_mean_amplitude_error_1',index_label='SNR (dB)',startrow = 2)
     worksheet = writer.sheets['PBWE_11_mean_amplitude_error_1']
-    worksheet['B1'] = 'Distance between targets (m)'
-    worksheet['B1'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['A1'] = 'PBWE - polar 11: Mean error on the amplitude of the 1st echo (%)'
+    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
+    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
+    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['B2'] = 'Distance between targets (m)'
+    worksheet['B2'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
 
-    dataframe_pbwe_polar11_amplitude_1_std_error.to_excel(writer, sheet_name='PBWE_11_STD_amplitude_error_1',index_label='SNR (dB)',startrow = 1)
+    dataframe_pbwe_polar11_amplitude_1_std_error.to_excel(writer, sheet_name='PBWE_11_STD_amplitude_error_1',index_label='SNR (dB)',startrow = 2)
     worksheet = writer.sheets['PBWE_11_STD_amplitude_error_1']
-    worksheet['B1'] = 'Distance between targets (m)'
-    worksheet['B1'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['A1'] = 'PBWE - polar 11: STD of the error on the amplitude of the 1st echo (%)'
+    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
+    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
+    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['B2'] = 'Distance between targets (m)'
+    worksheet['B2'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
 
-    dataframe_pbwe_polar11_amplitude_2_mean_error.to_excel(writer, sheet_name='PBWE_11_mean_amplitude_error_2',index_label='SNR (dB)',startrow = 1)
+    dataframe_pbwe_polar11_amplitude_2_mean_error.to_excel(writer, sheet_name='PBWE_11_mean_amplitude_error_2',index_label='SNR (dB)',startrow = 2)
     worksheet = writer.sheets['PBWE_11_mean_amplitude_error_2']
-    worksheet['B1'] = 'Distance between targets (m)'
-    worksheet['B1'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['A1'] = 'PBWE - polar 11: Mean error on the amplitude of the 2nd echo (%)'
+    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
+    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
+    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['B2'] = 'Distance between targets (m)'
+    worksheet['B2'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
 
-    dataframe_pbwe_polar11_amplitude_2_std_error.to_excel(writer, sheet_name='PBWE_11_STD_amplitude_error_2',index_label='SNR (dB)',startrow = 1)
+    dataframe_pbwe_polar11_amplitude_2_std_error.to_excel(writer, sheet_name='PBWE_11_STD_amplitude_error_2',index_label='SNR (dB)',startrow = 2)
     worksheet = writer.sheets['PBWE_11_STD_amplitude_error_2']
-    worksheet['B1'] = 'Distance between targets (m)'
-    worksheet['B1'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['A1'] = 'PBWE - polar 11: STD of the error on the amplitude of the 2nd echo (%)'
+    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
+    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
+    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['B2'] = 'Distance between targets (m)'
+    worksheet['B2'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
 
     #Excel sheets corresponding to the SSBWE - method 1 tests:------------------
 
-    dataframe_ssbwe_method1_percentage_echoes_detection.to_excel(writer, sheet_name='SSBWE_v1_echoes_detection',index_label='SNR (dB)',startrow = 1)
+    dataframe_ssbwe_method1_percentage_echoes_detection.to_excel(writer, sheet_name='SSBWE_v1_echoes_detection',index_label='SNR (dB)',startrow = 2)
     worksheet = writer.sheets['SSBWE_v1_echoes_detection']
-    worksheet['B1'] = 'Distance between targets (m)'
-    worksheet['B1'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['A1'] = 'SSBWE - method 1: Detection of the 2 echoes (%)'
+    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
+    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
+    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['B2'] = 'Distance between targets (m)'
+    worksheet['B2'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
 
-    dataframe_ssbwe_method1_distance_mean_error.to_excel(writer, sheet_name='SSBWE_v1_mean_distance_error',index_label='SNR (dB)',startrow = 1)
+    dataframe_ssbwe_method1_distance_mean_error.to_excel(writer, sheet_name='SSBWE_v1_mean_distance_error',index_label='SNR (dB)',startrow = 2)
     worksheet = writer.sheets['SSBWE_v1_mean_distance_error']
-    worksheet['B1'] = 'Distance between targets (m)'
-    worksheet['B1'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['A1'] = 'SSBWE - method 1: Mean error on the distance between targets (m)'
+    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
+    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
+    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['B2'] = 'Distance between targets (m)'
+    worksheet['B2'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
 
-    dataframe_ssbwe_method1_distance_std_error.to_excel(writer, sheet_name='SSBWE_v1_STD_distance_error',index_label='SNR (dB)',startrow = 1)
+    dataframe_ssbwe_method1_distance_std_error.to_excel(writer, sheet_name='SSBWE_v1_STD_distance_error',index_label='SNR (dB)',startrow = 2)
     worksheet = writer.sheets['SSBWE_v1_STD_distance_error']
-    worksheet['B1'] = 'Distance between targets (m)'
-    worksheet['B1'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['A1'] = 'SSBWE - method 1: STD of the error on the distance between targets (m)'
+    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
+    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
+    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['B2'] = 'Distance between targets (m)'
+    worksheet['B2'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
 
-    dataframe_ssbwe_method1_amplitude_1_mean_error.to_excel(writer, sheet_name='SSBWE_v1_mean_amplitude_error_1',index_label='SNR (dB)',startrow = 1)
+    dataframe_ssbwe_method1_amplitude_1_mean_error.to_excel(writer, sheet_name='SSBWE_v1_mean_amplitude_error_1',index_label='SNR (dB)',startrow = 2)
     worksheet = writer.sheets['SSBWE_v1_mean_amplitude_error_1']
-    worksheet['B1'] = 'Distance between targets (m)'
-    worksheet['B1'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['A1'] = 'SSBWE - method 1: Mean error on the amplitude of the 1st echo (%)'
+    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
+    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
+    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['B2'] = 'Distance between targets (m)'
+    worksheet['B2'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
 
-    dataframe_ssbwe_method1_amplitude_1_std_error.to_excel(writer, sheet_name='SSBWE_v1_STD_amplitude_error_1',index_label='SNR (dB)',startrow = 1)
+    dataframe_ssbwe_method1_amplitude_1_std_error.to_excel(writer, sheet_name='SSBWE_v1_STD_amplitude_error_1',index_label='SNR (dB)',startrow = 2)
     worksheet = writer.sheets['SSBWE_v1_STD_amplitude_error_1']
-    worksheet['B1'] = 'Distance between targets (m)'
-    worksheet['B1'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['A1'] = 'SSBWE - method 1: STD of the error on the amplitude of the 1st echo (%)'
+    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
+    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
+    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['B2'] = 'Distance between targets (m)'
+    worksheet['B2'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
 
-    dataframe_ssbwe_method1_amplitude_2_mean_error.to_excel(writer, sheet_name='SSBWE_v1_mean_amplitude_error_2',index_label='SNR (dB)',startrow = 1)
+    dataframe_ssbwe_method1_amplitude_2_mean_error.to_excel(writer, sheet_name='SSBWE_v1_mean_amplitude_error_2',index_label='SNR (dB)',startrow = 2)
     worksheet = writer.sheets['SSBWE_v1_mean_amplitude_error_2']
-    worksheet['B1'] = 'Distance between targets (m)'
-    worksheet['B1'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['A1'] = 'SSBWE - method 1: Mean error on the amplitude of the 2nd echo (%)'
+    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
+    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
+    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['B2'] = 'Distance between targets (m)'
+    worksheet['B2'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
 
-    dataframe_ssbwe_method1_amplitude_2_std_error.to_excel(writer, sheet_name='SSBWE_v1_STD_amplitude_error_2',index_label='SNR (dB)',startrow = 1)
+    dataframe_ssbwe_method1_amplitude_2_std_error.to_excel(writer, sheet_name='SSBWE_v1_STD_amplitude_error_2',index_label='SNR (dB)',startrow = 2)
     worksheet = writer.sheets['SSBWE_v1_STD_amplitude_error_2']
-    worksheet['B1'] = 'Distance between targets (m)'
-    worksheet['B1'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['A1'] = 'SSBWE - method 1: STD of the error on the amplitude of the 2nd echo (%)'
+    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
+    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
+    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['B2'] = 'Distance between targets (m)'
+    worksheet['B2'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
 
     #Excel sheets corresponding to the SSBWE - method 2 tests:------------------
 
-    dataframe_ssbwe_method2_percentage_echoes_detection.to_excel(writer, sheet_name='SSBWE_v2_echoes_detection',index_label='SNR (dB)',startrow = 1)
+    dataframe_ssbwe_method2_percentage_echoes_detection.to_excel(writer, sheet_name='SSBWE_v2_echoes_detection',index_label='SNR (dB)',startrow = 2)
     worksheet = writer.sheets['SSBWE_v2_echoes_detection']
-    worksheet['B1'] = 'Distance between targets (m)'
-    worksheet['B1'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['A1'] = 'SSBWE - method 2: Detection of the 2 echoes (%)'
+    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
+    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
+    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['B2'] = 'Distance between targets (m)'
+    worksheet['B2'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
 
-    dataframe_ssbwe_method2_distance_mean_error.to_excel(writer, sheet_name='SSBWE_v2_mean_distance_error',index_label='SNR (dB)',startrow = 1)
+    dataframe_ssbwe_method2_distance_mean_error.to_excel(writer, sheet_name='SSBWE_v2_mean_distance_error',index_label='SNR (dB)',startrow = 2)
     worksheet = writer.sheets['SSBWE_v2_mean_distance_error']
-    worksheet['B1'] = 'Distance between targets (m)'
-    worksheet['B1'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['A1'] = 'SSBWE - method 2: Mean error on the distance between targets (m)'
+    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
+    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
+    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['B2'] = 'Distance between targets (m)'
+    worksheet['B2'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
 
-    dataframe_ssbwe_method2_distance_std_error.to_excel(writer, sheet_name='SSBWE_v2_STD_distance_error',index_label='SNR (dB)',startrow = 1)
+    dataframe_ssbwe_method2_distance_std_error.to_excel(writer, sheet_name='SSBWE_v2_STD_distance_error',index_label='SNR (dB)',startrow = 2)
     worksheet = writer.sheets['SSBWE_v2_STD_distance_error']
-    worksheet['B1'] = 'Distance between targets (m)'
-    worksheet['B1'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['A1'] = 'SSBWE - method 2: STD of the error on the distance between targets (m)'
+    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
+    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
+    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['B2'] = 'Distance between targets (m)'
+    worksheet['B2'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
 
-    dataframe_ssbwe_method2_amplitude_1_mean_error.to_excel(writer, sheet_name='SSBWE_v2_mean_amplitude_error_1',index_label='SNR (dB)',startrow = 1)
+    dataframe_ssbwe_method2_amplitude_1_mean_error.to_excel(writer, sheet_name='SSBWE_v2_mean_amplitude_error_1',index_label='SNR (dB)',startrow = 2)
     worksheet = writer.sheets['SSBWE_v2_mean_amplitude_error_1']
-    worksheet['B1'] = 'Distance between targets (m)'
-    worksheet['B1'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['A1'] = 'SSBWE - method 2: Mean error on the amplitude of the 1st echo (%)'
+    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
+    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
+    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['B2'] = 'Distance between targets (m)'
+    worksheet['B2'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
 
-    dataframe_ssbwe_method2_amplitude_1_std_error.to_excel(writer, sheet_name='SSBWE_v2_STD_amplitude_error_1',index_label='SNR (dB)',startrow = 1)
+    dataframe_ssbwe_method2_amplitude_1_std_error.to_excel(writer, sheet_name='SSBWE_v2_STD_amplitude_error_1',index_label='SNR (dB)',startrow = 2)
     worksheet = writer.sheets['SSBWE_v2_STD_amplitude_error_1']
-    worksheet['B1'] = 'Distance between targets (m)'
-    worksheet['B1'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['A1'] = 'SSBWE - method 2: STD of the error on the amplitude of the 1st echo (%)'
+    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
+    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
+    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['B2'] = 'Distance between targets (m)'
+    worksheet['B2'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
 
-    dataframe_ssbwe_method2_amplitude_2_mean_error.to_excel(writer, sheet_name='SSBWE_v2_mean_amplitude_error_2',index_label='SNR (dB)',startrow = 1)
+    dataframe_ssbwe_method2_amplitude_2_mean_error.to_excel(writer, sheet_name='SSBWE_v2_mean_amplitude_error_2',index_label='SNR (dB)',startrow = 2)
     worksheet = writer.sheets['SSBWE_v2_mean_amplitude_error_2']
-    worksheet['B1'] = 'Distance between targets (m)'
-    worksheet['B1'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['A1'] = 'SSBWE - method 2: Mean error on the amplitude of the 2nd echo (%)'
+    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
+    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
+    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['B2'] = 'Distance between targets (m)'
+    worksheet['B2'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
 
-    dataframe_ssbwe_method2_amplitude_2_std_error.to_excel(writer, sheet_name='SSBWE_v2_STD_amplitude_error_2',index_label='SNR (dB)',startrow = 1)
+    dataframe_ssbwe_method2_amplitude_2_std_error.to_excel(writer, sheet_name='SSBWE_v2_STD_amplitude_error_2',index_label='SNR (dB)',startrow = 2)
     worksheet = writer.sheets['SSBWE_v2_STD_amplitude_error_2']
-    worksheet['B1'] = 'Distance between targets (m)'
-    worksheet['B1'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['A1'] = 'SSBWE - method 2: STD of the error on the amplitude of the 2nd echo (%)'
+    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
+    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
+    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
+    worksheet['B2'] = 'Distance between targets (m)'
+    worksheet['B2'].font = Font(bold=True)
+    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
