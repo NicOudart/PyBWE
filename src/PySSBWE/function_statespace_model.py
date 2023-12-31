@@ -54,7 +54,7 @@ def statespace_model(y,order=0,noise_type="white"):
     L = floor(2*N/3)
 
     #Check if the order of the model is below 1/3 the number of samples:
-    if order > N-L:
+    if order > N-L+1:
         raise ValueError("The order must be less than 1/3 the number of samples")
 
     #Create the Hankel matrix from the spectrum:
