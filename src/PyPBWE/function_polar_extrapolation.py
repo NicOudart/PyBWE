@@ -37,6 +37,10 @@ def polar_extrapolation(X,Thetaf,Thetab,Mextra,extra_mode):
     #Retrieve the order of the model:
     order = round((np.shape(Thetaf)[0])/Npol)
 
+    #Check if the order of the model is below the number of samples:
+    if order > M:
+        raise ValueError("The order must be less than the number of samples")
+
     #Initialize the extrapolated spectrum matri and add X to it:
     if (extra_mode=="both"):
         X_extra = np.zeros((Npol,M+(2*Mextra)),dtype=complex)

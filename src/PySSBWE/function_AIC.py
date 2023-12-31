@@ -29,12 +29,8 @@ def AIC(sv,N,noise_type="white"):
     #Initialize the information criteria's list:
     IC = []
 
-    #Retrieve the dimensions of the Hankel matrix:
-    M = len(sv)
-    L = N-M+1
-
-    #Select the shortest dimension of the Hankel matrix:
-    Q = min(M,L)
+    #Retrieve the number of singular values:
+    Q = len(sv)
 
     #Adapt the eigenvalues of the unitary matrices depending on the type of noise:
     if noise_type=="white":

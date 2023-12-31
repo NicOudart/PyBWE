@@ -38,6 +38,10 @@ def polar_burg(X,p):
     #Retrieve the number of samples in the spectrum:
     M = np.shape(X)[1]
 
+    #Check if the order of the model is below the number of samples:
+    if p > M:
+        raise ValueError("The order must be less than the number of samples")
+
     #Initialize the error matrices (forward/backward):
     Fmat = np.zeros((Npol,M),dtype=complex)
     Bmat = np.zeros((Npol,M),dtype=complex)

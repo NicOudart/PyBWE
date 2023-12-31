@@ -30,6 +30,7 @@ def burg(x,p):
     N = len(x) #number of elements
     x = np.array(x) #numpy array conversion of the input spectrum
 
+    #Check if the order of the model is below the number of samples:
     if p > N:
         raise ValueError("The order must be less than the number of samples")
 

@@ -32,6 +32,10 @@ def ar_extrapolation(x,ar_coeff,Nextra,extra_mode):
     #Retrieve the numbers of samples in the spectrum:
     N = len(x)
 
+    #Check if the number of coefficients is below the number of samples:
+    if len(ar_coeff) > N:
+        raise ValueError("The number of AR coefficients must be less than the number of samples")
+
     #Add the x vector data to x_extra:
     if (extra_mode=="both"):
         x_extra = np.zeros((N+(2*Nextra)),dtype=complex)
