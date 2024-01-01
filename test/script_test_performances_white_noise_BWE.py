@@ -87,7 +87,7 @@ detection_level = 0.1
 test_dir_path = os.path.dirname(__file__)
 
 #Test report path:
-test_report_path = os.path.join(test_dir_path,'PyBWE_Report_test_performances_white_noise_BWE.xlsx')
+test_report_path = os.path.join(test_dir_path,'PyBWE_Report_test_performances_white_noise.xlsx')
 
 #Initialize the test results dataframes:----------------------------------------
 
