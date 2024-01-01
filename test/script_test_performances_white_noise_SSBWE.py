@@ -14,6 +14,9 @@
 #   -The list of SNR to be tested (dB).
 #   -The number of noise cases
 
+#The State-Space model's order can either be forced to 2, or estimated using
+#AIC (to do so, set the order to 0).
+
 #The following tests will be performed:
 #   -The percentage of times 2 echoes are detected (with a user-defined
 #    threshold).
@@ -64,6 +67,9 @@ list_snr_levels = [6,14,20,40,60]
 
 #Number of noise case to be tested for each distance:
 nb_noise_case = 1000
+
+#Order of the model (forcing 2 or 0 = AIC estimation):
+param_order = 2
 
 #Other parameters:--------------------------------------------------------------
 
@@ -167,7 +173,7 @@ for dist in list_dist_targets:
             spec_vect_wn = np.conjugate(hilbert(spec_vect_wn))[::2]
 
             #Application of the SSBWE:
-            output_ssbwe_1, output_ssbwe_2, time_ssbwe_vect = PySSBWE.SSBWE(spec_vect_wn,df=5e6,extra_factor=3,zp_factor=10,side_cut=True)
+            output_ssbwe_1, output_ssbwe_2, time_ssbwe_vect = PySSBWE.SSBWE(spec_vect_wn,df=5e6,extra_factor=3,zp_factor=10,side_cut=True,order=param_order)
 
             #Testing the SSBWE - method 1:--------------------------------------
 
