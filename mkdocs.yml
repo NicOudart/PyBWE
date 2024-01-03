@@ -120,5 +120,7 @@ nav:
     - PyBWE: PyBWE.md
     - PyPBWE: PyPBWE.md
     - PySSBWE: PySSBWE.md
+  - Tests:
+    - Performance tests: Performance_tests.md
   - References: references.md
   - Credits: credits.md

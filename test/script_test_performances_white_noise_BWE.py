@@ -79,7 +79,7 @@ amp_target2 = 1
 dist_target1 = 1
 
 #Peak detection threshold on the amplitude of echoes:
-detection_level = 0.1
+detection_level = 0.5
 
 #Retrieve the test path:--------------------------------------------------------
 
