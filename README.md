@@ -30,7 +30,7 @@ Several improvements to the BWE have been proposed: the **Polarimetric BWE** (**
 polarimetric radar channels for an improved extrapolation (Suwa and Iwamoto, 2003,2007), or the **State-Space BWE** 
 (**SSBWE**) using a State-Space model to account for noise and exponential distortions in the signal (Piou, 1999).
 
-Also, the BWE can be used to fill gap between two spectra of multiband radars (Moore, 1997). This process is known as
+Also, the BWE can be used to fill a gap between two spectra of multiband radars (Moore, 1997). This process is known as
 **Bandwidth Interpolation** (**BWI**).
 
 ### Recent application to planetary radar sounders
@@ -38,7 +38,7 @@ Also, the BWE can be used to fill gap between two spectra of multiband radars (M
 If the BWE can be applied to any radar signals, it has been extensively applied to planetary radar sounders. 
 Radar sounders unlocked a 3rd dimension in planetary studies, allowing scientists to discover the widely unknown 
 subsurface of the Moon, Mars, Titan and soon Venus and Jupiter's moons. The development of space instruments being 
-very constrained, the BWE is a mean to get as much information on the subsurface structure and composition from a 
+highly constrained, the BWE is a mean to get as much information on the subsurface structure and composition from a 
 given radar instrument.
  
 Here is a non-exhaustive list of successful BWE applications in planetary science:
@@ -117,6 +117,10 @@ This package is released under a MIT open source license. See **LICENSE**.
 
 ## References
 
+Parametric spectral estimation:
+
+* [Kay and Marple (1981)](https://doi.org/10.1109/PROC.1981.12184)
+
 BWE:
 
 * [Bowling (1977)](https://apps.dtic.mil/sti/pdfs/ADA042817.pdf)
@@ -133,7 +137,7 @@ PBWE:
 
 SSBWE:
 
-* [Piou (1999):](https://apps.dtic.mil/sti/pdfs/ADA366105.pdf)
+* [Piou (1999)](https://apps.dtic.mil/sti/pdfs/ADA366105.pdf)
 
 Planetary science applications:
 
