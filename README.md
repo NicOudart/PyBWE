@@ -28,7 +28,7 @@ The extrapolation factor is equal to the resolution enhancement, and can be up t
 In the regular BWE, the signal is modelled by an autoregressive (AR) model, using the Burg algorithm (Burg, 1967). 
 Several improvements to the BWE have been proposed: the **Polarimetric BWE** (**PBWE**) using the correlation between several 
 polarimetric radar channels for an improved extrapolation (Suwa and Iwamoto, 2003,2007), or the **State-Space BWE** 
-(**SSBWE**) using a State-Space model to account for noise and exponential distortions in the signal (Piou, 1999).
+(**SSBWE**) using a State-Space model accounting for noise and exponential distortions in the signal (Piou, 1999).
 
 Also, the BWE can be used to fill a gap between two spectra of multiband radars (Moore, 1997). This process is known as
 **Bandwidth Interpolation** (**BWI**).

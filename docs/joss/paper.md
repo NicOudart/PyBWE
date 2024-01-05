@@ -34,7 +34,7 @@ A parametric model is fitted to the signal's spectrum, this model is then used t
 The extrapolation factor is equal to the resolution enhancement, and can be up to 3 in practical cases.
 
 In the regular BWE, the signal is modelled by an autoregressive (AR) model, using the Burg algorithm. 
-Several improvements to the BWE have been proposed: the **Polarimetric BWE** (**PBWE**) using the correlation between several polarimetric radar channels for an improved extrapolation [@Suwa:2003] [@Suwa:2007], or the **State-Space BWE** (**SSBWE**) using an State-Space model to account for noise and exponential distortions in the signal [@Piou:1999].
+Several improvements to the BWE have been proposed: the **Polarimetric BWE** (**PBWE**) using the correlation between several polarimetric radar channels for an improved extrapolation [@Suwa:2003] [@Suwa:2007], or the **State-Space BWE** (**SSBWE**) using a State-Space model accounting for noise and exponential distortions in the signal [@Piou:1999].
 
 Also, the BWE can be used to fill a gap between two spectra of multiband radars [@Moore:1997]. This process is known as **Bandwidth Interpolation** (**BWI**).
 
@@ -70,9 +70,9 @@ Here is a non-exhaustive list of successful BWE applications in planetary scienc
 
 * The BWE helped the estimation of attenuations in the Martian subsurface with the RIMFAX (Mars 2020) Ground Penetrating Radar data [@Eide2022]
 
-However, the planetary science community has few radar specialists, and to our knowledge no open-source integrated BWE solutions existed before the release of the library, limiting the application of this technique to planetary radar data.
+However, the planetary science community has few radar specialists, and to our knowledge no open-source integrated BWE solutions existed before the release of this library, limiting the planetary radar application of this technique.
 For this reason, we propose in this library integrated BWE solutions for all planetary scientists, and the individual functions for planetary radar experts.
 
-In addition, this library could also benefit other radar / sonar applications developed under harsh contraints.
+In addition, this library could also benefit other radar / sonar applications developed under harsh contraints, impacting the obtainable range resolution.
 
 # References
