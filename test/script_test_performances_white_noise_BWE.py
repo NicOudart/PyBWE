@@ -91,13 +91,13 @@ test_report_path = os.path.join(test_dir_path,'PyBWE_Report_test_performances_wh
 
 #Initialize the test results dataframes:----------------------------------------
 
-dataframe_bwe_percentage_echoes_detection = pd.DataFrame(0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_bwe_distance_mean_error = pd.DataFrame(0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_bwe_distance_std_error = pd.DataFrame(0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_bwe_amplitude_1_mean_error = pd.DataFrame(0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_bwe_amplitude_1_std_error = pd.DataFrame(0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_bwe_amplitude_2_mean_error = pd.DataFrame(0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_bwe_amplitude_2_std_error = pd.DataFrame(0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_bwe_percentage_echoes_detection = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_bwe_distance_mean_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_bwe_distance_std_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_bwe_amplitude_1_mean_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_bwe_amplitude_1_std_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_bwe_amplitude_2_mean_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_bwe_amplitude_2_std_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
 
 
 #Perform the test:--------------------------------------------------------------

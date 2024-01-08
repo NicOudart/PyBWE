@@ -92,22 +92,22 @@ test_report_path = os.path.join(test_dir_path,'PyPBWE_Report_test_performances_w
 #Initialize the test results dataframes:----------------------------------------
 
 #For the PBWE - polar 00:
-dataframe_pbwe_polar00_percentage_echoes_detection = pd.DataFrame(0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_pbwe_polar00_distance_mean_error = pd.DataFrame(0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_pbwe_polar00_distance_std_error = pd.DataFrame(0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_pbwe_polar00_amplitude_1_mean_error = pd.DataFrame(0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_pbwe_polar00_amplitude_1_std_error = pd.DataFrame(0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_pbwe_polar00_amplitude_2_mean_error = pd.DataFrame(0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_pbwe_polar00_amplitude_2_std_error = pd.DataFrame(0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_pbwe_polar00_percentage_echoes_detection = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_pbwe_polar00_distance_mean_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_pbwe_polar00_distance_std_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_pbwe_polar00_amplitude_1_mean_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_pbwe_polar00_amplitude_1_std_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_pbwe_polar00_amplitude_2_mean_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_pbwe_polar00_amplitude_2_std_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
 
 #For the PBWE - polar 11:
-dataframe_pbwe_polar11_percentage_echoes_detection = pd.DataFrame(0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_pbwe_polar11_distance_mean_error = pd.DataFrame(0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_pbwe_polar11_distance_std_error = pd.DataFrame(0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_pbwe_polar11_amplitude_1_mean_error = pd.DataFrame(0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_pbwe_polar11_amplitude_1_std_error = pd.DataFrame(0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_pbwe_polar11_amplitude_2_mean_error = pd.DataFrame(0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_pbwe_polar11_amplitude_2_std_error = pd.DataFrame(0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_pbwe_polar11_percentage_echoes_detection = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_pbwe_polar11_distance_mean_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_pbwe_polar11_distance_std_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_pbwe_polar11_amplitude_1_mean_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_pbwe_polar11_amplitude_1_std_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_pbwe_polar11_amplitude_2_mean_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_pbwe_polar11_amplitude_2_std_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
 
 #Perform the test:--------------------------------------------------------------
 

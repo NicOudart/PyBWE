@@ -98,22 +98,22 @@ test_report_path = os.path.join(test_dir_path,'PySSBWE_Report_test_performances_
 #Initialize the test results dataframes:----------------------------------------
 
 #For the SSBWE - method 1:
-dataframe_ssbwe_method1_percentage_echoes_detection = pd.DataFrame(0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_ssbwe_method1_distance_mean_error = pd.DataFrame(0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_ssbwe_method1_distance_std_error = pd.DataFrame(0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_ssbwe_method1_amplitude_1_mean_error = pd.DataFrame(0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_ssbwe_method1_amplitude_1_std_error = pd.DataFrame(0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_ssbwe_method1_amplitude_2_mean_error = pd.DataFrame(0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_ssbwe_method1_amplitude_2_std_error = pd.DataFrame(0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_ssbwe_method1_percentage_echoes_detection = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_ssbwe_method1_distance_mean_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_ssbwe_method1_distance_std_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_ssbwe_method1_amplitude_1_mean_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_ssbwe_method1_amplitude_1_std_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_ssbwe_method1_amplitude_2_mean_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_ssbwe_method1_amplitude_2_std_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
 
 #For the SSBWE - method 2:
-dataframe_ssbwe_method2_percentage_echoes_detection = pd.DataFrame(0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_ssbwe_method2_distance_mean_error = pd.DataFrame(0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_ssbwe_method2_distance_std_error = pd.DataFrame(0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_ssbwe_method2_amplitude_1_mean_error = pd.DataFrame(0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_ssbwe_method2_amplitude_1_std_error = pd.DataFrame(0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_ssbwe_method2_amplitude_2_mean_error = pd.DataFrame(0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_ssbwe_method2_amplitude_2_std_error = pd.DataFrame(0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_ssbwe_method2_percentage_echoes_detection = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_ssbwe_method2_distance_mean_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_ssbwe_method2_distance_std_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_ssbwe_method2_amplitude_1_mean_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_ssbwe_method2_amplitude_1_std_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_ssbwe_method2_amplitude_2_mean_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_ssbwe_method2_amplitude_2_std_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
 
 
 #Perform the test:--------------------------------------------------------------
