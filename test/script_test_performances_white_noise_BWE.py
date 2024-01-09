@@ -86,17 +86,13 @@ test_report_path = os.path.join(test_dir_path,'PyBWE_Report_test_performances_wh
 
 #Initialize the test results dataframes:----------------------------------------
 
-#Columns and index names:
-data_columns = ['delta = '+str(dist)+' (m)' for dist in list_dist_targets]
-data_index = ['SNR = '+str(snr)+' (dB)' for snr in list_snr_levels]
-
-dataframe_bwe_percentage_echoes_detection = pd.DataFrame(0.0,index=data_index,columns=data_columns)
-dataframe_bwe_distance_mean_error = pd.DataFrame(0.0,index=data_index,columns=data_columns)
-dataframe_bwe_distance_std_error = pd.DataFrame(0.0,index=data_index,columns=data_columns)
-dataframe_bwe_amplitude_1_mean_error = pd.DataFrame(0.0,index=data_index,columns=data_columns)
-dataframe_bwe_amplitude_1_std_error = pd.DataFrame(0.0,index=data_index,columns=data_columns)
-dataframe_bwe_amplitude_2_mean_error = pd.DataFrame(0.0,index=data_index,columns=data_columns)
-dataframe_bwe_amplitude_2_std_error = pd.DataFrame(0.0,index=data_index,columns=data_columns)
+dataframe_bwe_percentage_echoes_detection = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_bwe_distance_mean_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_bwe_distance_std_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_bwe_amplitude_1_mean_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_bwe_amplitude_1_std_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_bwe_amplitude_2_mean_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_bwe_amplitude_2_std_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
 
 
 #Perform the test:--------------------------------------------------------------
@@ -201,6 +197,28 @@ for dist in list_dist_targets:
         dataframe_bwe_amplitude_1_std_error.loc[snr,dist] = np.std(error_amplitude_target1_bwe)
         dataframe_bwe_amplitude_2_mean_error.loc[snr,dist] = np.mean(error_amplitude_target2_bwe)
         dataframe_bwe_amplitude_2_std_error.loc[snr,dist] = np.std(error_amplitude_target2_bwe)
+
+
+#Format columns and index names for export:-------------------------------------
+
+data_columns = ['delta = '+str(dist)+' (m)' for dist in list_dist_targets]
+data_index = ['SNR = '+str(snr)+' (dB)' for snr in list_snr_levels]
+
+dataframe_bwe_percentage_echoes_detection.index = data_index
+dataframe_bwe_distance_mean_error.index = data_index
+dataframe_bwe_distance_std_error.index = data_index
+dataframe_bwe_amplitude_1_mean_error.index = data_index
+dataframe_bwe_amplitude_1_std_error.index = data_index
+dataframe_bwe_amplitude_2_mean_error.index = data_index
+dataframe_bwe_amplitude_2_std_error.index = data_index
+
+dataframe_bwe_percentage_echoes_detection.columns = data_columns
+dataframe_bwe_distance_mean_error.columns = data_columns
+dataframe_bwe_distance_std_error.columns = data_columns
+dataframe_bwe_amplitude_1_mean_error.columns = data_columns
+dataframe_bwe_amplitude_1_std_error.columns = data_columns
+dataframe_bwe_amplitude_2_mean_error.columns = data_columns
+dataframe_bwe_amplitude_2_std_error.columns = data_columns
 
 
 #Export the Markdown report:----------------------------------------------------

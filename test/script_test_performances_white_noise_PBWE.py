@@ -94,27 +94,23 @@ test_report_path = os.path.join(test_dir_path,'PyPBWE_Report_test_performances_w
 
 #Initialize the test results dataframes:----------------------------------------
 
-#Columns and index names:
-data_columns = ['delta = '+str(dist)+' (m)' for dist in list_dist_targets]
-data_index = ['SNR = '+str(snr)+' (dB)' for snr in list_snr_levels]
-
 #For the PBWE - polar 00:
-dataframe_pbwe_polar00_percentage_echoes_detection = pd.DataFrame(0.0,index=data_index,columns=data_columns)
-dataframe_pbwe_polar00_distance_mean_error = pd.DataFrame(0.0,index=data_index,columns=data_columns)
-dataframe_pbwe_polar00_distance_std_error = pd.DataFrame(0.0,index=data_index,columns=data_columns)
-dataframe_pbwe_polar00_amplitude_1_mean_error = pd.DataFrame(0.0,index=data_index,columns=data_columns)
-dataframe_pbwe_polar00_amplitude_1_std_error = pd.DataFrame(0.0,index=data_index,columns=data_columns)
-dataframe_pbwe_polar00_amplitude_2_mean_error = pd.DataFrame(0.0,index=data_index,columns=data_columns)
-dataframe_pbwe_polar00_amplitude_2_std_error = pd.DataFrame(0.0,index=data_index,columns=data_columns)
+dataframe_pbwe_polar00_percentage_echoes_detection = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_pbwe_polar00_distance_mean_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_pbwe_polar00_distance_std_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_pbwe_polar00_amplitude_1_mean_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_pbwe_polar00_amplitude_1_std_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_pbwe_polar00_amplitude_2_mean_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_pbwe_polar00_amplitude_2_std_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
 
 #For the PBWE - polar 11:
-dataframe_pbwe_polar11_percentage_echoes_detection = pd.DataFrame(0.0,index=data_index,columns=data_columns)
-dataframe_pbwe_polar11_distance_mean_error = pd.DataFrame(0.0,index=data_index,columns=data_columns)
-dataframe_pbwe_polar11_distance_std_error = pd.DataFrame(0.0,index=data_index,columns=data_columns)
-dataframe_pbwe_polar11_amplitude_1_mean_error = pd.DataFrame(0.0,index=data_index,columns=data_columns)
-dataframe_pbwe_polar11_amplitude_1_std_error = pd.DataFrame(0.0,index=data_index,columns=data_columns)
-dataframe_pbwe_polar11_amplitude_2_mean_error = pd.DataFrame(0.0,index=data_index,columns=data_columns)
-dataframe_pbwe_polar11_amplitude_2_std_error = pd.DataFrame(0.0,index=data_index,columns=data_columns)
+dataframe_pbwe_polar11_percentage_echoes_detection = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_pbwe_polar11_distance_mean_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_pbwe_polar11_distance_std_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_pbwe_polar11_amplitude_1_mean_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_pbwe_polar11_amplitude_1_std_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_pbwe_polar11_amplitude_2_mean_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+dataframe_pbwe_polar11_amplitude_2_std_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
 
 #Perform the test:--------------------------------------------------------------
 
@@ -265,6 +261,47 @@ for dist in list_dist_targets:
         dataframe_pbwe_polar11_amplitude_1_std_error.loc[snr,dist] = np.std(error_amplitude_target1_pbwe11)
         dataframe_pbwe_polar11_amplitude_2_mean_error.loc[snr,dist] = np.mean(error_amplitude_target2_pbwe11)
         dataframe_pbwe_polar11_amplitude_2_std_error.loc[snr,dist] = np.std(error_amplitude_target2_pbwe11)
+
+#Format columns and index names for export:-------------------------------------
+
+data_columns = ['delta = '+str(dist)+' (m)' for dist in list_dist_targets]
+data_index = ['SNR = '+str(snr)+' (dB)' for snr in list_snr_levels]
+
+#For the PBWE - polar 00:
+
+dataframe_pbwe_polar00_percentage_echoes_detection.index = data_index
+dataframe_pbwe_polar00_distance_mean_error.index = data_index
+dataframe_pbwe_polar00_distance_std_error.index = data_index
+dataframe_pbwe_polar00_amplitude_1_mean_error.index = data_index
+dataframe_pbwe_polar00_amplitude_1_std_error.index = data_index
+dataframe_pbwe_polar00_amplitude_2_mean_error.index = data_index
+dataframe_pbwe_polar00_amplitude_2_std_error.index = data_index
+
+dataframe_pbwe_polar00_percentage_echoes_detection.columns = data_columns
+dataframe_pbwe_polar00_distance_mean_error.columns = data_columns
+dataframe_pbwe_polar00_distance_std_error.columns = data_columns
+dataframe_pbwe_polar00_amplitude_1_mean_error.columns = data_columns
+dataframe_pbwe_polar00_amplitude_1_std_error.columns = data_columns
+dataframe_pbwe_polar00_amplitude_2_mean_error.columns = data_columns
+dataframe_pbwe_polar00_amplitude_2_std_error.columns = data_columns
+
+#For the PBWE - polar 11:
+
+dataframe_pbwe_polar11_percentage_echoes_detection.index = data_index
+dataframe_pbwe_polar11_distance_mean_error.index = data_index
+dataframe_pbwe_polar11_distance_std_error.index = data_index
+dataframe_pbwe_polar11_amplitude_1_mean_error.index = data_index
+dataframe_pbwe_polar11_amplitude_1_std_error.index = data_index
+dataframe_pbwe_polar11_amplitude_2_mean_error.index = data_index
+dataframe_pbwe_polar11_amplitude_2_std_error.index = data_index
+
+dataframe_pbwe_polar11_percentage_echoes_detection.columns = data_columns
+dataframe_pbwe_polar11_distance_mean_error.columns = data_columns
+dataframe_pbwe_polar11_distance_std_error.columns = data_columns
+dataframe_pbwe_polar11_amplitude_1_mean_error.columns = data_columns
+dataframe_pbwe_polar11_amplitude_1_std_error.columns = data_columns
+dataframe_pbwe_polar11_amplitude_2_mean_error.columns = data_columns
+dataframe_pbwe_polar11_amplitude_2_std_error.columns = data_columns
 
 #Export the Markdown report:----------------------------------------------------
 
