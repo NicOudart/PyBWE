@@ -144,7 +144,7 @@ for dist in list_dist_targets:
 
             #Display the test progress:
             count_iterations += 1
-            print('Test in progress ... '+str(round(100*count_iterations/nb_iterations,3))+'%')
+            print('BWE performance test in progress ... '+str(round(100*count_iterations/nb_iterations,3))+'%')
 
             #Add a white noise to this spectrum signal to obtain the right SNR:
             rng = np.random.RandomState(idx_case)

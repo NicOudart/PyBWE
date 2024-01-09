@@ -7,6 +7,7 @@ on:
       - main
 
 jobs:
+
   deploy:
     runs-on: ubuntu-latest
     steps:
@@ -16,4 +17,5 @@ jobs:
           python-version: 3.9
       - run: pip install -r test/requirements.txt
       - run: python test/script_test_performances_white_noise_BWE.py 
-      
+      - run: python test/script_test_performances_white_noise_SSBWE.py
+      - run: python test/script_test_performances_white_noise_PBWE.py  

@@ -1,3 +1,4 @@
 PyBWE
 pandas
 tabulate
+importlib_metadata
