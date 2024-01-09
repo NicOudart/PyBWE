@@ -13,8 +13,9 @@
 #    Quadrature component (imaginary part of the spectrum) is reconstructed by
 #    Hilbert transform.
 #   -Two targets in free-space are seperated by 5 cm, slightly below the radar's
-#    free-space resolution. These targets generate echoes of equal amplitudes in
-#    the radar's signal, or complex sine-waves in the measured spectrum.
+#    free-space resolution. These targets generate echoes of given complex
+#    amplitudes in the radar's signal, or complex sine-waves in the measured
+#    spectrum.
 #   -The measured spectrum is corrupted by a white-noise of standard deviation
 #    10X smaller than the complex sine-waves' amplitudes.
 

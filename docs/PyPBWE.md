@@ -205,7 +205,7 @@ The synthetic radar signal example (inspired by the WISDOM GPR of the ExoMars ro
 
 * Only the In-phase component (real part of the spectrum) is measured, the Quadrature component (imaginary part of the spectrum) is reconstructed by Hilbert transform.
 
-* Two targets in free-space are seperated by 5 cm, slightly below the radar's free-space resolution. These targets generate echoes of equal amplitudes in the radar's signal, or complex sine-waves in the measured spectrum. The two targets are perfect reflectors, the 1st a perfect plate, the 2nd a perfect dihedral corner. Echoes received by the 00 and 11 channels therefore have the same scattering coefficients (1,1) for the 1st reflector, and different coefficients for the 2nd (1,-1).
+* Two targets in free-space are seperated by 5 cm, slightly below the radar's free-space resolution. These targets generate echoes of given complex amplitudes in the radar's signal, or complex sine-waves in the measured spectrum.
 
 * The measured spectrum is corrupted by a white-noise of standard deviation 10X smaller than the complex sine-waves' amplitudes.
 
@@ -245,14 +245,22 @@ dist_target1 = 1
 dist_target2 = 1.07
 ~~~
 
+Amplitude associated with each target echo for each polarimetric channel:
+~~~bash
+amp_target1_00 = 1
+amp_target2_00 = 1
+amp_target1_11 = 1
+amp_target2_11 = -1
+~~~
+
 Generate a sum of two complex sine-waves corresponding to the targets' echoes (each with an amplitude of 1), for the 00 channel:
 ~~~bash
-spec_vect_00 = np.exp(-1j*4*pi*dist_target1*freq_vect/3e8)+np.exp(-1j*4*pi*dist_target2*freq_vect/3e8)
+spec_vect_00 = (amp_target1_00*np.exp(-1j*4*pi*dist_target1*freq_vect/3e8))+(amp_target2_00*np.exp(-1j*4*pi*dist_target2*freq_vect/3e8))
 ~~~
 
 Generate a sum of two complex sine-waves corresponding to the targets' echoes (with amplitudes of 1 and -1), for the 11 channel:
 ~~~bash
-spec_vect_11 = np.exp(-1j*4*pi*dist_target1*freq_vect/3e8)-np.exp(-1j*4*pi*dist_target2*freq_vect/3e8)
+spec_vect_11 = (amp_target1_11*np.exp(-1j*4*pi*dist_target1*freq_vect/3e8))+(amp_target2_11*np.exp(-1j*4*pi*dist_target2*freq_vect/3e8))
 ~~~
 
 Only keep the real part of the spectrum (In-phase component) for the 2 channels:

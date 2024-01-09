@@ -192,7 +192,7 @@ The synthetic radar signal example (inspired by the WISDOM GPR of the ExoMars ro
 
 * Only the In-phase component (real part of the spectrum) is measured, the Quadrature component (imaginary part of the spectrum) is reconstructed by Hilbert transform.
 
-* Two targets in free-space are seperated by 5 cm, slightly below the radar's free-space resolution. These targets generate echoes of equal amplitudes in the radar's signal, or complex sine-waves in the measured spectrum.
+* Two targets in free-space are seperated by 5 cm, slightly below the radar's free-space resolution. These targets generate echoes of given complex amplitudes in the radar's signal, or complex sine-waves in the measured spectrum.
 
 * The measured spectrum is corrupted by a white-noise of standard deviation 10X smaller than the complex sine-waves' amplitudes.
 
@@ -232,9 +232,15 @@ dist_target1 = 1
 dist_target2 = 1.07
 ~~~
 
+Amplitude of the 2 echoes corresponding to the 2 targets:
+~~~bash
+ampli_target1 = 1
+ampli_target2 = 1
+~~~
+
 Generate a sum of two complex sine-waves corresponding to the targets' echoes (each with an amplitude of 1):
 ~~~bash
-spec_vect = np.exp(-1j*4*pi*dist_target1*freq_vect/3e8)+np.exp(-1j*4*pi*dist_target2*freq_vect/3e8)
+spec_vect = (ampli_target1*np.exp(-1j*4*pi*dist_target1*freq_vect/3e8))+(ampli_target2*np.exp(-1j*4*pi*dist_target2*freq_vect/3e8))
 ~~~
 
 Only keep the real part of the spectrum (In-phase component):

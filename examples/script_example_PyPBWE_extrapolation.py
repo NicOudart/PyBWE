@@ -19,12 +19,9 @@
 #    Quadrature component (imaginary part of the spectrum) is reconstructed by
 #    Hilbert transform.
 #   -Two targets in free-space are seperated by 5 cm, slightly below the radar's
-#    free-space resolution. These targets generate echoes of equal amplitudes in
-#    the radar's signal, or complex sine-waves in the measured spectrum. The two
-#    targets are perfect reflectors, the 1st a perfect plate, the 2nd a perfect
-#    dihedral corner. Echoes received by the 00 and 11 channels therefore have
-#    the same scattering coefficients (1,1) for the 1st reflector, and different
-#    coefficients for the 2nd (1,-1).
+#    free-space resolution. These targets generate echoes of given complex
+#    amplitudes in the radar's signal, or complex sine-waves in the measured
+#    spectrum.
 #   -The measured spectrum is corrupted by a white-noise of standard deviation
 #    10X smaller than the complex sine-waves' amplitudes.
 
