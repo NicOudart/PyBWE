@@ -23,7 +23,7 @@ Synthetic radar signals are generated (inspired by the WISDOM GPR of the ExoMars
 
 * Only the In-phase component (real part of the spectrum) is measured, the Quadrature component (imaginary part of the spectrum) is reconstructed by Hilbert transform.
 
-* Two targets in free-space are seperated by a given distance, slightly below the radar's free-space resolution. These targets generate echoes of equal amplitudes in the radar's signal, or complex sine-waves in the measured spectrum.
+* Two targets in free-space are seperated by a given distance, slightly below the radar's free-space resolution. These targets generate echoes of given amplitudes in the radar's signal, or complex sine-waves in the measured spectrum.
 
 * The measured spectrum is corrupted by a white-noise, with a standard deviation leading to a given SNR.
 
@@ -54,19 +54,24 @@ nb_noise_case = 1000
 
 1000 white-noise cases are proposed for the BWE and SSBWE. The multi-channel version of the Burg algorithm used in the PBWE being significantly longer to run, we propose 100 noise cases instead.
 
-In addition to these main test parameters, secondary parameters can also be modified if necessary.
+In addition to these test parameters, scenario parameters can also be modified if necessary.
 
-The frequencies measured by the SFCW radar:
+### The scenario parameters
 
-~~~bash
-freq_vect = np.linspace(0.5e9,3e9,1001)
-~~~
-
-The amplitude of the 2 echoes corresponding to the 2 targets can also be set:
+The amplitude of the 2 echoes corresponding to the 2 targets can be set:
 
 ~~~bash
 amp_target1 = 1
 amp_target2 = 1
+~~~
+
+In the case of the PBWE, the amplitudes can be set for each polarimetric channel 00 and 11:
+
+~~~bash
+amp_target1_00 = 1
+amp_target2_00 = 1
+amp_target1_11 = 1
+amp_target2_11 = -1
 ~~~
 
 The distance between the 1st target and the radar's antennas:
@@ -112,16 +117,16 @@ Here are the selected metrics:
 
 ### The test report
 
-For each method (BWE, PBWE and SSBWE), an Excel test report will be exported.
-Each sheet of these Excel files will correspond to a specific test metric.
+For each method (BWE, PBWE and SSBWE), a Markdown test report will be exported.
+Each section of this Markdown files will correspond to a specific test metric.
 
-The reports can be found in:
+After running the tests, the reports can be found in:
 
-* test/PyBWE_Report_test_performances_white_noise.xlsx
+* test/PyBWE_Report_test_performances_white_noise.md
 
-* test/PyPBWE_Report_test_performances_white_noise.xlsx
+* test/PyPBWE_Report_test_performances_white_noise.md
 
-* test/PySSBWE_Report_test_performances_white_noise.xlsx
+* test/PySSBWE_Report_test_performances_white_noise.md
 
 In the case of the PBWE, as 2 co-polarimetric channels 00 and 11 are generated for the test, we return the metrics for each channel.
 

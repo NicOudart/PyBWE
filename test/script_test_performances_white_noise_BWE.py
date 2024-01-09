@@ -30,8 +30,9 @@
 #    Quadrature component (imaginary part of the spectrum) is reconstructed by
 #    Hilbert transform.
 #   -Two targets in free-space are seperated by 5 cm, slightly below the radar's
-#    free-space resolution. These targets generate echoes of equal amplitudes in
-#    the radar's signal, or complex sine-waves in the measured spectrum.
+#    free-space resolution. These targets generate echoes of given complex
+#    amplitudes in the radar's signal, or complex sine-waves in the measured
+#    spectrum.
 #   -The measured spectrum is corrupted by a white-noise of standard deviation
 #    10X smaller than the complex sine-waves' amplitudes.
 
@@ -48,13 +49,11 @@ import pandas as pd
 import os
 from math import pi
 from scipy.signal import hilbert,find_peaks
-from openpyxl.styles import Font,PatternFill
+from importlib_metadata import version
 
 import PyBWE
-import PyPBWE
-import PySSBWE
 
-#User-defined test parameters:--------------------------------------------------
+#Test parameters:---------------------------------------------------------------
 
 #List of distances between targets to be tested (m):
 list_dist_targets = [0.04,0.06,0.08,0.1,0.12]
@@ -65,17 +64,13 @@ list_snr_levels = [6,14,20,40,60]
 #Number of noise case to be tested for each distance:
 nb_noise_case = 1000
 
-#Other parameters:--------------------------------------------------------------
-
-#Generate a vector of 1001 frequencies between 0.5 and 3 GHz:
-freq_vect = np.linspace(0.5e9,3e9,1001)
+#Scenario parameters:-----------------------------------------------------------
 
 #Amplitude of the 2 echoes corresponding to the 2 targets:
 amp_target1 = 1
 amp_target2 = 1
 
-#Distance (m) between the 1st radar target in free-space (returning one echo)
-#and the radar:
+#Distance (m) between the 1st target and the radar:
 dist_target1 = 1
 
 #Peak detection threshold on the amplitude of echoes:
@@ -87,17 +82,21 @@ detection_level = 0.5
 test_dir_path = os.path.dirname(__file__)
 
 #Test report path:
-test_report_path = os.path.join(test_dir_path,'PyBWE_Report_test_performances_white_noise.xlsx')
+test_report_path = os.path.join(test_dir_path,'PyBWE_Report_test_performances_white_noise.md')
 
 #Initialize the test results dataframes:----------------------------------------
 
-dataframe_bwe_percentage_echoes_detection = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_bwe_distance_mean_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_bwe_distance_std_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_bwe_amplitude_1_mean_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_bwe_amplitude_1_std_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_bwe_amplitude_2_mean_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
-dataframe_bwe_amplitude_2_std_error = pd.DataFrame(0.0,index=list_snr_levels,columns=list_dist_targets)
+#Columns and index names:
+data_columns = ['delta = '+str(dist)+' (m)' for dist in list_dist_targets]
+data_index = ['SNR = '+str(snr)+' (dB)' for snr in list_snr_levels]
+
+dataframe_bwe_percentage_echoes_detection = pd.DataFrame(0.0,index=data_index,columns=data_columns)
+dataframe_bwe_distance_mean_error = pd.DataFrame(0.0,index=data_index,columns=data_columns)
+dataframe_bwe_distance_std_error = pd.DataFrame(0.0,index=data_index,columns=data_columns)
+dataframe_bwe_amplitude_1_mean_error = pd.DataFrame(0.0,index=data_index,columns=data_columns)
+dataframe_bwe_amplitude_1_std_error = pd.DataFrame(0.0,index=data_index,columns=data_columns)
+dataframe_bwe_amplitude_2_mean_error = pd.DataFrame(0.0,index=data_index,columns=data_columns)
+dataframe_bwe_amplitude_2_std_error = pd.DataFrame(0.0,index=data_index,columns=data_columns)
 
 
 #Perform the test:--------------------------------------------------------------
@@ -105,6 +104,9 @@ dataframe_bwe_amplitude_2_std_error = pd.DataFrame(0.0,index=list_snr_levels,col
 #Initialize the iterations counter:
 nb_iterations = len(list_dist_targets)*len(list_snr_levels)*nb_noise_case
 count_iterations = 0
+
+#Generate a vector of 1001 frequencies between 0.5 and 3 GHz:
+freq_vect = np.linspace(0.5e9,3e9,1001)
 
 #Iterate on the distance between targets:
 for dist in list_dist_targets:
@@ -200,76 +202,57 @@ for dist in list_dist_targets:
         dataframe_bwe_amplitude_2_mean_error.loc[snr,dist] = np.mean(error_amplitude_target2_bwe)
         dataframe_bwe_amplitude_2_std_error.loc[snr,dist] = np.std(error_amplitude_target2_bwe)
 
-#Export the Excel report:-------------------------------------------------------
 
-with pd.ExcelWriter(test_report_path) as writer:
+#Export the Markdown report:----------------------------------------------------
 
-    dataframe_bwe_percentage_echoes_detection.to_excel(writer, sheet_name='BWE_echoes_detection',index_label='SNR (dB)',startrow = 2)
-    worksheet = writer.sheets['BWE_echoes_detection']
-    worksheet['A1'] = 'BWE: Detection of the 2 echoes (%)'
-    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
-    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
-    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
-    worksheet['B2'] = 'Distance between targets (m)'
-    worksheet['B2'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
+with open(test_report_path,'w') as file_report:
 
-    dataframe_bwe_distance_mean_error.to_excel(writer, sheet_name='BWE_mean_distance_error',index_label='SNR (dB)',startrow = 2)
-    worksheet = writer.sheets['BWE_mean_distance_error']
-    worksheet['A1'] = 'BWE: Mean error on the distance between targets (m)'
-    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
-    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
-    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
-    worksheet['B2'] = 'Distance between targets (m)'
-    worksheet['B2'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
+    #Title
+    file_report.write('# BWE performance test report\r\n')
 
-    dataframe_bwe_distance_std_error.to_excel(writer, sheet_name='BWE_STD_distance_error',index_label='SNR (dB)',startrow = 2)
-    worksheet = writer.sheets['BWE_STD_distance_error']
-    worksheet['A1'] = 'BWE: STD of the error on the distance between targets (m)'
-    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
-    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
-    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
-    worksheet['B2'] = 'Distance between targets (m)'
-    worksheet['B2'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
+    #Test scenario:
+    file_report.write('## Test scenario\r\n')
+    file_report.write('### Scenario\r\n')
+    file_report.write('The test is performed on synthetic radar signals (inspired by the WISDOM GPR of the ExoMars rover mission, Ciarletti et al. (2017):\r\n')
+    file_report.write('* A SFCW (Stepped Frequency Continuous Wave) radar working between 0.5 and 3 GHz measures a 1001 frequencies spectrum when sounding.\r\n')
+    file_report.write('* Only the In-phase component (real part of the spectrum) is measured, the Quadrature component (imaginary part of the spectrum) is reconstructed by Hilbert transform.\r\n')
+    file_report.write('* Two targets in free-space are seperated by 5 cm, slightly below the radar free-space resolution. These targets generate echoes of equal amplitudes in the radar signal, or complex sine-waves in the measured spectrum.\r\n')
+    file_report.write('* The measured spectrum is corrupted by a white-noise of standard deviation 10X smaller than the complex sine-waves amplitudes.\r\n')
+    file_report.write('### Scenario parameters\r\n')
+    file_report.write('* Amplitude of the 1st echo: '+str(amp_target1)+'\r\n')
+    file_report.write('* Amplitude of the 2nd echo: '+str(amp_target2)+'\r\n')
+    file_report.write('* Distance (m) between the 1st target and the radar:  '+str(dist_target1)+'\r\n')
+    file_report.write('* Peak detection threshold on the amplitude of echoes: '+str(detection_level)+'\r\n')
 
-    dataframe_bwe_amplitude_1_mean_error.to_excel(writer, sheet_name='BWE_mean_amplitude_error_1',index_label='SNR (dB)',startrow = 2)
-    worksheet = writer.sheets['BWE_mean_amplitude_error_1']
-    worksheet['A1'] = 'BWE: Mean error on the amplitude of the 1st echo (%)'
-    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
-    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
-    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
-    worksheet['B2'] = 'Distance between targets (m)'
-    worksheet['B2'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
+    #Test parameters:
+    file_report.write('## Test parameters\r\n')
+    file_report.write('* PyBWE version: '+version('PyBWE')+'\r\n')
+    file_report.write('* Tested function: PyBWE.BWE\r\n')
+    file_report.write('* Distances between targets **delta** (m): '+str(list_dist_targets)+'\r\n')
+    file_report.write('* **SNR** levels (dB): '+str(list_snr_levels)+'\r\n')
+    file_report.write('* Number of noise cases: '+str(nb_noise_case)+'\r\n')
 
-    dataframe_bwe_amplitude_1_std_error.to_excel(writer, sheet_name='BWE_STD_amplitude_error_1',index_label='SNR (dB)',startrow = 2)
-    worksheet = writer.sheets['BWE_STD_amplitude_error_1']
-    worksheet['A1'] = 'BWE: STD of the error on the amplitude of the 1st echo (%)'
-    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
-    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
-    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
-    worksheet['B2'] = 'Distance between targets (m)'
-    worksheet['B2'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
+    #Percentage of echoes detection:
+    file_report.write('## Percentage of echoes detection\r\n')
+    file_report.write(dataframe_bwe_percentage_echoes_detection.to_markdown()+'\r\n')
 
-    dataframe_bwe_amplitude_2_mean_error.to_excel(writer, sheet_name='BWE_mean_amplitude_error_2',index_label='SNR (dB)',startrow = 2)
-    worksheet = writer.sheets['BWE_mean_amplitude_error_2']
-    worksheet['A1'] = 'BWE: Mean error on the amplitude of the 2nd echo (%)'
-    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
-    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
-    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
-    worksheet['B2'] = 'Distance between targets (m)'
-    worksheet['B2'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
+    #Error on the distance between targets:
+    file_report.write('## Error on the distance between targets\r\n')
+    file_report.write('### Mean (m)\r\n')
+    file_report.write(dataframe_bwe_distance_mean_error.to_markdown()+'\r\n')
+    file_report.write('### STD (m)\r\n')
+    file_report.write(dataframe_bwe_distance_std_error.to_markdown()+'\r\n')
 
-    dataframe_bwe_amplitude_2_std_error.to_excel(writer, sheet_name='BWE_STD_amplitude_error_2',index_label='SNR (dB)',startrow = 2)
-    worksheet = writer.sheets['BWE_STD_amplitude_error_2']
-    worksheet['A1'] = 'BWE: STD of the error on the amplitude of the 2nd echo (%)'
-    worksheet['A1'].font = Font(bold=True,color="FFFFFF")
-    worksheet['A1'].fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
-    worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(list_dist_targets)+1)
-    worksheet['B2'] = 'Distance between targets (m)'
-    worksheet['B2'].font = Font(bold=True)
-    worksheet.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(list_dist_targets)+1)
+    #Error on the amplitude of the 1st echo:
+    file_report.write('## Error on the amplitude of the 1st echo\r\n')
+    file_report.write('### Mean (%)\r\n')
+    file_report.write(dataframe_bwe_amplitude_1_mean_error.to_markdown()+'\r\n')
+    file_report.write('### STD (%)\r\n')
+    file_report.write(dataframe_bwe_amplitude_1_std_error.to_markdown()+'\r\n')
+
+    #Error on the amplitude of the 2nd echo:
+    file_report.write('## Error on the amplitude of the 2nd echo\r\n')
+    file_report.write('### Mean (%)\r\n')
+    file_report.write(dataframe_bwe_amplitude_2_mean_error.to_markdown()+'\r\n')
+    file_report.write('### STD (%)\r\n')
+    file_report.write(dataframe_bwe_amplitude_2_std_error.to_markdown()+'\r\n')
