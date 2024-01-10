@@ -4,5 +4,3 @@ tabulate
 importlib_metadata
 scipy
 numpy
-math
-os
