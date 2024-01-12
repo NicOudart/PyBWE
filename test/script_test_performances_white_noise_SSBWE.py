@@ -52,6 +52,7 @@ import pandas as pd
 import os
 from math import pi
 from scipy.signal import hilbert,find_peaks
+from importlib_metadata import version
 
 import PySSBWE
 
