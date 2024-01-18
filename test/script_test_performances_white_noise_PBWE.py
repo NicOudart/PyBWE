@@ -68,7 +68,7 @@ list_dist_targets = [0.04,0.06,0.08,0.1,0.12]
 list_snr_levels = [6,14,20,40,60]
 
 #Number of noise case to be tested for each distance:
-nb_noise_case = 100
+nb_noise_case = 25
 
 #Scenario parameters:-----------------------------------------------------------
 

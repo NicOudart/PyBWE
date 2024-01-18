@@ -52,7 +52,7 @@ In a Monte-Carlo approach, the number of white-noise cases to be tested is given
 nb_noise_case = 1000
 ~~~
 
-1000 white-noise cases are proposed for the BWE and SSBWE. The multi-channel version of the Burg algorithm used in the PBWE being significantly longer to run, we propose 100 noise cases instead.
+1000 white-noise cases are proposed for the BWE and SSBWE. The multi-channel version of the Burg algorithm used in the PBWE being significantly longer to run, we propose 25 noise cases instead.
 
 In addition to these test parameters, scenario parameters can also be modified if necessary.
 
