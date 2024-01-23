@@ -8,7 +8,17 @@ on:
 
 jobs:
 
-  perfoBWE:
+  unitTestBWE:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - run: pip install -r test/requirements.txt
+      - run: python test/script_unit_test_BWE.py
+
+  perfoTestBWE:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -22,7 +32,7 @@ jobs:
           name: BWE_test_report
           path: test/PyBWE_Report_test_performances_white_noise.md
           
-  perfoSSBWE:
+  perfoTestSSBWE:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -36,7 +46,7 @@ jobs:
           name: SSBWE_test_report
           path: test/PySSBWE_Report_test_performances_white_noise.md
           
-  perfoPBWE:
+  perfoTestPBWE:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
