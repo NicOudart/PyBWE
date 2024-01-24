@@ -31,7 +31,9 @@ However, parametric techniques are less robust than classic Fourier transform on
 
 The **Bandwidth Extrapolation technique** (**BWE**) is a compromise between a classic Fourier transform and a parametric spectral estimation technique [@Cuomo:1992]. 
 A parametric model is fitted to the signal's spectrum, this model is then used to extrapolate this spectrum forward and backward, and the spectrum is eventually Fourier transformed using IFFT.
-The extrapolation factor is equal to the resolution enhancement, and can be up to 3 in practical cases.
+The extrapolation factor is equal to the resolution enhancement, and can be up to 3 in practical cases. An example on a synthetic planetary radar spectrum, inspired by [@Oudart:2021], is shown in \autoref{fig:example}.
+
+![An example of BWE application to a synthetic planetary radar spectrum, with 2 targets in free-space separated by a distance of 7 cm, below the instrument's resolution limit. This spectrum is generated with 2 complex sine-waves of amplitude 1, corrupted by a white-noise of standard deviation 0.1, for frequencies between 0.5 and 3 GHz. (a) Extrapolation of this spectrum with a parametric model. (b) Corresponding time-domain signal obtained with classic FFT or BWE. \label{fig:example}](Figure_example.png)
 
 In the regular BWE, the signal is modelled by an autoregressive (AR) model, using the Burg algorithm. 
 Several improvements to the BWE have been proposed: the **Polarimetric BWE** (**PBWE**) using the correlation between several polarimetric radar channels for an improved extrapolation [@Suwa:2003] [@Suwa:2007], or the **State-Space BWE** (**SSBWE**) using a State-Space model accounting for noise and exponential distortions in the signal [@Piou:1999].
