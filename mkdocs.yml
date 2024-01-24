@@ -121,6 +121,8 @@ nav:
     - PyPBWE: PyPBWE.md
     - PySSBWE: PySSBWE.md
   - Tests:
-    - Performance tests: Performance_tests.md
+    - Unit and integration tests: unit_integration_tests.md
+    - Performance tests: performance_tests.md
+  - Community guidelines: community.md
   - References: references.md
   - Credits: credits.md
