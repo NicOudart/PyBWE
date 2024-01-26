@@ -22,16 +22,22 @@ bibliography: paper.bib
 **PyBWE** is a Python library containing radar super-resolution methods known as "Bandwidth Extrapolation" (BWE).
 
 Range resolution enhancement is one of the main challenges in radar signal processing. 
-With classic spectral estimation techniques, this resolution is limited by the frequency bandwidth of the instrument: the larger is the bandwidth, the better is the resolution. 
+It is driven by the time resolution of radar soundings, and the speed of electromagnetic waves in the sounded material. 
+Time resolution being limited by the frequency bandwidth of the instrument, the same applies to range resolution: the larger is the bandwidth, the better is the resolution. 
 
-Fast Fourier Transform techniques are efficient and robust for spectral estimation, but in practical applications the output resolution is limited. 
+Fast Fourier Transform techniques are efficient and robust for spectral estimation, but their performances in time resolution are limited by the inverse of the bandwidth, and the necessary application of windowing to reduce the impact of side-lobes. 
 For this reason parametric spectral estimation techniques have been introduced [@Kay:1981].
 Based on a signal model, assuming deterministic properties of the signal, the output of such techniques yields a better resolution. 
 However, parametric techniques are less robust than classic Fourier transform ones, in particular in the presence of noise or distortions.
 
 The **Bandwidth Extrapolation technique** (**BWE**) is a compromise between a classic Fourier transform and a parametric spectral estimation technique [@Cuomo:1992]. 
-A parametric model is fitted to the signal's spectrum, this model is then used to extrapolate this spectrum forward and backward, and the spectrum is eventually Fourier transformed using IFFT.
-The extrapolation factor is equal to the resolution enhancement, and can be up to 3 in practical cases. An example on a synthetic planetary radar spectrum, inspired by [@Oudart:2021], is shown in \autoref{fig:example}.
+A parametric model is fitted to the measured signal's spectrum, this model is then used to extrapolate this spectrum forward and backward, and the spectrum is eventually Fourier transformed using IFFT.
+The extrapolation factor is equal to the resolution enhancement, and can be up to 3 in practical cases. 
+
+The extrapolation of a radar spectrum is indeed possible, as it can be modelled by a sum of complex sine-waves with different amplitudes, frequencies and phases. Each of these complex sine-waves corresponds to a target echo in time-domain. 
+In practical cases, this deterministic signal is corrupted by various sources of noise, distorsions, and can be dampened by losses in the sounded material.
+
+An example of application on a synthetic planetary radar spectrum, inspired by [@Oudart:2021], is shown in \autoref{fig:example}.
 
 In the regular BWE, the signal is modelled by an autoregressive (AR) model, using the Burg algorithm. 
 Several improvements to the BWE have been proposed: the **Polarimetric BWE** (**PBWE**) using the correlation between several polarimetric radar channels for an improved extrapolation [@Suwa:2003] [@Suwa:2007], or the **State-Space BWE** (**SSBWE**) using a State-Space model accounting for noise and exponential distortions in the signal [@Piou:1999].
