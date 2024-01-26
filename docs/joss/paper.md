@@ -74,7 +74,7 @@ Here is a non-exhaustive list of successful BWE applications in planetary scienc
 
 * The improvement of the MARSIS (Mars Express) radar sounder resolution by a factor of 6 using both BWE and BWI [@Gambacorta:2022]
 
-* The BWE helped the estimation of attenuations in the Martian subsurface with the RIMFAX (Mars 2020) Ground Penetrating Radar data [@Eide2022]
+* The BWE helped the estimation of attenuations in the Martian subsurface with the RIMFAX (Mars 2020) Ground Penetrating Radar data [@Eide:2022]
 
 However, the planetary science community has few radar specialists, and to our knowledge no open-source integrated BWE solutions existed before the release of this library, limiting the planetary radar application of this technique.
 For this reason, we propose in this library integrated BWE solutions for all planetary scientists, and the individual functions for planetary radar experts.
