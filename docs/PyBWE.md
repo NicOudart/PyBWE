@@ -322,6 +322,10 @@ plt.show()
 
 (The X 1.85 factor in amplitude corresponds to the compensation for the Hamming window).
 
+Here is an example of figure displayed with this command:
+
+[<img src="https://github.com/NicOudart/PyBWE/raw/main/docs/figures/Figure_example_PyBWE_BWE.png"/>](Figure_example_PyBWE_BWE.png)
+
 ### Manual extrapolation:
 
 If you want to model and extrapolate the spectrum manually, it can also be done using the PyBWE.burg and PyBWE.ar_extrapolation functions.
@@ -385,6 +389,10 @@ plt.grid()
 plt.show()
 ~~~
 
+Here is an example of figure displayed with this command:
+
+[<img src="https://github.com/NicOudart/PyBWE/raw/main/docs/figures/Figure_example_PyBWE_extrapolation_1.png"/>](Figure_example_PyBWE_extrapolation_1.png)
+
 Generate a vector of frequencies for the forward and backward extrapolations:
 ~~~bash
 freq_vect_forward = np.linspace(freq_vect[-1]+df,freq_vect[-1]+(df*Nextra),Nextra)
@@ -409,6 +417,10 @@ plt.title('Spectrum AR-extrapolation')
 plt.grid()
 plt.show()
 ~~~
+
+Here is an example of figure displayed with this command:
+
+[<img src="https://github.com/NicOudart/PyBWE/raw/main/docs/figures/Figure_example_PyBWE_extrapolation_2.png"/>](Figure_example_PyBWE_extrapolation_2.png)
 
 ## References
 

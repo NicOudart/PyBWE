@@ -432,6 +432,10 @@ plt.show()
 
 (The X 1.85 factor in amplitude corresponds to the compensation for the Hamming window).
 
+Here is an example of figure displayed with this command for method 1:
+
+[<img src="https://github.com/NicOudart/PyBWE/raw/main/docs/figures/Figure_example_PyBWE_SSBWE.png"/>](Figure_example_PyBWE_SSBWE.png)
+
 ### Extraction of the echoes properties:
 
 In this section we show how to extract the echoes properties (amplitudes, time-delays, frequency-domain decays) from a spectrum's state-space model.
@@ -563,6 +567,10 @@ plt.grid()
 plt.show()
 ~~~
 
+Here is an example of figure displayed with this command for method 1:
+
+[<img src="https://github.com/NicOudart/PyBWE/raw/main/docs/figures/Figure_example_PySSBWE_extrapolation_1.png"/>](Figure_example_PySSBWE_extrapolation_1.png)
+
 Generate a vector of frequencies for the forward and backward extrapolations:
 ~~~bash
 freq_vect_forward = np.linspace(freq_vect[-1]+df,freq_vect[-1]+(df*Nextra),Nextra)
@@ -606,6 +614,10 @@ plt.title('Spectrum state-space extrapolation - method 2 (using the controllabil
 plt.grid()
 plt.show()
 ~~~
+
+Here is an example of figure displayed with this command for method 1:
+
+[<img src="https://github.com/NicOudart/PyBWE/raw/main/docs/figures/Figure_example_PySSBWE_extrapolation_2.png"/>](Figure_example_PySSBWE_extrapolation_2.png)
 
 ## References
 

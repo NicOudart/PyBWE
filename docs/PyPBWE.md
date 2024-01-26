@@ -365,6 +365,10 @@ plt.show()
 
 (The X 1.85 factor in amplitude corresponds to the compensation for the Hamming window).
 
+Here is an example of figure displayed with this command:
+
+[<img src="https://github.com/NicOudart/PyBWE/raw/main/docs/figures/Figure_example_PyBWE_PBWE.png"/>](Figure_example_PyBWE_PBWE.png)
+
 ### Manual extrapolation:
 
 If you want to model and extrapolate the multi-channel spectrum manually, it can also be done using the PyPBWE.polar_burg and PyPBWE.polar_extrapolation functions.
@@ -447,6 +451,10 @@ plt.grid()
 plt.show()
 ~~~
 
+Here is an example of figure displayed with this command:
+
+[<img src="https://github.com/NicOudart/PyBWE/raw/main/docs/figures/Figure_example_PyPBWE_extrapolation_1.png"/>](Figure_example_PyPBWE_extrapolation_1.png)
+
 Generate a vector of frequencies for the forward and backward extrapolations:
 ~~~bash
 freq_vect_forward = np.linspace(freq_vect[-1]+df,freq_vect[-1]+(df*Mextra),Mextra)
@@ -482,6 +490,10 @@ plt.title('Spectrum polarimetric extrapolation - Polar channel 11')
 plt.grid()
 plt.show()
 ~~~
+
+Here is an example of figure displayed with this command:
+
+[<img src="https://github.com/NicOudart/PyBWE/raw/main/docs/figures/Figure_example_PyPBWE_extrapolation_2.png"/>](Figure_example_PyPBWE_extrapolation_2.png)
 
 ## References
 
