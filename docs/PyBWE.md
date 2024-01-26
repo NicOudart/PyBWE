@@ -293,7 +293,7 @@ df = freq_vect[1]-freq_vect[0]
 
 Application of the BWE to the spectrum:
 ~~~bash
-output_bwe, time_bwe_vect = PyBWE.BWE(spec_vect,freq_vect,extra_factor,model_order,zp_factor,side_cut)
+output_bwe, time_bwe_vect = PyBWE.BWE(spec_vect,df,extra_factor,model_order,zp_factor,side_cut)
 ~~~
 
 output_bwe contains the time-domain radar sounding after BWE, ready to be displayed with time axis time_bwe_vect.

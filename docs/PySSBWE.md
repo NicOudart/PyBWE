@@ -390,7 +390,7 @@ df = freq_vect[1]-freq_vect[0]
 
 Application of the BWE to the spectrum:
 ~~~bash
-output_ssbwe_1, output_ssbwe_2, time_ssbwe_vect = PySSBWE.SSBWE(spec_vect,freq_vect,extra_factor,zp_factor,side_cut)
+output_ssbwe_1, output_ssbwe_2, time_ssbwe_vect = PySSBWE.SSBWE(spec_vect,df,extra_factor,zp_factor,side_cut)
 ~~~
 
 output_ssbwe_1 and output_ssbwe_2 contains the time-domain radar soundings after SSBWE (method 1 and 2), ready to be displayed with time axis time_ssbwe_vect.

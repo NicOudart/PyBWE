@@ -322,7 +322,7 @@ df = freq_vect[1]-freq_vect[0]
 
 Application of the PBWE to the 2 polarimetric channels' spectra:
 ~~~bash
-output_pbwe, time_pbwe_vect = PyPBWE.PBWE(spec_mat,freq_vect,extra_factor,model_order,zp_factor,side_cut)
+output_pbwe, time_pbwe_vect = PyPBWE.PBWE(spec_mat,df,extra_factor,model_order,zp_factor,side_cut)
 ~~~
 
 output_bwe matrix contains the time-domain radar soundings after PBWE, ready to be displayed with time axis time_pbwe_vect.
