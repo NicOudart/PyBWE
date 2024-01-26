@@ -35,7 +35,7 @@ A parametric model is fitted to the measured signal's spectrum, this model is th
 The extrapolation factor is equal to the resolution enhancement, and can be up to 3 in practical cases. 
 
 The extrapolation of a radar spectrum is indeed possible, as it can be modelled by a sum of complex sine-waves with different amplitudes, frequencies and phases. Each of these complex sine-waves corresponds to a target echo in time-domain. 
-In practical cases, this deterministic signal is corrupted by various sources of noise, distorsions, and can be dampened by losses in the sounded material.
+In practical cases, this deterministic signal is corrupted by various sources of noise, distorsions, and can be dampened by losses in the sounded material. Hence the limitation of a radar spectrum extrapolation.
 
 An example of application on a synthetic planetary radar spectrum, inspired by [@Oudart:2021], is shown in \autoref{fig:example}.
 
