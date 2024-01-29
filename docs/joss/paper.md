@@ -56,8 +56,6 @@ Each package contains an integrated solution to directly apply the complete BWE 
 
 This library relies on Numpy [@Harris:2020] for the linear algebra, on Scipy [@Virtanen:2020] for matrix operations and data processing functions used in test and examples, on Matplolib [@Hunter:2007] for figure display in examples, and on Pandas [@Pandas:2020] for performance tests data handling.
 
-![An example of BWE application to a synthetic planetary radar spectrum, with 2 targets in free-space separated by a distance of 7 cm, below the instrument's resolution limit with IFFT and Hamming windowing. This spectrum is generated with 2 complex sine-waves of amplitude 1, corrupted by a white-noise of standard deviation 0.1 (SNR = 20 dB), for frequencies between 0.5 and 3 GHz. (a) Extrapolation of this spectrum with a parametric model. (b) Corresponding time-domain signal obtained with classic FFT or BWE. \label{fig:example}](Figure_example.png)
-
 # Statement of need
 
 If the BWE can be applied to any radar signal, it has been extensively applied to planetary radar sounders in the last decade. 
@@ -82,6 +80,8 @@ However, the planetary science community has few radar experts, and to our knowl
 For this reason, we propose in this library integrated BWE solutions for all planetary scientists, as well as the individual functions for planetary radar experts.
 
 In addition, this library could also benefit other radar / sonar applications developed under harsh contraints, impacting the reachable range resolution.
+
+![An example of BWE application to a synthetic planetary radar spectrum, with 2 targets in free-space separated by a distance of 7 cm, below the instrument's resolution limit with IFFT and Hamming windowing. This spectrum is generated with 2 complex sine-waves of amplitude 1, corrupted by a white-noise of standard deviation 0.1 (SNR = 20 dB), for frequencies between 0.5 and 3 GHz. (a) Extrapolation of this spectrum with a parametric model. (b) Corresponding time-domain signal obtained with classic FFT or BWE. \label{fig:example}](Figure_example.png)
 
 # Acknowledgments
 
