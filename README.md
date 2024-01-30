@@ -100,6 +100,24 @@ In **docs** can be found the full documentation of this library, with one file f
 
 In **examples** can be found one example scripts for each package, with applications on synthetic radar signals corrupted by a white-noise.
 
+## Tests
+
+In **test** can be found test scripts for each package, divided into unit, integration and performance tests.
+Each test script is automatically launched on push or release for the main branch. 
+
+### Unit and integration tests
+
+Each package (PyBWE, PyPBWE and PySSBWE) contains "unit" sub-functions that can be used independently, and "integrated" functions based on these sub-functions.  
+We propose test scripts for the "unit functions", and then for the "integrated functions", to check if they behave as expected given a specific synthetic radar input.
+Each script will print a message, with the test result ("OK"/"NOK").
+
+### Performance tests
+
+The performances of each package (PyBWE, PyPBWE and PySSBWE) are also tested, using a set of metrics (errors on the estimated distance between targets, errors on echoes amplitudes, etc.), on synthetic radar signals of different complexity.
+For now, the performances of each package are evaluated for different distances between 2 radar targets (below the resolution limit with FFT), and for different SNR levels (considering a signal corrupted by a white-noise). Several noise cases are tested for a given SNR.
+The performance test results are exported as Markdown reports.
+Other performance test scenarios can be implemented in the future.
+
 ## Community guidelines
 
 ### Contribute
