@@ -161,7 +161,7 @@ The PyPBWE.polar_burg function fits an AR model to each polarimetric channel's s
 
 * err: _float 1D array_ of prediction errors (forward/backward). 
 
-### PyPBWE.polar_extrapolation(X,Thetaf,Thetab,Mextra,extra_mode)
+### PyPBWE.polar_extrapolation(X,Thetaf,Thetab,Mextra,extra_mode='both')
 
 The PyPBWE.polar_extrapolation function extrapolates a set of polarimetric channel spectra given their multi-channel AR model, forward, backward or both.
 
@@ -175,7 +175,7 @@ The PyPBWE.polar_extrapolation function extrapolates a set of polarimetric chann
 
 * Mextra: _integer_ number of samples to be extrapolated forward, backward or both for each channel.
 
-* extra_mode: _string_ containing the extrapolation mode, "forward"/"backward"/"both".
+* extra_mode: (optional) _string_ containing the extrapolation mode, "forward"/"backward"/"both".
 
 **Outputs:**
 

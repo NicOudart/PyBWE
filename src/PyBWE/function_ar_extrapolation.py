@@ -9,7 +9,7 @@
 #   -x: spectrum data vector
 #   -ar_coeff: coefficients of the AR model of x
 #   -Nextra: number of samples to be extrapolated forward, backward or both
-#   -extra_mode: extrapolation mode, "forward","backward" or "both"
+#   -extra_mode (optional): extrapolation mode, "forward","backward" or "both"
 
 #-Outputs:
 #   -x_extra: extrapolated spectrum x
@@ -24,8 +24,13 @@ import numpy as np
 
 #Function definition:-----------------------------------------------------------
 
-def ar_extrapolation(x,ar_coeff,Nextra,extra_mode):
+def ar_extrapolation(x,ar_coeff,Nextra,extra_mode='both'):
 
+    #Check if the number of extrapolated samples is a positive integer:
+    if Nextra<1:
+        raise ValueError("The number of extrapolated samples must be strictly positive")
+
+    #Initialize the forward and backward extrapolation vectors:
     x_forward = np.zeros((Nextra),dtype=complex)
     x_backward = np.zeros((Nextra),dtype=complex)
 

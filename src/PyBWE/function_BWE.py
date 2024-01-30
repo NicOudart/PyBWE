@@ -60,7 +60,7 @@ def BWE(spec,df,extra_factor,model_order,zp_factor,side_cut):
     Nextra = round(((extra_factor*N)-N)//2)+1
 
     #Extrapolation on each side of the spectrum:
-    spec_extra,spec_forward,spec_backward = ar_extrapolation(spec,ar_coeff,Nextra,"both")
+    spec_extra,spec_forward,spec_backward = ar_extrapolation(spec,ar_coeff,Nextra)
 
     #Hamming windowing (a good compromise for resolution) and IFFT:
     spec_extra = np.hamming(len(spec_extra))*spec_extra

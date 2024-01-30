@@ -34,6 +34,10 @@ def burg(x,p):
     if p > N:
         raise ValueError("The order must be less than the number of samples")
 
+    #Check if the order of the model is above 0:
+    if p < 1:
+        raise ValueError("The order cannot be 0 or negative")
+
     #Variables initialization:
     e = sum(abs(x)**2.) / float(N) #white-noise variance
     a = np.zeros(0, dtype=complex) #AR model coefficients vector

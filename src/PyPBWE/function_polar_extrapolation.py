@@ -12,7 +12,7 @@
 #   -Thetaf: coefficients matrix of the AR forward model of X
 #   -Thetab: coefficients matrix of the AR backward model of X
 #   -Mextra: number of samples to be extrapolated forward, backward or both
-#   -extra_mode: extrapolation mode, "forward","backward" or "both"
+#   -extra_mode (optional): extrapolation mode, "forward","backward" or "both"
 
 #-Outputs:
 #   -X_extra: matrix containing the extrapolated X in the desired direction(s)
@@ -27,7 +27,11 @@ import numpy as np
 
 #Function definition:-----------------------------------------------------------
 
-def polar_extrapolation(X,Thetaf,Thetab,Mextra,extra_mode):
+def polar_extrapolation(X,Thetaf,Thetab,Mextra,extra_mode='both'):
+
+    #Check if the number of extrapolated samples is a positive integer:
+    if Mextra<1:
+        raise ValueError("The number of extrapolated samples must be strictly positive")
 
     #Retrieve the number of samples in the spectrum:
     M = np.shape(X)[1]

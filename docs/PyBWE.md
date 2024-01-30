@@ -106,7 +106,7 @@ This can for instance be done by subtracting a "free-space" (without any targets
 
 ## Functions
 
-### PyBWE.ar_extrapolation(x,ar_coeff,Nextra,extra_mode)
+### PyBWE.ar_extrapolation(x,ar_coeff,Nextra,extra_mode='both')
 
 The PyBWE.ar_extrapolation function extrapolates a spectrum given its AR model, forward, backward or both.
 
@@ -118,7 +118,7 @@ The PyBWE.ar_extrapolation function extrapolates a spectrum given its AR model, 
 
 * Nextra: _integer_ number of samples to be extrapolated forward, backward or both.
 
-* extra_mode: _string_ containing the extrapolation mode, "forward"/"backward"/"both".
+* extra_mode: (optional) _string_ containing the extrapolation mode, "forward"/"backward"/"both".
 
 **Outputs:**
 

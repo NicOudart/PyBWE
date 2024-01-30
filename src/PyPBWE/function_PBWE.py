@@ -64,7 +64,7 @@ def PBWE(spec_mat,df,extra_factor,model_order,zp_factor,side_cut):
     Mextra = round(((extra_factor*M)-M)//2)+1
 
     #Extrapolation of spec_mat in both directions:
-    spec_mat_extra,spec_mat_extra_forward,spec_mat_extra_backward = polar_extrapolation(spec_mat,Thetaf,Thetab,Mextra,"both")
+    spec_mat_extra,spec_mat_extra_forward,spec_mat_extra_backward = polar_extrapolation(spec_mat,Thetaf,Thetab,Mextra)
 
     #Hamming windowing (a good compromise for resolution) and IFFT for each
     #spectrum channel:
