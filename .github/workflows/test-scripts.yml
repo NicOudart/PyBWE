@@ -17,6 +17,16 @@ jobs:
           python-version: 3.9
       - run: pip install -r test/requirements.txt
       - run: python test/script_unit_test_BWE.py
+      
+  unitTestPBWE:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - run: pip install -r test/requirements.txt
+      - run: python test/script_unit_test_PBWE.py
 
   perfoTestBWE:
     runs-on: ubuntu-latest
