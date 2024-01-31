@@ -33,13 +33,26 @@ def polar_extrapolation(X,Thetaf,Thetab,Mextra,extra_mode='both'):
     if Mextra<1:
         raise ValueError("The number of extrapolated samples must be strictly positive")
 
+    #Check if the Thetaf and Thetab matrices have the same dimensions:
+    if np.shape(Thetaf)!=np.shape(Thetab):
+        raise ValueError("The forward and backward model coefficients matrices must have the same dimension")
+
     #Retrieve the number of samples in the spectrum:
     M = np.shape(X)[1]
 
     #Retrieve the number of polarimetric channels:
     Npol = np.shape(X)[0]
+
+    #Check if the 2nd dimension of Thetaf corresponds to the number of channels:
+    if np.shape(Thetaf)[1]!=Npol:
+        raise ValueError("The 2nd dimension of Thetaf and Thetab must be equal to the number of polarimetric channels")
+
+    #Check if the 1st dimension of Thetaf is a multiple of the number of channels:
+    if (np.shape(Thetaf)[0]%Npol>0):
+        raise ValueError("The 1st dimension of Thetaf and Thetab must be a multiple of the number of polarimetric channels")
+
     #Retrieve the order of the model:
-    order = round((np.shape(Thetaf)[0])/Npol)
+    order = int((np.shape(Thetaf)[0])/Npol)
 
     #Check if the order of the model is below the number of samples:
     if order > M:
