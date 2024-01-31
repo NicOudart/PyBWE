@@ -68,21 +68,24 @@ try:
 except ValueError:
     assert True
 
-#Testing the different extrapolation modes:
-for extra_mode in ['both','forward','backward']:
+#Check the 'both' extrapolation modes:
+x_extra,x_forward,x_backward = PyBWE.ar_extrapolation(spec_vect_test,a,150,'both')
+assert sqrt(sum(abs(spec_vect_ref[301:]-x_forward)**2)/150)<1e-3, 'PyBWE.extrapolated NOK!'
+assert sqrt(sum(abs(spec_vect_ref[:150]-x_backward)**2)/150)<1e-3, 'PyBWE.extrapolated NOK!'
+assert np.array_equal(x_forward,x_extra[301:]), 'PyBWE.extrapolated NOK!'
+assert np.array_equal(x_backward,x_extra[:150]), 'PyBWE.extrapolated NOK!'
 
-    #Application of the ar_extrapolation function to the test dataset:
-    x_extra,x_forward,x_backward = PyBWE.ar_extrapolation(spec_vect_test,a,150,'both')
+#Check the 'forward' extrapolation mode:
+x_extra,x_forward,x_backward = PyBWE.ar_extrapolation(spec_vect_test,a,150,'forward')
+assert sqrt(sum(abs(spec_vect_ref[301:]-x_forward)**2)/150)<1e-3, 'PyBWE.extrapolated NOK!'
+assert np.array_equal(x_forward,x_extra[151:]), 'PyBWE.extrapolated NOK!'
+assert sum(abs(x_backward))==0, 'PyBWE.extrapolated NOK!'
 
-    #Check the forward extrapolation:
-    if (extra_mode=='both')or(extra_mode=='forward'):
-        assert sqrt(sum(abs(spec_vect_ref[301:]-x_forward)**2)/150)<1e-3, 'PyBWE.extrapolated NOK!'
-        assert np.array_equal(x_forward,x_extra[301:]), 'PyBWE.extrapolated NOK!'
-
-    #Check the backward extrapolation:
-    if (extra_mode=='both')or(extra_mode=='backward'):
-        assert sqrt(sum(abs(spec_vect_ref[:150]-x_backward)**2)/150)<1e-3, 'PyBWE.extrapolated NOK!'
-        assert np.array_equal(x_backward,x_extra[:150]), 'PyBWE.extrapolated NOK!'
+#Check the 'backward' extrapolation mode:
+x_extra,x_forward,x_backward = PyBWE.ar_extrapolation(spec_vect_test,a,150,'backward')
+assert sqrt(sum(abs(spec_vect_ref[:150]-x_backward)**2)/150)<1e-3, 'PyBWE.extrapolated NOK!'
+assert np.array_equal(x_backward,x_extra[:150]), 'PyBWE.extrapolated NOK!'
+assert sum(abs(x_forward))==0, 'PyBWE.extrapolated NOK!'
 
 #Output:------------------------------------------------------------------------
 

@@ -42,6 +42,10 @@ def polar_burg(X,p):
     if p > M:
         raise ValueError("The order must be less than the number of samples")
 
+    #Check if the order of the model is above 0:
+    if p < 1:
+        raise ValueError("The order cannot be 0 or negative")
+
     #Initialize the error matrices (forward/backward):
     Fmat = np.zeros((Npol,M),dtype=complex)
     Bmat = np.zeros((Npol,M),dtype=complex)
