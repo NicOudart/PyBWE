@@ -23,7 +23,7 @@ spec_vect_test = np.exp(-1j*4*pi*freq_vect_test/3e8)+np.exp(-1j*4*pi*1.1*freq_ve
 
 #Reference dataset generation:--------------------------------------------------
 
-#Generate a vector of 451 frequencies between 0 and 2 GHz:
+#Generate a vector of 451 frequencies between 0 and 4.5 GHz:
 freq_vect_ref = np.linspace(0,4.5e9,451)
 
 #Generate a sum of two complex sine-waves corresponding to 2 targets' echoes,

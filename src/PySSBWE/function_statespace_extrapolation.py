@@ -26,6 +26,14 @@ from numpy.linalg import matrix_power as mp
 
 def statespace_extrapolation(y,A,B,C,Nextra):
 
+    #Check the consistency of the State-Space model matrices dimensions:
+    if (np.shape(A)[0]!=np.shape(A)[1]):
+        raise ValueError("The A matrix must be square")
+    if (np.shape(A)[0]!=max(np.shape(B))):
+        raise ValueError("The dimension of B is not consistent with A")
+    if (np.shape(A)[0]!=max(np.shape(C))):
+        raise ValueError("The dimension of C is not consistent with A")
+
     #Retrieve the number of samples in the spectrum and initialize the
     #extrapolation:
     N = len(y)

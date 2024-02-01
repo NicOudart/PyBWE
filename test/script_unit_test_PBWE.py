@@ -27,7 +27,7 @@ spec_mat_test = np.vstack((spec_vect_00_test,spec_vect_11_test))
 
 #Reference dataset generation:--------------------------------------------------
 
-#Generate a vector of 451 frequencies between 0 and 2 GHz:
+#Generate a vector of 451 frequencies between 0 and 4.5 GHz:
 freq_vect_ref = np.linspace(0,4.5e9,451)
 
 #Generate a sum of two complex sine-waves corresponding to 2 targets' echoes,

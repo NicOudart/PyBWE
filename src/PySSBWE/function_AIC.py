@@ -21,6 +21,7 @@
 #Libraries importation:---------------------------------------------------------
 
 import numpy as np
+from math import sqrt
 
 #Function definition:-----------------------------------------------------------
 

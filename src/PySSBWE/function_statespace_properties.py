@@ -31,6 +31,14 @@ from math import pi
 
 def statespace_properties(A,B,C,df,f1):
 
+    #Check the consistency of the State-Space model matrices dimensions:
+    if (np.shape(A)[0]!=np.shape(A)[1]):
+        raise ValueError("The A matrix must be square")
+    if (np.shape(A)[0]!=max(np.shape(B))):
+        raise ValueError("The dimension of B is not consistent with A")
+    if (np.shape(A)[0]!=max(np.shape(C))):
+        raise ValueError("The dimension of C is not consistent with A")
+
     #Retrieve the eigenvalues and eigenvector of A:
     eigval, eigvect = eig(A)
     #Calculate the inverse of A's eigenvector:
