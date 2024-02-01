@@ -45,7 +45,8 @@ from .function_ar_extrapolation import ar_extrapolation
 def BWE(spec,df,extra_factor,model_order,zp_factor,side_cut):
 
     #Cutting 5% of frequencies on each side of the spectrum:
-    spec = spec[round(len(spec)*0.05):len(spec)-round(len(spec)*0.05)]
+    if side_cut==True:
+        spec = spec[round(len(spec)*0.05):len(spec)-round(len(spec)*0.05)]
 
     #Retrieve the number of samples in the spectrum:
     N = len(spec)

@@ -54,7 +54,8 @@ from .function_statespace_extrapolation import statespace_extrapolation
 def SSBWE(spec,df,extra_factor,zp_factor,side_cut,order=0,noise_type="white"):
 
     #Cutting 5% of frequencies on each side of the spectrum:
-    spec = spec[round(len(spec)*0.05):len(spec)-round(len(spec)*0.05)]
+    if side_cut==True:
+        spec = spec[round(len(spec)*0.05):len(spec)-round(len(spec)*0.05)]
 
     #Convert y to Numpy array:
     y = np.array(spec)

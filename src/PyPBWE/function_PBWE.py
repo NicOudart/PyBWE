@@ -47,7 +47,8 @@ def PBWE(spec_mat,df,extra_factor,model_order,zp_factor,side_cut):
     spec_mat = np.array(spec_mat)
 
     #Cutting 5% of frequencies on each side of the spectrum:
-    spec_mat = spec_mat[:,round(np.shape(spec_mat)[1]*0.05):np.shape(spec_mat)[1]-round(np.shape(spec_mat)[1]*0.05)]
+    if side_cut==True:
+        spec_mat = spec_mat[:,round(np.shape(spec_mat)[1]*0.05):np.shape(spec_mat)[1]-round(np.shape(spec_mat)[1]*0.05)]
 
     #Retrieve the number of polarimetric channels:
     Npol = np.shape(spec_mat)[0]
