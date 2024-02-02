@@ -36,6 +36,36 @@ jobs:
           python-version: 3.9
       - run: pip install -r test/requirements.txt
       - run: python test/script_unit_test_SSBWE.py
+      
+  integrationTestBWE:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - run: pip install -r test/requirements.txt
+      - run: python test/script_integration_test_BWE.py
+      
+  integrationTestPBWE:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - run: pip install -r test/requirements.txt
+      - run: python test/script_integration_test_PBWE.py
+      
+  integrationTestSSBWE:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - run: pip install -r test/requirements.txt
+      - run: python test/script_integration_test_SSBWE.py
 
   perfoTestBWE:
     runs-on: ubuntu-latest
