@@ -8,8 +8,8 @@ jobs:
   unitTestBWE:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: 3.9
       - run: pip install -r test/requirements.txt
@@ -18,8 +18,8 @@ jobs:
   unitTestPBWE:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: 3.9
       - run: pip install -r test/requirements.txt
@@ -28,8 +28,8 @@ jobs:
   unitTestSSBWE:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: 3.9
       - run: pip install -r test/requirements.txt
@@ -38,8 +38,8 @@ jobs:
   integrationTestBWE:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: 3.9
       - run: pip install -r test/requirements.txt
@@ -48,8 +48,8 @@ jobs:
   integrationTestPBWE:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: 3.9
       - run: pip install -r test/requirements.txt
@@ -58,8 +58,8 @@ jobs:
   integrationTestSSBWE:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: 3.9
       - run: pip install -r test/requirements.txt
@@ -68,8 +68,8 @@ jobs:
   perfoTestBWE:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: 3.9
       - run: pip install -r test/requirements.txt
@@ -82,8 +82,8 @@ jobs:
   perfoTestSSBWE:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: 3.9
       - run: pip install -r test/requirements.txt
@@ -96,8 +96,8 @@ jobs:
   perfoTestPBWE:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: 3.9
       - run: pip install -r test/requirements.txt
