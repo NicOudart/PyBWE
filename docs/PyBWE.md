@@ -146,7 +146,7 @@ The PyBWE.burg function fits an AR model to a spectrum, using the Burg algorithm
 
 * rc: _complex 1D array_ containing the Burg algorithm's reflection coefficients.
 
-### PyBWE.BWE(spec,df,extra_factor,model_order,zp_factor,side_cut)
+### PyBWE.BWE(spec,df,extra_factor,model_order,zp_factor,side_cut=True)
 
 The PyBWE.BWE function applies the Bandwidth Extrapolation to a radar signal's spectrum.
 
@@ -162,7 +162,7 @@ The PyBWE.BWE function applies the Bandwidth Extrapolation to a radar signal's s
 
 * zp_factor: _float_ factor between the zero-padded and original spectrum's bandwidth.
 
-* side_cut: _boolean_, 5% of samples are cut on each side of the spectrum if True.
+* side_cut: (optional) _boolean_, 5% of samples are cut on each side of the spectrum if True.
 
 **Outputs:**
 

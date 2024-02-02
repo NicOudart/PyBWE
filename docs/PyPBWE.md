@@ -115,7 +115,7 @@ We thus recommend to acquire a "free-space" measurement for each polarimetric ch
 
 ## Functions
 
-### PyPBWE.PBWE(spec_mat,df,extra_factor,model_order,zp_factor,side_cut)
+### PyPBWE.PBWE(spec_mat,df,extra_factor,model_order,zp_factor,side_cut=True)
 
 The PyPBWE.PBWE function applies the Polarimetric Bandwidth Extrapolation to a radar polarimetric channels spectra.
 
@@ -131,7 +131,7 @@ The PyPBWE.PBWE function applies the Polarimetric Bandwidth Extrapolation to a r
 
 * zp_factor: _float_ factor between the zero-padded and original spectra's bandwidth.
 
-* side_cut: _boolean_, 5% of samples are cut on each side of each spectra if True.
+* side_cut: (optional) _boolean_, 5% of samples are cut on each side of each spectra if True.
 
 **Outputs:**
 

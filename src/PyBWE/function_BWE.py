@@ -17,10 +17,10 @@
 #   -zp_factor: zero-padding factor, a 10 zp_factor will lead to a X10
 #               interpolation in the time-domain output signal output_bwe. This
 #               process is only aesthetic.
-#   -side_cut: (boolean) if True, 5% of frequencies will be cut on each side of
-#              the spectrum. This greatly improves result in the case of radars
-#              working in time-domain, or in case the imaginary part of the
-#              spectrum has been reconstructed by Hilbert transform
+#   -side_cut (optional): (boolean) if True, 5% of frequencies will be cut on
+#              each side of the spectrum. This greatly improves result in the
+#              case of radars working in time-domain, or in case the imaginary
+#              part of the spectrum has been reconstructed by Hilbert transform.
 
 #-Outputs:
 #   -output_bwe: time-domain signal output after BWE application
@@ -42,7 +42,7 @@ from .function_ar_extrapolation import ar_extrapolation
 
 #Function definition:-----------------------------------------------------------
 
-def BWE(spec,df,extra_factor,model_order,zp_factor,side_cut):
+def BWE(spec,df,extra_factor,model_order,zp_factor,side_cut=True):
 
     #Cutting 5% of frequencies on each side of the spectrum:
     if side_cut==True:

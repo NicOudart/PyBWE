@@ -136,7 +136,7 @@ See Akaike (1974).
 **Notes:**
 The type of noise ("white" or "colored") is an optional input. The noise will be considered "white" by default.
 
-### PySSBWE.SSBWE(spec,df,extra_factor,zp_factor,side_cut,order=0,noise_type="white")
+### PySSBWE.SSBWE(spec,df,extra_factor,zp_factor,side_cut=True,order=0,noise_type="white")
 
 The PySSBWE.SSBWE function applies the State-Space Bandwidth Extrapolation (SSBWE) to a radar signal's spectrum.
 The State-Space model is estimated using two methods:
@@ -157,7 +157,7 @@ Both models' results are returned by the function.
 
 * zp_factor: _float_ factor between the zero-padded and original spectrum's bandwidth.
 
-* side_cut: _boolean_, 5% of samples are cut on each side of the spectrum if True.
+* side_cut: (optional) _boolean_, 5% of samples are cut on each side of the spectrum if True.
 
 * order: (optional) _integer_ order of the state-space model, if =0 the order is estimated using AIC.
 

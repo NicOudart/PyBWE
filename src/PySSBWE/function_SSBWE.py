@@ -17,10 +17,10 @@
 #   -zp_factor: zero-padding factor, a 10 zp_factor will lead to a X10
 #               interpolation in the time-domain output signal output_bwe. This
 #               process is only aesthetic.
-#   -side_cut: (boolean) if True, 5% of frequencies will be cut on each side of
-#              the spectrum. This greatly improves result in the case of radars
-#              working in time-domain, or in case the imaginary part of the
-#              spectrum has been reconstructed by Hilbert transform
+#   -side_cut (optional): (boolean) if True, 5% of frequencies will be cut on
+#              each side of the spectrum. This greatly improves result in the
+#              case of radars working in time-domain, or in case the imaginary
+#              part of the spectrum has been reconstructed by Hilbert transform.
 #   -order (optional): order of the model, by default the order will be
 #                      estimated by AIC.
 #   -noise_type (optional): noise corrupting the spectrum, "white" for a
@@ -51,7 +51,7 @@ from .function_statespace_extrapolation import statespace_extrapolation
 
 #Function definition:-----------------------------------------------------------
 
-def SSBWE(spec,df,extra_factor,zp_factor,side_cut,order=0,noise_type="white"):
+def SSBWE(spec,df,extra_factor,zp_factor,side_cut=True,order=0,noise_type="white"):
 
     #Cutting 5% of frequencies on each side of the spectrum:
     if side_cut==True:

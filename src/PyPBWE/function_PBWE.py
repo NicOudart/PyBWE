@@ -21,10 +21,10 @@
 #   -zp_factor: zero-padding factor, a 10 zp_factor will lead to a X10
 #               interpolation in the time-domain output signal output_bwe. This
 #               process is only aesthetic.
-#   -side_cut: (boolean) if True, 5% of frequencies will be cut on each side of
-#              the spectrum. This greatly improves result in the case of radars
-#              working in time-domain, or in case the imaginary part of the
-#              spectrum has been reconstructed by Hilbert transform
+#   -side_cut (optional): (boolean) if True, 5% of frequencies will be cut on
+#              each side of the spectrum. This greatly improves result in the
+#              case of radars working in time-domain, or in case the imaginary
+#              part of the spectrum has been reconstructed by Hilbert transform.
 
 #-Outputs:
 #   -output_pbwe: time-domain multi-channel signal output after PBWE application
@@ -41,7 +41,7 @@ from .function_polar_extrapolation import polar_extrapolation
 
 #Function definition:-----------------------------------------------------------
 
-def PBWE(spec_mat,df,extra_factor,model_order,zp_factor,side_cut):
+def PBWE(spec_mat,df,extra_factor,model_order,zp_factor,side_cut=True):
 
     #Convert the input spec_mat into a Numpy array:
     spec_mat = np.array(spec_mat)
