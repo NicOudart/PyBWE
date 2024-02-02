@@ -4,6 +4,13 @@
 #This script allows you to perform a test of the integrated functions in the
 #PySSBWE package.
 
+#The test is based on synthetic radar data, generated with the following scenario:
+# - 2 targets in sight of the radar, at distances 1 and 1.1 m, generate
+#   echoes in the radar signal of amplitudes 1 and 1.
+# - The 2 echoes are affected by frequency-domain decays of 0.25 and 0.5 1/Hz.
+# - The radar output is a spectrum of 151 frequencies between 1.5 and 3 GHz.
+# - The spectrum is corrupted by a white-noise of standard deviation 1e-6.
+
 ################################################################################
 
 #Libraries importation:---------------------------------------------------------

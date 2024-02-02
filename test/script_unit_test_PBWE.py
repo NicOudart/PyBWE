@@ -3,6 +3,15 @@
 
 #This script allows you to perform a test of unit functions in the PyPBWE package.
 
+#The test is based on synthetic radar data, generated with the following scenario:
+# - The radar acquires signals in 2 co-polarimetric channels 00 and 11.
+# - 2 targets in sight of the radar, at distances 1 and 1.1 m, generate
+#   echoes in the radar signal of amplitudes 1 and 1 in channel 00, 1 and -1 in
+#   channel 11.
+# - The radar output is 2 co-polarimetric spectra of 151 frequencies between
+#   1.5 and 3 GHz.
+# - The spectra are corrupted by a white-noise of standard deviation 1e-6.
+
 ################################################################################
 
 #Libraries importation:---------------------------------------------------------

@@ -1,7 +1,7 @@
 # Performance tests
 
-This library proposes performance tests for the integrated methods PyBWE.BWE, PyPBWE.PBWE and PySSBWE.SSBWE, to ensure modifications will not cause regressions.
-These tests are launched automatically at each release from the main branch as GitHub actions (**test-script.yml**, jobs **perfoTestBWE**, **perfoTestPBWE** and **perfoTestSSBWE**). Reports are saved as artifacts.
+This library proposes performance tests for the integrated methods PyBWE.BWE, PyPBWE.PBWE and PySSBWE.SSBWE, to ensure modifications will not cause performance regressions.
+These tests can be launched as GitHub actions (**test-script.yml**, jobs **perfoTestBWE**, **perfoTestPBWE** and **perfoTestSSBWE**). Reports are saved as artifacts.
 
 ## Performance facing white-noise
 

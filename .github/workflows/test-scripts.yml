@@ -1,9 +1,7 @@
 name: test_scripts
 
-workflow_run:
-    workflows: ["Upload to PyPI"]
-    types:
-      - completed
+on:
+  workflow_dispatch:
 
 jobs:
 
