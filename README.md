@@ -156,7 +156,7 @@ If you need support using PyBWE, you can either:
 
 ## Credits
 
-© Nicolas OUDART (2023)
+© Nicolas OUDART (2024)
 
 LATMOS/IPSL, UVSQ Université Paris-Saclay, Guyancourt, France
 
