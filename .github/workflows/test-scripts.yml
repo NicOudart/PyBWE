@@ -1,7 +1,9 @@
-on:
-  release:
-    branches:
-      - main
+name: test_scripts
+
+workflow_run:
+    workflows: ["Upload to PyPI"]
+    types:
+      - completed
 
 jobs:
 
