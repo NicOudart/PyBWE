@@ -45,13 +45,21 @@ For the extrapolation functions PyBWE.ar_extrapolation, PyPBWE.polar_extrapolati
 
 * Check the error messages if the model's coefficients arrays do not have dimensions consistent with the spectrum to extrapolate.
 
-*
+* Check the error messages if the number of extrapolated samples is not strictly positive.
+
+* For all extrapolation modes (forward, backward, both), compare the extrapolation returned by the function to the reference (extrapolation factor 3).
 
 ### Echoes properties extraction functions
 
 For the echoes properties extraction function PySSBWE.statespace_properties, we follow this strategy:
 
+* Check the error messages if the model's coefficients arrays do not have dimensions consistent with the input spectrum.
 
+* Compare the amplitudes of echoes extracted from the State-Space model to the expected values.
+
+* Compare the targets distances estimated from the echoes time-delays, extracted from the State-Space model, to the expected values.
+
+* Compare the frequency-domain decays of echoes extracted from the State-Space model to the expected values.
 
 # Integration tests
 
