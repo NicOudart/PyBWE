@@ -43,7 +43,9 @@ For the modelling functions PyBWE.burg, PyPBWE.polar_burg and PySSBWE.statespace
 
 For the extrapolation functions PyBWE.ar_extrapolation, PyPBWE.polar_extrapolation and PySSBWE.statespace_extrapolation, we follow this strategy:
 
+* Check the error messages if the model's coefficients arrays do not have dimensions consistent with the spectrum to extrapolate.
 
+*
 
 ### Echoes properties extraction functions
 

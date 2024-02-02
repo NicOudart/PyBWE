@@ -26,6 +26,10 @@ from numpy.linalg import matrix_power as mp
 
 def statespace_extrapolation(y,A,B,C,Nextra):
 
+    #Check if the number of extrapolated samples is a positive integer:
+    if Nextra<1:
+        raise ValueError("The number of extrapolated samples must be strictly positive")
+
     #Check the consistency of the State-Space model matrices dimensions:
     if (np.shape(A)[0]!=np.shape(A)[1]):
         raise ValueError("The A matrix must be square")

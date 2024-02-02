@@ -87,6 +87,13 @@ try:
 except ValueError:
     assert True
 
+#Check the error message if the number of extrapolated samples is not strictly positive:
+try:
+    y_extra = PySSBWE.statespace_extrapolation(np.zeros(3),np.zeros((2,2)),np.zeros((2,1)),np.zeros((1,2)),0)
+    assert False, 'PySSBWE.statespace_extrapolation NOK!'
+except ValueError:
+    assert True
+
 #Check the statespace_extrapolation function on the test dataset models obtained with methods 1 and 2:
 y_extra_1 = PySSBWE.statespace_extrapolation(spec_vect_test,A1,B1,C1,150)
 y_extra_2 = PySSBWE.statespace_extrapolation(spec_vect_test,A2,B2,C2,150)
