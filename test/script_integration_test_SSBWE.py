@@ -30,7 +30,7 @@ try:
     output_ssbwe_1, output_ssbwe_2, time_ssbwe_vect = PySSBWE.SSBWE(spec_vect_test,freq_vect_test[1]-freq_vect_test[0],3,10,True,2,'white') #Standard parameters
     output_ssbwe_1, output_ssbwe_2, time_ssbwe_vect = PySSBWE.SSBWE(spec_vect_test,freq_vect_test[1]-freq_vect_test[0],2,10,True,2,'white')
     output_ssbwe_1, output_ssbwe_2, time_ssbwe_vect = PySSBWE.SSBWE(spec_vect_test,freq_vect_test[1]-freq_vect_test[0],3,5,True,2,'white')
-    output_ssbwe_1, output_ssbwe_2, time_ssbwe_vect = PySSBWE.SSBWE(spec_vect_test,freq_vect_test[1]-freq_vect_test[0],3,10,True,0,'white')
+    output_ssbwe_1, output_ssbwe_2, time_ssbwe_vect = PySSBWE.SSBWE(spec_vect_test,freq_vect_test[1]-freq_vect_test[0],3,10,True,0,'white') #AIC to estimate the order of the model
     output_ssbwe_1, output_ssbwe_2, time_ssbwe_vect = PySSBWE.SSBWE(spec_vect_test,freq_vect_test[1]-freq_vect_test[0],3,10,True,2,'colored')
     output_ssbwe_1, output_ssbwe_2, time_ssbwe_vect = PySSBWE.SSBWE(spec_vect_test,freq_vect_test[1]-freq_vect_test[0],3,10,False,2,'white') #To be used for the rest of the test
 except:
