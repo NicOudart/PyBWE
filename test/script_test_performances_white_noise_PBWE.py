@@ -236,12 +236,12 @@ for dist in list_dist_targets:
         error_distance_pbwe11 = np.array(list_distance_pbwe11)-dist
 
         #Calculate the error on the amplitude of the 1st echo:
-        error_amplitude_target1_pbwe00 = 100*(np.array(list_amplitude_target1_pbwe00)-amp_target1_00)/amp_target1_00
-        error_amplitude_target1_pbwe11 = 100*(np.array(list_amplitude_target1_pbwe11)-amp_target1_11)/amp_target1_11
+        error_amplitude_target1_pbwe00 = 100*(np.array(list_amplitude_target1_pbwe00)-abs(amp_target1_00))/abs(amp_target1_00)
+        error_amplitude_target1_pbwe11 = 100*(np.array(list_amplitude_target1_pbwe11)-abs(amp_target1_11))/abs(amp_target1_11)
 
         #Calculate the error on the amplitude of the 2nd echo:
-        error_amplitude_target2_pbwe00 = 100*(np.array(list_amplitude_target2_pbwe00)-amp_target2_00)/amp_target2_00
-        error_amplitude_target2_pbwe11 = 100*(np.array(list_amplitude_target2_pbwe11)-amp_target2_11)/amp_target2_11
+        error_amplitude_target2_pbwe00 = 100*(np.array(list_amplitude_target2_pbwe00)-abs(amp_target2_00))/abs(amp_target2_00)
+        error_amplitude_target2_pbwe11 = 100*(np.array(list_amplitude_target2_pbwe11)-abs(amp_target2_11))/abs(amp_target2_11)
 
         #Add the tests results to the dataframes:-------------------------------
 
