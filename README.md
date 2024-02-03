@@ -162,8 +162,8 @@ LATMOS/IPSL, UVSQ Université Paris-Saclay, Guyancourt, France
 
 ## Citation
 
-OUDART Nicolas (2024), PyBWE: Python tools for Bandwidth Extrapolation of radar signals (2024.02).
-DOI: 10.5281/zenodo.10611676
+OUDART Nicolas (2024), PyBWE: Python tools for Bandwidth Extrapolation of radar signals (2024.02.2).
+DOI: 10.5281/zenodo.10612861
 
 ## License
 
