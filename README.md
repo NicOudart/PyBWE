@@ -103,7 +103,7 @@ In **examples** can be found one example scripts for each package, with applicat
 ## Tests
 
 In **test** can be found test scripts for each package, divided into unit, integration and performance tests.
-Each test script is automatically launched on release for the main branch. 
+Each test script can be launched on request with GitHub action **test-scripts.yml**. 
 
 ### Unit and integration tests
 
