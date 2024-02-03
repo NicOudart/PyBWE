@@ -314,7 +314,7 @@ with open(test_report_path,'w') as file_report:
     #Test scenario:
     file_report.write('## Test scenario\r\n')
     file_report.write('### Scenario\r\n')
-    file_report.write('The test is performed on synthetic radar signals (inspired by the WISDOM GPR of the ExoMars rover mission, Ciarletti et al. (2017):\r\n')
+    file_report.write('The test is performed on synthetic radar signals (inspired by the WISDOM GPR of the ExoMars rover mission, Ciarletti et al. (2017)):\r\n')
     file_report.write('* A SFCW (Stepped Frequency Continuous Wave) radar working between 0.5 and 3 GHz measures a 1001 frequencies spectrum when sounding.\r\n')
     file_report.write('* This radar can transmit and receive signals in two linear polarizations named 0 and 1. This leads to 4 polirization channels: 2 co-polar named 00 and 11 (emission and reception in the same polarization), and 2 cross-polar named 01 and 10 (emission and reception in different polarizations). For simplicity, we will only consider the co-polar channels 00 and 11 in this example.\r\n')
     file_report.write('* Only the In-phase component (real part of the spectrum) is measured, the Quadrature component (imaginary part of the spectrum) is reconstructed by Hilbert transform.\r\n')

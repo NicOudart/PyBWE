@@ -231,7 +231,7 @@ with open(test_report_path,'w') as file_report:
     #Test scenario:
     file_report.write('## Test scenario\r\n')
     file_report.write('### Scenario\r\n')
-    file_report.write('The test is performed on synthetic radar signals (inspired by the WISDOM GPR of the ExoMars rover mission, Ciarletti et al. (2017):\r\n')
+    file_report.write('The test is performed on synthetic radar signals (inspired by the WISDOM GPR of the ExoMars rover mission, Ciarletti et al. (2017)):\r\n')
     file_report.write('* A SFCW (Stepped Frequency Continuous Wave) radar working between 0.5 and 3 GHz measures a 1001 frequencies spectrum when sounding.\r\n')
     file_report.write('* Only the In-phase component (real part of the spectrum) is measured, the Quadrature component (imaginary part of the spectrum) is reconstructed by Hilbert transform.\r\n')
     file_report.write('* Two targets in free-space are seperated by 5 cm, slightly below the radar free-space resolution. These targets generate echoes of equal amplitudes in the radar signal, or complex sine-waves in the measured spectrum.\r\n')
