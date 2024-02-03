@@ -42,7 +42,7 @@ import PyPBWE
 ### The order of the AR model
 
 In theory, the ideal order of an AR model depends on the number of complex sine-waves composing the spectrum.
-However, in practical cases, a higher order is required to obtain good results.
+However, in practical cases, a higher order is required to obtain good results in presence of noise.
 For the BWE, Cuomo (1992) recommends an order equal to 1/3 of the number of samples in the spectrum. This is also what we recommend for PBWE.
 
 ### The extrapolation factor
