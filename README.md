@@ -1,6 +1,6 @@
 [![DOI](https://zenodo.org/badge/724105763.svg)](https://zenodo.org/doi/10.5281/zenodo.10259072)
 
-Markdown: [![status](https://joss.theoj.org/papers/16898c7ed1ff84843966a673e06dd513/status.svg)](https://joss.theoj.org/papers/16898c7ed1ff84843966a673e06dd513)
+[![status](https://joss.theoj.org/papers/16898c7ed1ff84843966a673e06dd513/status.svg)](https://joss.theoj.org/papers/16898c7ed1ff84843966a673e06dd513)
 
 [<img src="https://github.com/NicOudart/PyBWE/raw/main/Logo_PyBWE.png" width="500"/>](Logo_PyBWE.png)
 
