@@ -255,12 +255,12 @@ amp_target2_11 = -1
 
 Generate a sum of two complex sine-waves corresponding to the targets' echoes (each with an amplitude of 1), for the 00 channel:
 ~~~bash
-spec_vect_00 = (amp_target1_00*np.exp(-1j*4*pi*dist_target1*freq_vect/3e8))+(amp_target2_00*np.exp(-1j*4*pi*dist_target2*freq_vect/3e8))
+spec_vect_00 = (amp_target1_00*np.exp(1j*4*pi*dist_target1*freq_vect/3e8))+(amp_target2_00*np.exp(1j*4*pi*dist_target2*freq_vect/3e8))
 ~~~
 
 Generate a sum of two complex sine-waves corresponding to the targets' echoes (with amplitudes of 1 and -1), for the 11 channel:
 ~~~bash
-spec_vect_11 = (amp_target1_11*np.exp(-1j*4*pi*dist_target1*freq_vect/3e8))+(amp_target2_11*np.exp(-1j*4*pi*dist_target2*freq_vect/3e8))
+spec_vect_11 = (amp_target1_11*np.exp(1j*4*pi*dist_target1*freq_vect/3e8))+(amp_target2_11*np.exp(1j*4*pi*dist_target2*freq_vect/3e8))
 ~~~
 
 Only keep the real part of the spectrum (In-phase component) for the 2 channels:
@@ -279,8 +279,8 @@ spec_vect_11 += wn_vect_11
 
 Reconstruct a complex signal with the Hilbert transform for the 2 channels:
 ~~~bash
-spec_vect_00 = np.conjugate(hilbert(spec_vect_00))[::2]
-spec_vect_11 = np.conjugate(hilbert(spec_vect_11))[::2]
+spec_vect_00 = hilbert(spec_vect_00)[::2]
+spec_vect_11 = hilbert(spec_vect_11)[::2]
 freq_vect = freq_vect[::2]
 ~~~
 
@@ -339,7 +339,7 @@ time_vect = np.linspace(0,1/df,zp_factor*np.shape(spec_mat)[1])
 Display the original radar sounding and the PBWE version for channel 00:
 ~~~bash
 plt.subplot(1,2,1)
-plt.plot(time_vect*1e9,abs(1.85*np.fft.fft(np.conjugate(spec_mat[0,:])*np.hamming(len(spec_mat[0,:])),zp_factor*len(spec_mat[0,:])))/len(spec_mat[0,:]),'k-')
+plt.plot(time_vect*1e9,abs(1.85*np.fft.fft(spec_mat[0,:]*np.hamming(len(spec_mat[0,:])),zp_factor*len(spec_mat[0,:])))/len(spec_mat[0,:]),'k-')
 plt.plot(time_pbwe_vect*1e9,abs(output_pbwe[0,:]),'r-')
 plt.xlim([5,9])
 plt.xlabel('Time delays (ns)')
@@ -352,7 +352,7 @@ plt.grid()
 Display the original radar sounding and the PBWE version for channel 00:
 ~~~bash
 plt.subplot(1,2,2)
-plt.plot(time_vect*1e9,abs(1.85*np.fft.fft(np.conjugate(spec_mat[1,:])*np.hamming(len(spec_mat[1,:])),zp_factor*len(spec_mat[1,:])))/len(spec_mat[1,:]),'k-')
+plt.plot(time_vect*1e9,abs(1.85*np.fft.fft(spec_mat[1,:]*np.hamming(len(spec_mat[1,:])),zp_factor*len(spec_mat[1,:])))/len(spec_mat[1,:]),'k-')
 plt.plot(time_pbwe_vect*1e9,abs(output_pbwe[1,:]),'r-')
 plt.xlim([5,9])
 plt.xlabel('Time delays (ns)')
@@ -419,8 +419,8 @@ Generate the expected spectrum after extrapolation for comparison:
 ~~~bash
 df = freq_vect[1]-freq_vect[0]
 freq_vect_expected = np.linspace(freq_vect[0]-(df*(Mextra-2)),freq_vect[-1]+(df*Mextra),M+(Mextra*2))
-spec_vect_expected_00 = np.exp(-1j*4*pi*dist_target1*freq_vect_expected/3e8)+np.exp(-1j*4*pi*dist_target2*freq_vect_expected/3e8)
-spec_vect_expected_11 = np.exp(-1j*4*pi*dist_target1*freq_vect_expected/3e8)-np.exp(-1j*4*pi*dist_target2*freq_vect_expected/3e8)
+spec_vect_expected_00 = np.exp(1j*4*pi*dist_target1*freq_vect_expected/3e8)+np.exp(1j*4*pi*dist_target2*freq_vect_expected/3e8)
+spec_vect_expected_11 = np.exp(1j*4*pi*dist_target1*freq_vect_expected/3e8)-np.exp(1j*4*pi*dist_target2*freq_vect_expected/3e8)
 ~~~
 
 Display the expected spectrum after extrapolation for the 00 and 11 channels:

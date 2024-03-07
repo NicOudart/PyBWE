@@ -75,7 +75,7 @@ decay_target2 = 0.5e-9
 
 #Generate a sum of two complex sine-waves corresponding to the targets' echoes
 #(each with an amplitude of 1):
-spec_vect = (ampli_target1*np.exp(-(decay_target1+(1j*4*pi*dist_target1/3e8))*freq_vect))+(ampli_target2*np.exp(-(decay_target2+(1j*4*pi*dist_target2/3e8))*freq_vect))
+spec_vect = (ampli_target1*np.exp((-decay_target1+(1j*4*pi*dist_target1/3e8))*freq_vect))+(ampli_target2*np.exp((-decay_target2+(1j*4*pi*dist_target2/3e8))*freq_vect))
 
 #Only keep the real part of the spectrum (In-phase component):
 spec_vect = np.real(spec_vect)
@@ -85,7 +85,7 @@ wn_vect = np.random.normal(0,0.1,spec_vect.shape)
 spec_vect += wn_vect
 
 #Reconstruct a complex signal with the Hilbert transform:
-spec_vect = np.conjugate(hilbert(spec_vect))[::2]
+spec_vect = hilbert(spec_vect)[::2]
 freq_vect = freq_vect[::2]
 
 #State-space model fit:---------------------------------------------------------
@@ -129,7 +129,7 @@ spec_vect_extra_2_b = np.flip(spec_vect_extra_2_b)
 #Generate the expected spectrum after extrapolation for comparison:
 df = freq_vect[1]-freq_vect[0]
 freq_vect_expected = np.linspace(freq_vect[0]-(df*(Nextra-2)),freq_vect[-1]+(df*Nextra),N+(Nextra*2))
-spec_vect_expected = (ampli_target1*np.exp(-(decay_target1+(1j*4*pi*dist_target1/3e8))*freq_vect_expected))+(ampli_target2*np.exp(-(decay_target2+(1j*4*pi*dist_target2/3e8))*freq_vect_expected))
+spec_vect_expected = (ampli_target1*np.exp((-decay_target1+(1j*4*pi*dist_target1/3e8))*freq_vect_expected))+(ampli_target2*np.exp((-decay_target2+(1j*4*pi*dist_target2/3e8))*freq_vect_expected))
 
 #Display the expected spectrum after extrapolation:
 plt.plot(freq_vect_expected*1e-9,np.real(spec_vect_expected),'r-')

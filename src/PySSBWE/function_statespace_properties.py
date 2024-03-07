@@ -55,7 +55,7 @@ def statespace_properties(A,B,C,df,f1):
         #Fill to the output vectors of amplitudes, time-delays and
         #frequency-domain decays:
         amp[idx] = np.matmul(C,eigvect[:,idx])*np.matmul(inv_eigvect[idx,:],B)/(eigval[idx]**(f1/df))
-        td[idx] = -np.angle(eigval[idx])/(2*pi*df)
+        td[idx] = np.angle(eigval[idx])/(2*pi*df)
         dec[idx] = -np.log(abs(eigval[idx]))/df
 
     return amp,td,dec

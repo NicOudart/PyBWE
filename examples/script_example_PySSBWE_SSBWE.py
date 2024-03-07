@@ -82,7 +82,7 @@ decay_target2 = 0.5e-9
 
 #Generate a sum of two complex sine-waves corresponding to the targets' echoes
 #(each with an amplitude of 1):
-spec_vect = (ampli_target1*np.exp(-(decay_target1+(1j*4*pi*dist_target1/3e8))*freq_vect))+(ampli_target2*np.exp(-(decay_target2+(1j*4*pi*dist_target2/3e8))*freq_vect))
+spec_vect = (ampli_target1*np.exp((-decay_target1+(1j*4*pi*dist_target1/3e8))*freq_vect))+(ampli_target2*np.exp((-decay_target2+(1j*4*pi*dist_target2/3e8))*freq_vect))
 
 #Only keep the real part of the spectrum (In-phase component):
 spec_vect = np.real(spec_vect)
@@ -92,7 +92,7 @@ wn_vect = np.random.normal(0,0.1,spec_vect.shape)
 spec_vect += wn_vect
 
 #Reconstruct a complex signal with the Hilbert transform:
-spec_vect = np.conjugate(hilbert(spec_vect))[::2]
+spec_vect = hilbert(spec_vect)[::2]
 freq_vect = freq_vect[::2]
 
 #SSBWE function application:----------------------------------------------------
@@ -116,7 +116,7 @@ output_ssbwe_1, output_ssbwe_2, time_ssbwe_vect = PySSBWE.SSBWE(spec_vect,df,ext
 time_vect = np.linspace(0,1/df,zp_factor*len(spec_vect))
 
 #Display the original radar sounding and the SSBWE version using method 1:
-plt.plot(time_vect*1e9,abs(1.85*np.fft.fft(np.conjugate(spec_vect)*np.hamming(len(spec_vect)),zp_factor*len(spec_vect)))/len(spec_vect),'k-')
+plt.plot(time_vect*1e9,abs(1.85*np.fft.fft(spec_vect*np.hamming(len(spec_vect)),zp_factor*len(spec_vect)))/len(spec_vect),'k-')
 plt.plot(time_ssbwe_vect*1e9,abs(output_ssbwe_1),'r-')
 plt.xlim([5,9])
 plt.xlabel('Time delays (ns)')
@@ -127,7 +127,7 @@ plt.grid()
 plt.show()
 
 #Display the original radar sounding and the SSBWE version using method 2:
-plt.plot(time_vect*1e9,abs(1.85*np.fft.fft(np.conjugate(spec_vect)*np.hamming(len(spec_vect)),zp_factor*len(spec_vect)))/len(spec_vect),'k-')
+plt.plot(time_vect*1e9,abs(1.85*np.fft.fft(spec_vect*np.hamming(len(spec_vect)),zp_factor*len(spec_vect)))/len(spec_vect),'k-')
 plt.plot(time_ssbwe_vect*1e9,abs(output_ssbwe_2),'r-')
 plt.xlim([5,9])
 plt.xlabel('Time delays (ns)')

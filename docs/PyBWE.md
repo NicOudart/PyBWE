@@ -240,7 +240,7 @@ ampli_target2 = 1
 
 Generate a sum of two complex sine-waves corresponding to the targets' echoes (each with an amplitude of 1):
 ~~~bash
-spec_vect = (ampli_target1*np.exp(-1j*4*pi*dist_target1*freq_vect/3e8))+(ampli_target2*np.exp(-1j*4*pi*dist_target2*freq_vect/3e8))
+spec_vect = (ampli_target1*np.exp(1j*4*pi*dist_target1*freq_vect/3e8))+(ampli_target2*np.exp(1j*4*pi*dist_target2*freq_vect/3e8))
 ~~~
 
 Only keep the real part of the spectrum (In-phase component):
@@ -256,7 +256,7 @@ spec_vect += wn_vect
 
 Reconstruct a complex signal with the Hilbert transform:
 ~~~bash
-spec_vect = np.conjugate(hilbert(spec_vect))[::2]
+spec_vect = hilbert(spec_vect)[::2]
 freq_vect = freq_vect[::2]
 ~~~
 
@@ -309,7 +309,7 @@ time_vect = np.linspace(0,1/df,zp_factor*len(spec_vect))
 
 Display the original radar sounding and the BWE version:
 ~~~bash
-plt.plot(time_vect*1e9,abs(1.85*np.fft.fft(np.conjugate(spec_vect)*np.hamming(len(spec_vect)),zp_factor*len(spec_vect)))/len(spec_vect),'k-')
+plt.plot(time_vect*1e9,abs(1.85*np.fft.fft(spec_vect*np.hamming(len(spec_vect)),zp_factor*len(spec_vect)))/len(spec_vect),'k-')
 plt.plot(time_bwe_vect*1e9,abs(output_bwe),'r-')
 plt.xlim([5,9])
 plt.xlabel('Time delays (ns)')
@@ -371,7 +371,7 @@ Generate the expected spectrum after extrapolation for comparison:
 ~~~bash
 df = freq_vect[1]-freq_vect[0]
 freq_vect_expected = np.linspace(freq_vect[0]-(df*(Nextra-2)),freq_vect[-1]+(df*Nextra),N+(Nextra*2))
-spec_vect_expected = np.exp(-1j*4*pi*dist_target1*freq_vect_expected/3e8)+np.exp(-1j*4*pi*dist_target2*freq_vect_expected/3e8)
+spec_vect_expected = np.exp(1j*4*pi*dist_target1*freq_vect_expected/3e8)+np.exp(1j*4*pi*dist_target2*freq_vect_expected/3e8)
 ~~~
 
 Display the expected spectrum after extrapolation:

@@ -57,7 +57,7 @@ dist_target2 = 1.07
 
 #Generate a sum of two complex sine-waves corresponding to the targets' echoes
 #(each with an amplitude of 1):
-spec_vect = np.exp(-1j*4*pi*dist_target1*freq_vect/3e8)+np.exp(-1j*4*pi*dist_target2*freq_vect/3e8)
+spec_vect = np.exp(1j*4*pi*dist_target1*freq_vect/3e8)+np.exp(1j*4*pi*dist_target2*freq_vect/3e8)
 
 #Only keep the real part of the spectrum (In-phase component):
 spec_vect = np.real(spec_vect)
@@ -67,7 +67,7 @@ wn_vect = np.random.normal(0,0.1,spec_vect.shape)
 spec_vect += wn_vect
 
 #Reconstruct a complex signal with the Hilbert transform:
-spec_vect = np.conjugate(hilbert(spec_vect))[::2]
+spec_vect = hilbert(spec_vect)[::2]
 freq_vect = freq_vect[::2]
 
 #AR model fit:------------------------------------------------------------------
@@ -99,7 +99,7 @@ spec_vect_extra,spec_vect_forward,spec_vect_backward = PyBWE.ar_extrapolation(sp
 #Generate the expected spectrum after extrapolation for comparison:
 df = freq_vect[1]-freq_vect[0]
 freq_vect_expected = np.linspace(freq_vect[0]-(df*(Nextra-2)),freq_vect[-1]+(df*Nextra),N+(Nextra*2))
-spec_vect_expected = np.exp(-1j*4*pi*dist_target1*freq_vect_expected/3e8)+np.exp(-1j*4*pi*dist_target2*freq_vect_expected/3e8)
+spec_vect_expected = np.exp(1j*4*pi*dist_target1*freq_vect_expected/3e8)+np.exp(1j*4*pi*dist_target2*freq_vect_expected/3e8)
 
 #Display the expected spectrum after extrapolation:
 plt.plot(freq_vect_expected*1e-9,np.real(spec_vect_expected),'r-')

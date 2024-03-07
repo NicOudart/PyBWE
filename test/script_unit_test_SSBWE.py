@@ -26,7 +26,7 @@ freq_vect_test = np.linspace(1.5e9,3e9,151)
 
 #Generate a sum of two complex sine-waves corresponding to 2 targets' echoes at
 #the resolution limit, corrupted by a very low amplitude white-noise:
-spec_vect_test = np.exp(-((1j*4*pi/3e8)+0.25e-9)*freq_vect_test)+np.exp(-((1j*4*pi*1.1/3e8)+0.5e-9)*freq_vect_test)+np.random.normal(0,1e-6,151)
+spec_vect_test = np.exp(((1j*4*pi/3e8)-0.25e-9)*freq_vect_test)+np.exp(((1j*4*pi*1.1/3e8)-0.5e-9)*freq_vect_test)+np.random.normal(0,1e-6,151)
 
 #Reference dataset generation:--------------------------------------------------
 
@@ -35,7 +35,7 @@ freq_vect_ref = np.linspace(1.5e9,4.5e9,301)
 
 #Generate a sum of two complex sine-waves corresponding to 2 targets' echoes,
 #but with a resolution 3X better:
-spec_vect_ref = np.exp(-((1j*4*pi/3e8)+0.25e-9)*freq_vect_ref)+np.exp(-((1j*4*pi*1.1/3e8)+0.5e-9)*freq_vect_ref)
+spec_vect_ref = np.exp(((1j*4*pi/3e8)-0.25e-9)*freq_vect_ref)+np.exp(((1j*4*pi*1.1/3e8)-0.5e-9)*freq_vect_ref)
 
 #Test function statespace_model:------------------------------------------------
 

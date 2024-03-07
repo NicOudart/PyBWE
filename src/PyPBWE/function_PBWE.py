@@ -72,7 +72,7 @@ def PBWE(spec_mat,df,extra_factor,model_order,zp_factor,side_cut=True):
     output_pbwe = np.zeros((Npol,round(zp_factor*np.shape(spec_mat_extra)[1])),dtype=complex)
     for idx_channel in range(Npol):
         spec_mat_extra[idx_channel,:] = np.hamming(np.shape(spec_mat_extra)[1])*spec_mat_extra[idx_channel,:]
-        output_pbwe[idx_channel,:] = 1.85*np.fft.fft(np.conjugate(spec_mat_extra[idx_channel,:]),round(zp_factor*np.shape(spec_mat_extra)[1]))/np.shape(spec_mat_extra)[1]
+        output_pbwe[idx_channel,:] = 1.85*np.fft.fft(spec_mat_extra[idx_channel,:],round(zp_factor*np.shape(spec_mat_extra)[1]))/np.shape(spec_mat_extra)[1]
 
     #Create a new time vector for output_bwe:
     time_pbwe_vect = np.linspace(0,1/df,zp_factor*np.shape(spec_mat_extra)[1])

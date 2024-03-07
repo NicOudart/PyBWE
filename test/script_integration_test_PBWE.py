@@ -31,8 +31,8 @@ freq_vect_test = np.linspace(1.5e9,3e9,151)
 #Generate a sum of two complex sine-waves corresponding to 2 targets' echoes at
 #the resolution limit, corrupted by a very low amplitude white-noise, for 2
 #polarimetric channels (00 and 11):
-spec_vect_00_test = np.exp(-1j*4*pi*freq_vect_test/3e8)+np.exp(-1j*4*pi*1.1*freq_vect_test/3e8)+np.random.normal(0,1e-6,151)
-spec_vect_11_test = np.exp(-1j*4*pi*freq_vect_test/3e8)-np.exp(-1j*4*pi*1.1*freq_vect_test/3e8)+np.random.normal(0,1e-6,151)
+spec_vect_00_test = np.exp(1j*4*pi*freq_vect_test/3e8)+np.exp(1j*4*pi*1.1*freq_vect_test/3e8)+np.random.normal(0,1e-6,151)
+spec_vect_11_test = np.exp(1j*4*pi*freq_vect_test/3e8)-np.exp(1j*4*pi*1.1*freq_vect_test/3e8)+np.random.normal(0,1e-6,151)
 
 #Concatenate the 2 polarimetric channels in a matrix:
 spec_mat_test = np.vstack((spec_vect_00_test,spec_vect_11_test))

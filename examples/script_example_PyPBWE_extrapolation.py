@@ -74,10 +74,10 @@ amp_target2_11 = -1
 
 #Generate a sum of two complex sine-waves corresponding to the targets' echoes,
 #for the 00 channel:
-spec_vect_00 = (amp_target1_00*np.exp(-1j*4*pi*dist_target1*freq_vect/3e8))+(amp_target2_00*np.exp(-1j*4*pi*dist_target2*freq_vect/3e8))
+spec_vect_00 = (amp_target1_00*np.exp(1j*4*pi*dist_target1*freq_vect/3e8))+(amp_target2_00*np.exp(1j*4*pi*dist_target2*freq_vect/3e8))
 #Generate a sum of two complex sine-waves corresponding to the targets' echoes
 #for the 11 channel:
-spec_vect_11 = (amp_target1_11*np.exp(-1j*4*pi*dist_target1*freq_vect/3e8))+(amp_target2_11*np.exp(-1j*4*pi*dist_target2*freq_vect/3e8))
+spec_vect_11 = (amp_target1_11*np.exp(1j*4*pi*dist_target1*freq_vect/3e8))+(amp_target2_11*np.exp(1j*4*pi*dist_target2*freq_vect/3e8))
 
 #Only keep the real part of the spectrum (In-phase component) for the 2 channels:
 spec_vect_00 = np.real(spec_vect_00)
@@ -90,8 +90,8 @@ spec_vect_00 += wn_vect_00
 spec_vect_11 += wn_vect_11
 
 #Reconstruct a complex signal with the Hilbert transform for the 2 channels:
-spec_vect_00 = np.conjugate(hilbert(spec_vect_00))[::2]
-spec_vect_11 = np.conjugate(hilbert(spec_vect_11))[::2]
+spec_vect_00 = hilbert(spec_vect_00)[::2]
+spec_vect_11 = hilbert(spec_vect_11)[::2]
 freq_vect = freq_vect[::2]
 
 #Assemble the 2 spectrum channels into a single matrix:
@@ -128,8 +128,8 @@ spec_mat_extra,spec_mat_extra_forward,spec_mat_extra_backward = PyPBWE.polar_ext
 #Generate the expected spectrum after extrapolation for comparison:
 df = freq_vect[1]-freq_vect[0]
 freq_vect_expected = np.linspace(freq_vect[0]-(df*(Mextra-2)),freq_vect[-1]+(df*Mextra),M+(Mextra*2))
-spec_vect_expected_00 = np.exp(-1j*4*pi*dist_target1*freq_vect_expected/3e8)+np.exp(-1j*4*pi*dist_target2*freq_vect_expected/3e8)
-spec_vect_expected_11 = np.exp(-1j*4*pi*dist_target1*freq_vect_expected/3e8)-np.exp(-1j*4*pi*dist_target2*freq_vect_expected/3e8)
+spec_vect_expected_00 = np.exp(1j*4*pi*dist_target1*freq_vect_expected/3e8)+np.exp(1j*4*pi*dist_target2*freq_vect_expected/3e8)
+spec_vect_expected_11 = np.exp(1j*4*pi*dist_target1*freq_vect_expected/3e8)-np.exp(1j*4*pi*dist_target2*freq_vect_expected/3e8)
 
 #Display the expected spectrum after extrapolation for the 00 and 11
 #channels:

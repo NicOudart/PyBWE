@@ -25,7 +25,7 @@ freq_vect_test = np.linspace(1.5e9,3e9,151)
 
 #Generate a sum of two complex sine-waves corresponding to 2 targets' echoes at
 #the resolution limit, corrupted by a very low amplitude white-noise:
-spec_vect_test = np.exp(-1j*4*pi*freq_vect_test/3e8)+np.exp(-1j*4*pi*1.1*freq_vect_test/3e8)+np.random.normal(0,1e-6,151)
+spec_vect_test = np.exp(1j*4*pi*freq_vect_test/3e8)+np.exp(1j*4*pi*1.1*freq_vect_test/3e8)+np.random.normal(0,1e-6,151)
 
 #Reference dataset generation:--------------------------------------------------
 
@@ -34,7 +34,7 @@ freq_vect_ref = np.linspace(0,4.5e9,451)
 
 #Generate a sum of two complex sine-waves corresponding to 2 targets' echoes,
 #but with a resolution 3X better:
-spec_vect_ref = np.exp(-1j*4*pi*freq_vect_ref/3e8)+np.exp(-1j*4*pi*1.1*freq_vect_ref/3e8)
+spec_vect_ref = np.exp(1j*4*pi*freq_vect_ref/3e8)+np.exp(1j*4*pi*1.1*freq_vect_ref/3e8)
 
 #Test function burg:------------------------------------------------------------
 

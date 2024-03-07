@@ -130,8 +130,8 @@ for dist in list_dist_targets:
     dist_target2 = 1 + dist
 
     #Generate a sum of two complex sine-waves corresponding to the targets' echoes:
-    spec_vect_00 = (amp_target1_00*np.exp(-1j*4*pi*dist_target1*freq_vect/3e8))+(amp_target2_00*np.exp(-1j*4*pi*dist_target2*freq_vect/3e8))
-    spec_vect_11 = (amp_target1_11*np.exp(-1j*4*pi*dist_target1*freq_vect/3e8))+(amp_target2_11*np.exp(-1j*4*pi*dist_target2*freq_vect/3e8))
+    spec_vect_00 = (amp_target1_00*np.exp(1j*4*pi*dist_target1*freq_vect/3e8))+(amp_target2_00*np.exp(1j*4*pi*dist_target2*freq_vect/3e8))
+    spec_vect_11 = (amp_target1_11*np.exp(1j*4*pi*dist_target1*freq_vect/3e8))+(amp_target2_11*np.exp(1j*4*pi*dist_target2*freq_vect/3e8))
 
     #Only keep the real part of the spectrum (In-phase component):
     spec_vect_00 = np.real(spec_vect_00)
@@ -176,8 +176,8 @@ for dist in list_dist_targets:
             spec_vect_wn_11 = spec_vect_11 + wn_vect_11
 
             #Reconstruct a complex signal with the Hilbert transform:
-            spec_vect_wn_00 = np.conjugate(hilbert(spec_vect_wn_00))[::2]
-            spec_vect_wn_11 = np.conjugate(hilbert(spec_vect_wn_11))[::2]
+            spec_vect_wn_00 = hilbert(spec_vect_wn_00)[::2]
+            spec_vect_wn_11 = hilbert(spec_vect_wn_11)[::2]
 
             #Assemble the 2 spectrum channels into a single matrix:
             spec_mat_wn = np.vstack((spec_vect_wn_00,spec_vect_wn_11))

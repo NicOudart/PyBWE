@@ -129,7 +129,7 @@ for dist in list_dist_targets:
     dist_target2 = 1 + dist
 
     #Generate a sum of two complex sine-waves corresponding to the targets' echoes:
-    spec_vect = (amp_target1*np.exp(-1j*4*pi*dist_target1*freq_vect/3e8))+(amp_target2*np.exp(-1j*4*pi*dist_target2*freq_vect/3e8))
+    spec_vect = (amp_target1*np.exp(1j*4*pi*dist_target1*freq_vect/3e8))+(amp_target2*np.exp(1j*4*pi*dist_target2*freq_vect/3e8))
 
     #Only keep the real part of the spectrum (In-phase component):
     spec_vect = np.real(spec_vect)
@@ -169,7 +169,7 @@ for dist in list_dist_targets:
             spec_vect_wn = spec_vect + wn_vect
 
             #Reconstruct a complex signal with the Hilbert transform:
-            spec_vect_wn = np.conjugate(hilbert(spec_vect_wn))[::2]
+            spec_vect_wn = hilbert(spec_vect_wn)[::2]
 
             #Application of the SSBWE:
             output_ssbwe_1, output_ssbwe_2, time_ssbwe_vect = PySSBWE.SSBWE(spec_vect_wn,df=5e6,extra_factor=3,zp_factor=10,side_cut=True,order=param_order)
