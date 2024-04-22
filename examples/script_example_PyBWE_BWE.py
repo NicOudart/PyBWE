@@ -99,11 +99,12 @@ output_bwe, time_bwe_vect = PyBWE.BWE(spec_vect,df,extra_factor,model_order,zp_f
 #Generate a time vector corresponding to the time-domain transform:
 time_vect = np.linspace(0,1/df,zp_factor*len(spec_vect))
 
-
 #Display the original radar sounding and the BWE version:
+plt.figure(figsize=(10,5))
 plt.plot(time_vect*1e9,abs(1.85*np.fft.fft(spec_vect*np.hamming(len(spec_vect)),zp_factor*len(spec_vect)))/len(spec_vect),'k-')
 plt.plot(time_bwe_vect*1e9,abs(output_bwe),'r-')
 plt.xlim([5,9])
+plt.ylim([-0.05,1.3])
 plt.xlabel('Time delays (ns)')
 plt.ylabel('Normalized amplitude')
 plt.legend(['Original radar sounding','Radar sounding after BWE'], loc ='best')

@@ -338,10 +338,13 @@ time_vect = np.linspace(0,1/df,zp_factor*np.shape(spec_mat)[1])
 
 Display the original radar sounding and the PBWE version for channel 00:
 ~~~bash
+plt.figure(figsize=(12.75,5))
+
 plt.subplot(1,2,1)
 plt.plot(time_vect*1e9,abs(1.85*np.fft.fft(spec_mat[0,:]*np.hamming(len(spec_mat[0,:])),zp_factor*len(spec_mat[0,:])))/len(spec_mat[0,:]),'k-')
 plt.plot(time_pbwe_vect*1e9,abs(output_pbwe[0,:]),'r-')
 plt.xlim([5,9])
+plt.ylim([-0.05,1.3])
 plt.xlabel('Time delays (ns)')
 plt.ylabel('Normalized amplitude')
 plt.legend(['Original radar sounding','Radar sounding after PBWE'], loc ='best')
@@ -355,11 +358,13 @@ plt.subplot(1,2,2)
 plt.plot(time_vect*1e9,abs(1.85*np.fft.fft(spec_mat[1,:]*np.hamming(len(spec_mat[1,:])),zp_factor*len(spec_mat[1,:])))/len(spec_mat[1,:]),'k-')
 plt.plot(time_pbwe_vect*1e9,abs(output_pbwe[1,:]),'r-')
 plt.xlim([5,9])
+plt.ylim([-0.05,1.3])
 plt.xlabel('Time delays (ns)')
 plt.ylabel('Normalized amplitude')
 plt.legend(['Original radar sounding','Radar sounding after PBWE'], loc ='best')
 plt.title('PBWE application - Polar channel 11')
 plt.grid()
+
 plt.tight_layout()
 plt.show()
 ~~~
@@ -426,29 +431,34 @@ spec_vect_expected_11 = np.exp(1j*4*pi*dist_target1*freq_vect_expected/3e8)-np.e
 
 Display the expected spectrum after extrapolation for the 00 and 11 channels:
 ~~~bash
+plt.figure(figsize=(10,6))
+
 plt.subplot(2,1,1)
 plt.plot(freq_vect_expected*1e-9,np.real(spec_vect_expected_00),'r-')
 plt.plot(freq_vect_expected*1e-9,abs(spec_vect_expected_00),'k-')
 plt.axvspan((freq_vect[0]-(df*(Mextra-2)))*1e-9, (freq_vect[0]-df)*1e-9, facecolor='k', alpha=0.1)
 plt.axvspan((freq_vect[-1]+df)*1e-9, (freq_vect[-1]+(df*Mextra))*1e-9, facecolor='k', alpha=0.1)
 plt.xlim([(freq_vect[0]-(df*(Mextra-2)))*1e-9,(freq_vect[-1]+(df*Mextra))*1e-9])
+plt.ylim([-2.5,3])
 plt.xlabel('Frequency (GHz)')
 plt.ylabel('Amplitude')
-plt.legend(['Expected spectrum after extrapolation (real part)','Expected spectrum after extrapolation (modulus)'], loc ='best')
+plt.legend(['Real part','Modulus'],loc='upper left',ncol=2)
 plt.title('Expected spectrum after extrapolation - Polar channel 00')
 plt.grid()
 
 plt.subplot(2,1,2)
 plt.plot(freq_vect_expected*1e-9,np.real(spec_vect_expected_11),'r-')
 plt.plot(freq_vect_expected*1e-9,abs(spec_vect_expected_11),'k-')
-plt.axvspan((freq_vect[0]-(df*(Mextra-2)))*1e-9, (freq_vect[0]-df)*1e-9, facecolor='k', alpha=0.1)
-plt.axvspan((freq_vect[-1]+df)*1e-9, (freq_vect[-1]+(df*Mextra))*1e-9, facecolor='k', alpha=0.1)
+plt.axvspan((freq_vect[0]-(df*(Mextra-2)))*1e-9, (freq_vect[0]-df)*1e-9,facecolor='k',alpha=0.1)
+plt.axvspan((freq_vect[-1]+df)*1e-9, (freq_vect[-1]+(df*Mextra))*1e-9,facecolor='k',alpha=0.1)
 plt.xlim([(freq_vect[0]-(df*(Mextra-2)))*1e-9,(freq_vect[-1]+(df*Mextra))*1e-9])
+plt.ylim([-2.5,3])
 plt.xlabel('Frequency (GHz)')
 plt.ylabel('Amplitude')
-plt.legend(['Expected spectrum after extrapolation (real part)','Expected spectrum after extrapolation (modulus)'], loc ='best')
+plt.legend(['Real part','Modulus'],loc='upper left',ncol=2)
 plt.title('Expected spectrum after extrapolation - Polar channel 11')
 plt.grid()
+
 plt.tight_layout()
 plt.show()
 ~~~
@@ -465,6 +475,8 @@ freq_vect_backward = np.linspace(freq_vect[0]-(df*(Mextra-2)),freq_vect[0]-df,Me
 
 Display the original radar spectrum and the extrapolation for the 00 and 11 channels:
 ~~~bash
+plt.figure(figsize=(11,6))
+
 plt.subplot(2,1,1)
 plt.plot(freq_vect*1e-9,np.real(spec_mat[0,:]),'r-')
 plt.plot(freq_vect*1e-9,abs(spec_mat[0,:]),'k-')
@@ -472,9 +484,11 @@ plt.plot(freq_vect_backward*1e-9,np.real(spec_mat_extra_backward[0,:]),'y-')
 plt.plot(freq_vect_backward*1e-9,abs(spec_mat_extra_backward[0,:]),'g-')
 plt.plot(freq_vect_forward*1e-9,np.real(spec_mat_extra_forward[0,:]),'c-')
 plt.plot(freq_vect_forward*1e-9,abs(spec_mat_extra_forward[0,:]),'b-')
+plt.xlim([(freq_vect[0]-(df*(Mextra-2)))*1e-9,(freq_vect[-1]+(df*Mextra))*1e-9])
+plt.ylim([-3.6,2.3])
 plt.xlabel('Frequency (GHz)')
 plt.ylabel('Amplitude')
-plt.legend(['Original radar spectrum (real part)','Original radar spectrum (modulus)','Backward extrapolation (real part)', 'Backward extrapolation (modulus)', 'Forward extrapolation (real part)', 'Forward extrapolation (modulus)'], loc ='best')
+plt.legend(['Original radar spectrum (real part)','Original radar spectrum (modulus)','Backward extrapolation (real part)','Backward extrapolation (modulus)','Forward extrapolation (real part)','Forward extrapolation (modulus)'],loc ='lower center',ncol=3)
 plt.title('Spectrum polarimetric extrapolation - Polar channel 00')
 plt.grid()
 
@@ -485,11 +499,14 @@ plt.plot(freq_vect_backward*1e-9,np.real(spec_mat_extra_backward[1,:]),'y-')
 plt.plot(freq_vect_backward*1e-9,abs(spec_mat_extra_backward[1,:]),'g-')
 plt.plot(freq_vect_forward*1e-9,np.real(spec_mat_extra_forward[1,:]),'c-')
 plt.plot(freq_vect_forward*1e-9,abs(spec_mat_extra_forward[1,:]),'b-')
+plt.xlim([(freq_vect[0]-(df*(Mextra-2)))*1e-9,(freq_vect[-1]+(df*Mextra))*1e-9])
+plt.ylim([-3.6,2.3])
 plt.xlabel('Frequency (GHz)')
 plt.ylabel('Amplitude')
-plt.legend(['Original radar spectrum (real part)','Original radar spectrum (modulus)','Backward extrapolation (real part)', 'Backward extrapolation (modulus)', 'Forward extrapolation (real part)', 'Forward extrapolation (modulus)'], loc ='best')
+plt.legend(['Original radar spectrum (real part)','Original radar spectrum (modulus)','Backward extrapolation (real part)','Backward extrapolation (modulus)','Forward extrapolation (real part)','Forward extrapolation (modulus)'],loc ='lower center',ncol=3)
 plt.title('Spectrum polarimetric extrapolation - Polar channel 11')
 plt.grid()
+
 plt.tight_layout()
 plt.show()
 ~~~

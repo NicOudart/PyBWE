@@ -309,9 +309,11 @@ time_vect = np.linspace(0,1/df,zp_factor*len(spec_vect))
 
 Display the original radar sounding and the BWE version:
 ~~~bash
+plt.figure(figsize=(10,5))
 plt.plot(time_vect*1e9,abs(1.85*np.fft.fft(spec_vect*np.hamming(len(spec_vect)),zp_factor*len(spec_vect)))/len(spec_vect),'k-')
 plt.plot(time_bwe_vect*1e9,abs(output_bwe),'r-')
 plt.xlim([5,9])
+plt.ylim([-0.05,1.3])
 plt.xlabel('Time delays (ns)')
 plt.ylabel('Normalized amplitude')
 plt.legend(['Original radar sounding','Radar sounding after BWE'], loc ='best')
@@ -377,14 +379,16 @@ spec_vect_expected = np.exp(1j*4*pi*dist_target1*freq_vect_expected/3e8)+np.exp(
 
 Display the expected spectrum after extrapolation:
 ~~~bash
+plt.figure(figsize=(10,5))
 plt.plot(freq_vect_expected*1e-9,np.real(spec_vect_expected),'r-')
 plt.plot(freq_vect_expected*1e-9,abs(spec_vect_expected),'k-')
 plt.axvspan((freq_vect[0]-(df*(Nextra-2)))*1e-9, (freq_vect[0]-df)*1e-9, facecolor='k', alpha=0.1)
 plt.axvspan((freq_vect[-1]+df)*1e-9, (freq_vect[-1]+(df*Nextra))*1e-9, facecolor='k', alpha=0.1)
 plt.xlim([(freq_vect[0]-(df*(Nextra-2)))*1e-9,(freq_vect[-1]+(df*Nextra))*1e-9])
+plt.ylim([-2.1,2.1])
 plt.xlabel('Frequency (GHz)')
 plt.ylabel('Amplitude')
-plt.legend(['Expected spectrum after extrapolation (real part)','Expected spectrum after extrapolation (modulus)'], loc ='best')
+plt.legend(['Real part','Modulus'], loc ='upper left')
 plt.title('Expected spectrum after extrapolation')
 plt.grid()
 plt.tight_layout()
@@ -403,6 +407,7 @@ freq_vect_backward = np.linspace(freq_vect[0]-(df*(Nextra-2)),freq_vect[0]-df,Ne
 
 Display the original radar spectrum and the extrapolation:
 ~~~bash
+plt.figure(figsize=(10,5))
 plt.plot(freq_vect*1e-9,np.real(spec_vect),'r-')
 plt.plot(freq_vect*1e-9,abs(spec_vect),'k-')
 plt.plot(freq_vect_backward*1e-9,np.real(spec_vect_backward),'y-')
@@ -412,12 +417,13 @@ plt.plot(freq_vect_forward*1e-9,abs(spec_vect_forward),'b-')
 plt.axvspan((freq_vect[0]-(df*(Nextra-2)))*1e-9, (freq_vect[0]-df)*1e-9, facecolor='k', alpha=0.1)
 plt.axvspan((freq_vect[-1]+df)*1e-9, (freq_vect[-1]+(df*Nextra))*1e-9, facecolor='k', alpha=0.1)
 plt.xlim([(freq_vect[0]-(df*(Nextra-2)))*1e-9,(freq_vect[-1]+(df*Nextra))*1e-9])
+plt.ylim([-3,2.5])
 plt.xlabel('Frequency (GHz)')
 plt.ylabel('Amplitude')
-plt.legend(['Original radar spectrum (real part)','Original radar spectrum (modulus)','Backward extrapolation (real part)', 'Backward extrapolation (modulus)', 'Forward extrapolation (real part)', 'Forward extrapolation (modulus)'], loc ='best')
 plt.title('Spectrum AR-extrapolation')
 plt.grid()
 plt.tight_layout()
+plt.legend(['Original radar spectrum (real part)','Original radar spectrum (modulus)','Backward extrapolation (real part)', 'Backward extrapolation (modulus)', 'Forward extrapolation (real part)', 'Forward extrapolation (modulus)'],loc ='lower center',ncol=3)
 plt.show()
 ~~~
 
