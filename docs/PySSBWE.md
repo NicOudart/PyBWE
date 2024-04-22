@@ -576,7 +576,7 @@ plt.tight_layout()
 plt.show()
 ~~~
 
-Here is an example of figure displayed with this command for method 1:
+Here is an example of figure displayed with this command:
 
 [<img src="https://github.com/NicOudart/PyBWE/raw/main/docs/figures/Figure_example_PySSBWE_extrapolation_1.png"/>](Figure_example_PySSBWE_extrapolation_1.png)
 
