@@ -1,7 +1,7 @@
 ---
 # Project Information
 site_name: "PyBWE"
-site_url: "https://noudart.github.io/PyBWE"
+site_url: "https://nicoudart.github.io/PyBWE"
 site_author: "Nicolas OUDART"
 site_description: "Python tools for Bandwidth Extrapolation of radar signals"
 
