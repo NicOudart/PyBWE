@@ -360,6 +360,7 @@ plt.ylabel('Normalized amplitude')
 plt.legend(['Original radar sounding','Radar sounding after PBWE'], loc ='best')
 plt.title('PBWE application - Polar channel 11')
 plt.grid()
+plt.tight_layout()
 plt.show()
 ~~~
 
@@ -448,6 +449,7 @@ plt.ylabel('Amplitude')
 plt.legend(['Expected spectrum after extrapolation (real part)','Expected spectrum after extrapolation (modulus)'], loc ='best')
 plt.title('Expected spectrum after extrapolation - Polar channel 11')
 plt.grid()
+plt.tight_layout()
 plt.show()
 ~~~
 
@@ -488,6 +490,7 @@ plt.ylabel('Amplitude')
 plt.legend(['Original radar spectrum (real part)','Original radar spectrum (modulus)','Backward extrapolation (real part)', 'Backward extrapolation (modulus)', 'Forward extrapolation (real part)', 'Forward extrapolation (modulus)'], loc ='best')
 plt.title('Spectrum polarimetric extrapolation - Polar channel 11')
 plt.grid()
+plt.tight_layout()
 plt.show()
 ~~~
 

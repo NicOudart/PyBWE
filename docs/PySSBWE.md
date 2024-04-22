@@ -414,6 +414,7 @@ plt.ylabel('Normalized amplitude')
 plt.legend(['Original radar sounding','Radar sounding after SSBWE'], loc ='best')
 plt.title('SSBWE application - method 1 (using the observability matrix)')
 plt.grid()
+plt.tight_layout()
 plt.show()
 ~~~
 
@@ -427,6 +428,7 @@ plt.ylabel('Normalized amplitude')
 plt.legend(['Original radar sounding','Radar sounding after SSBWE'], loc ='best')
 plt.title('SSBWE application - method 2 (using the controllability matrix)')
 plt.grid()
+plt.tight_layout()
 plt.show()
 ~~~
 
@@ -564,6 +566,7 @@ plt.ylabel('Amplitude')
 plt.legend(['Expected spectrum after extrapolation (real part)','Expected spectrum after extrapolation (modulus)'], loc ='best')
 plt.title('Expected spectrum after extrapolation')
 plt.grid()
+plt.tight_layout()
 plt.show()
 ~~~
 
@@ -593,6 +596,7 @@ plt.ylabel('Amplitude')
 plt.legend(['Original radar spectrum (real part)','Original radar spectrum (modulus)','Backward extrapolation (real part)', 'Backward extrapolation (modulus)', 'Forward extrapolation (real part)', 'Forward extrapolation (modulus)'], loc ='best')
 plt.title('Spectrum state-space extrapolation - method 1 (using the observability matrix)')
 plt.grid()
+plt.tight_layout()
 plt.show()
 ~~~
 
@@ -612,6 +616,7 @@ plt.ylabel('Amplitude')
 plt.legend(['Original radar spectrum (real part)','Original radar spectrum (modulus)','Backward extrapolation (real part)', 'Backward extrapolation (modulus)', 'Forward extrapolation (real part)', 'Forward extrapolation (modulus)'], loc ='best')
 plt.title('Spectrum state-space extrapolation - method 2 (using the controllability matrix)')
 plt.grid()
+plt.tight_layout()
 plt.show()
 ~~~
 

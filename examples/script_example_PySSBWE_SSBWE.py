@@ -124,6 +124,7 @@ plt.ylabel('Normalized amplitude')
 plt.legend(['Original radar sounding','Radar sounding after SSBWE'], loc ='best')
 plt.title('SSBWE application - method 1 (using the observability matrix)')
 plt.grid()
+plt.tight_layout()
 plt.show()
 
 #Display the original radar sounding and the SSBWE version using method 2:
@@ -135,6 +136,7 @@ plt.ylabel('Normalized amplitude')
 plt.legend(['Original radar sounding','Radar sounding after SSBWE'], loc ='best')
 plt.title('SSBWE application - method 2 (using the controllability matrix)')
 plt.grid()
+plt.tight_layout()
 plt.show()
 
 #Echoes properties estimation:--------------------------------------------------

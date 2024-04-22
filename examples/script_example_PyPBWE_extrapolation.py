@@ -157,6 +157,7 @@ plt.legend(['Expected spectrum after extrapolation (real part)','Expected spectr
 plt.title('Expected spectrum after extrapolation - Polar channel 11')
 plt.grid()
 
+plt.tight_layout()
 plt.show()
 
 #Generate a vector of frequencies for the forward and backward extrapolations:
@@ -192,4 +193,5 @@ plt.legend(['Original radar spectrum (real part)','Original radar spectrum (modu
 plt.title('Spectrum polarimetric extrapolation - Polar channel 11')
 plt.grid()
 
+plt.tight_layout()
 plt.show()

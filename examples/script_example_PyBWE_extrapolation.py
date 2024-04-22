@@ -112,6 +112,7 @@ plt.ylabel('Amplitude')
 plt.legend(['Expected spectrum after extrapolation (real part)','Expected spectrum after extrapolation (modulus)'], loc ='best')
 plt.title('Expected spectrum after extrapolation')
 plt.grid()
+plt.tight_layout()
 plt.show()
 
 #Generate a vector of frequencies for the forward and backward extrapolations:
@@ -133,4 +134,5 @@ plt.ylabel('Amplitude')
 plt.legend(['Original radar spectrum (real part)','Original radar spectrum (modulus)','Backward extrapolation (real part)', 'Backward extrapolation (modulus)', 'Forward extrapolation (real part)', 'Forward extrapolation (modulus)'], loc ='best')
 plt.title('Spectrum AR-extrapolation')
 plt.grid()
+plt.tight_layout()
 plt.show()

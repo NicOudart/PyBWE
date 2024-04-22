@@ -142,6 +142,7 @@ plt.ylabel('Amplitude')
 plt.legend(['Expected spectrum after extrapolation (real part)','Expected spectrum after extrapolation (modulus)'], loc ='best')
 plt.title('Expected spectrum after extrapolation')
 plt.grid()
+plt.tight_layout()
 plt.show()
 
 #Generate a vector of frequencies for the forward and backward extrapolations:
@@ -163,6 +164,7 @@ plt.ylabel('Amplitude')
 plt.legend(['Original radar spectrum (real part)','Original radar spectrum (modulus)','Backward extrapolation (real part)', 'Backward extrapolation (modulus)', 'Forward extrapolation (real part)', 'Forward extrapolation (modulus)'], loc ='best')
 plt.title('Spectrum state-space extrapolation - method 1 (using the observability matrix)')
 plt.grid()
+plt.tight_layout()
 plt.show()
 
 #Display the original radar spectrum and the extrapolation using method 2:
@@ -180,4 +182,5 @@ plt.ylabel('Amplitude')
 plt.legend(['Original radar spectrum (real part)','Original radar spectrum (modulus)','Backward extrapolation (real part)', 'Backward extrapolation (modulus)', 'Forward extrapolation (real part)', 'Forward extrapolation (modulus)'], loc ='best')
 plt.title('Spectrum state-space extrapolation - method 2 (using the controllability matrix)')
 plt.grid()
+plt.tight_layout()
 plt.show()

@@ -144,4 +144,5 @@ plt.legend(['Original radar sounding','Radar sounding after PBWE'], loc ='best')
 plt.title('PBWE application - Polar channel 11')
 plt.grid()
 
+plt.tight_layout()
 plt.show()
