@@ -7,6 +7,7 @@
 # PyBWE: Python tools for Bandwidth Extrapolation of planetary radar signals
 
 Resolution enhancement of radar signals with the super-resolution technique named "Bandwidth Extrapolation" (BWE).
+Website: [https://nicoudart.github.io/PyBWE](https://nicoudart.github.io/PyBWE)
 
 ## Introduction to PyBWE
 
