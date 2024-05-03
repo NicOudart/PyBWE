@@ -45,9 +45,9 @@ import PySSBWE
 ### The order of the AR model
 
 The idea behind the state-space identification of the SSBWE technique is to seperate the singular values of signal from the singular values of noise in the input spectrum's Hankel matrix.
-The ideal order of a state-space model is thus directly the number of complex sine-waves composing the spectrum, also equal to the number of targets sounded by the radar.
+The ideal order of a state-space model corresponds to the number of selected singular values being part of the signal sub-space. It is directly the number of complex sine-waves composing the spectrum, also equal to the number of targets sounded by the radar.
 If you have an a priori knowledge of the number of targets, you directly set the order of the model.
-If not, you can estimate it with Akaike's Information Criterion (AIC, see Akaike (1974)), as recommended by Piou (1999).
+If not, you can estimate it with Akaike's Information Criterion (AIC, see Akaike (1974)), implemented in PySSBWE, as recommended by Piou (1999).
 
 The stability of the model not being guaranteed in the case of the SSBWE, a wrong estimation of the ideal model order can lead to diverging extrapolations, and thus to very high errors in time-domain.
 
@@ -119,7 +119,7 @@ This can for instance be done by subtracting a "free-space" (without any targets
 ### PySSBWE.AIC(sv,N,noise_type="white")
 
 The PySSBWE.AIC function estimates the ideal state-space model order from the spectrum's Hankel matrix singular values, using AIC.
-See Akaike (1974).
+See Akaike (1974). This order corresponds to the number of singular values selected as being part of the signal's subspace, and is ideally equal to the number of target echoes in the radar signal.
 
 **Inputs:**
 
@@ -159,7 +159,7 @@ Both models' results are returned by the function.
 
 * side_cut: (optional) _boolean_, 5% of samples are cut on each side of the spectrum if True.
 
-* order: (optional) _integer_ order of the state-space model, if =0 the order is estimated using AIC.
+* order: (optional) _integer_ order of the state-space model (number of selected singular value, ideally equal to the number of radar targets), if =0 the order is estimated using AIC.
 
 * noise_type: (optional) _string_, "white" if the spectrum is affected by a white-noise, "colored" if the spectrum is affected by a colored-noise.
 
@@ -214,7 +214,7 @@ Both models are returned by the function.
 
 * y: _complex 1D array_ containing the spectrum to be modelled.
 
-* order: (optional) _integer_ order of the state-space model, if =0 the order is estimated using AIC.
+* order: (optional) _integer_ order of the state-space model (number of selected singular value, ideally equal to the number of radar targets), if =0 the order is estimated using AIC.
 
 * noise_type: (optional) _string_, "white" if the spectrum is affected by a white-noise, "colored" if the spectrum is affected by a colored-noise.
 
