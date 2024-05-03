@@ -46,7 +46,7 @@ Several improvements to the BWE have been proposed:
 
 * The **State-Space BWE** (**SSBWE**) accounting for noise and distorsions in radar signals with an autoregressive moving-average (ARMA) model, which coefficients are determined by State-Space identification [@Piou:1999].
 
-Also, the BWE can be used to fill a gap between two spectra of multiband radars [@Moore:1997]. This process is known as **Bandwidth Interpolation** (**BWI**), and can be used for Electromagnetic Interference (EMI) removal [@Piazzo:2019].
+Also, the BWE can be used to fill a gap between two spectra of multiband radars [@Moore:1997], or for Electromagnetic Interference (EMI) removal [@Piazzo:2019]. This process is known as **Bandwidth Interpolation** (**BWI**).
 
 This library contains 3 packages, each containing a different BWE technique, based on a different signal model:
 
@@ -76,7 +76,7 @@ Here is a non-exhaustive list of successful BWE applications in planetary scienc
 
 * The improvement of the WISDOM (ExoMars, ESA) Ground Penetrating Radar soundings in preparation of the Rosalind Franklin rover mission [@Oudart:2021]
 
-* The improvement of the MARSIS (Mars Express, ESA) radar sounder resolution by a factor of 6 using both BWE and BWI between different frequency modes [@Gambacorta:2022]
+* The improvement of the MARSIS (Mars Express, ESA) radar sounder resolution by a factor of 6 using both BWE and BWI between different frequency band modes [@Gambacorta:2022]
 
 * The EMI removal by BWI helped the estimation of attenuations in the Martian subsurface with the RIMFAX (Mars 2020, NASA) Ground Penetrating Radar data [@Eide:2022]
 
