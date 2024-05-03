@@ -23,11 +23,11 @@ bibliography: paper.bib
 
 Range resolution enhancement is one of the main challenges in radar signal processing. 
 It is driven by the time resolution of radar soundings, and the speed of electromagnetic waves in the sounded material. 
-Time resolution being limited by the frequency bandwidth of the instrument, the same applies to range resolution: the larger the bandwidth, the better the resolution. 
+Time resolution being limited by the frequency bandwidth of the instrument, the same applies to range resolution: the larger the bandwidth, the more enhanced the resolution. 
 
 Fast Fourier Transform techniques are efficient and robust for spectral estimation, but their performances in time resolution are limited by the inverse of the bandwidth, and the necessary application of windowing to reduce the impact of side-lobes. 
 For this reason parametric spectral estimation techniques have been introduced [@Kay:1981].
-Based on a signal model, assuming deterministic properties of the signal, the output of such techniques yields a better resolution. 
+Based on a signal model, assuming deterministic properties of the signal, the output of such techniques yields an enhanced resolution. 
 However, parametric techniques are less robust than classic Fourier transform ones, in particular in the presence of noise or distortions.
 
 The **Bandwidth Extrapolation technique** (**BWE**) is a compromise between a classic Fourier transform and a parametric spectral estimation technique [@Cuomo:1992]. 
@@ -39,18 +39,22 @@ In practical cases, this deterministic signal is corrupted by various sources of
 
 An example of application on a synthetic planetary radar spectrum, inspired by the WISDOM (ExoMars, ESA) planetary radar [@Ciarletti:2017], is shown in \autoref{fig:example}.
 
-In the regular BWE, the signal is modelled by an autoregressive (AR) model, using the Burg algorithm. 
-Several improvements to the BWE have been proposed: the **Polarimetric BWE** (**PBWE**) using the correlation between several polarimetric radar channels for an improved extrapolation [@Suwa:2003] [@Suwa:2007], or the **State-Space BWE** (**SSBWE**) using a State-Space model accounting for noise and exponential distortions in the signal [@Piou:1999].
+In the regular BWE, the signal is modelled by an autoregressive (AR) model, which coefficients are determined with the Burg algorithm.
+Several improvements to the BWE have been proposed:
 
-Also, the BWE can be used to fill a gap between two spectra of multiband radars [@Moore:1997]. This process is known as **Bandwidth Interpolation** (**BWI**).
+* The **Polarimetric BWE** (**PBWE**) accounting for the correlation between several polarimetric radar channels with a multi-channel AR model, which coefficients are determined by a multi-channel Burg algorithm [@Suwa:2003] [@Suwa:2007].
+
+* The **State-Space BWE** (**SSBWE**) accounting for noise and distorsions in radar signals with an autoregressive moving-average (ARMA) model, which coefficients are determined by State-Space identification [@Piou:1999].
+
+Also, the BWE can be used to fill a gap between two spectra of multiband radars [@Moore:1997]. This process is known as **Bandwidth Interpolation** (**BWI**), and can be used for Electromagnetic Interference (EMI) removal [@Piazzo:2019].
 
 This library contains 3 packages, each containing a different BWE technique, based on a different signal model:
 
-* PyBWE: implementing the "classic" BWE technique, with an AR model determined by the Burg algorithm.
+* PyBWE: implementing the "classic" BWE technique.
 
-* PyPBWE: implementing the PBWE technique, with a multi-channel AR model determined by a multi-channel Burg algorithm.
+* PyPBWE: implementing the PBWE technique.
 
-* PySSBWE: implementing the SSBWE technique, with an ARMA model determined by a State-Space modelling approach.
+* PySSBWE: implementing the SSBWE technique.
 
 Each package contains an integrated solution to directly apply the complete BWE process to a given radar spectrum, as well as all the individual functions for modelling and extrapolation.
 
@@ -68,13 +72,13 @@ Here is a non-exhaustive list of successful BWE applications in planetary scienc
 
 * The 1st bathymetry of a Titan sea using Cassini (NASA) radar data [@Mastrogiuseppe:2014]
 
-* The improvement of the stratigraphic analysis of Martian polar ice sheets using SHARAD (MRO, NASA) radar sounder data [@Raguso:2018]
+* The improvement of the stratigraphic analysis of Martian polar ice sheets using the SHARAD (MRO, NASA) radar sounder data, after both BWE and EMI removal by BWI [@Raguso:2018] [@Raguso:2023].
 
 * The improvement of the WISDOM (ExoMars, ESA) Ground Penetrating Radar soundings in preparation of the Rosalind Franklin rover mission [@Oudart:2021]
 
-* The improvement of the MARSIS (Mars Express, ESA) radar sounder resolution by a factor of 6 using both BWE and BWI [@Gambacorta:2022]
+* The improvement of the MARSIS (Mars Express, ESA) radar sounder resolution by a factor of 6 using both BWE and BWI between different frequency modes [@Gambacorta:2022]
 
-* The BWE helped the estimation of attenuations in the Martian subsurface with the RIMFAX (Mars 2020, NASA) Ground Penetrating Radar data [@Eide:2022]
+* The EMI removal by BWI helped the estimation of attenuations in the Martian subsurface with the RIMFAX (Mars 2020, NASA) Ground Penetrating Radar data [@Eide:2022]
 
 However, the planetary science community has few radar experts, and to our knowledge no open-source integrated BWE solutions existed before the release of this library, limiting the planetary radar application of this technique.
 For this reason, we propose in this library integrated BWE solutions for all planetary scientists, as well as the individual functions for planetary radar experts.
