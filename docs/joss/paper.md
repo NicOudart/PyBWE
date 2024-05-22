@@ -85,7 +85,7 @@ For this reason, we propose in this library integrated BWE solutions for all pla
 
 In addition, this library could also benefit other radar / sonar applications developed under harsh contraints, impacting the reachable range resolution.
 
-![An example of BWE application to a synthetic planetary radar spectrum, with 2 targets in free-space separated by a distance of 7 cm, below the instrument's resolution limit with IFFT and Hamming windowing. This spectrum is generated with 2 complex sine-waves of amplitude 1, corrupted by a white-noise of standard deviation 0.1 (SNR = 20 dB), for frequencies between 0.5 and 3 GHz. (a) Extrapolation of this spectrum with a parametric model. (b) Corresponding time-domain signal obtained with classic FFT or BWE. \label{fig:example}](Figure_example.png)
+![An example of BWE application to a synthetic planetary radar spectrum, with 2 targets in free-space separated by a distance of 7 cm, below the instrument's resolution limit with IFFT and Hamming windowing. This spectrum is generated with 2 complex sine-waves of amplitude 1, corrupted by a white-noise of standard deviation 0.1 (SNR = 20 dB), for frequencies between 0.5 and 3 GHz. (a) Time-domain signal obtained with classic FFT or BWE. (b) Extrapolation of the spectrum with a parametric model. \label{fig:example}](Figure_example.png)
 
 # Acknowledgments
 
