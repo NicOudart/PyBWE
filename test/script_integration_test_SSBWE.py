@@ -34,12 +34,12 @@ spec_vect_test = np.exp(1j*4*pi*freq_vect_test/3e8)+np.exp(1j*4*pi*1.1*freq_vect
 
 #Check PySSBWE.SSBWE on the test dataset with different parameters:
 try:
-    output_ssbwe_1, output_ssbwe_2, time_ssbwe_vect = PySSBWE.SSBWE(spec_vect_test,freq_vect_test[1]-freq_vect_test[0],3,10,True,2,'white') #Standard parameters
-    output_ssbwe_1, output_ssbwe_2, time_ssbwe_vect = PySSBWE.SSBWE(spec_vect_test,freq_vect_test[1]-freq_vect_test[0],2,10,True,2,'white')
-    output_ssbwe_1, output_ssbwe_2, time_ssbwe_vect = PySSBWE.SSBWE(spec_vect_test,freq_vect_test[1]-freq_vect_test[0],3,5,True,2,'white')
-    output_ssbwe_1, output_ssbwe_2, time_ssbwe_vect = PySSBWE.SSBWE(spec_vect_test,freq_vect_test[1]-freq_vect_test[0],3,10,True,0,'white') #AIC to estimate the order of the model
-    output_ssbwe_1, output_ssbwe_2, time_ssbwe_vect = PySSBWE.SSBWE(spec_vect_test,freq_vect_test[1]-freq_vect_test[0],3,10,True,2,'colored')
-    output_ssbwe_1, output_ssbwe_2, time_ssbwe_vect = PySSBWE.SSBWE(spec_vect_test,freq_vect_test[1]-freq_vect_test[0],3,10,False,2,'white') #To be used for the rest of the test
+    output_ssbwe_1, output_ssbwe_2, time_ssbwe_vect = PySSBWE.SSBWE(spec_vect_test,freq_vect_test[1]-freq_vect_test[0],3,10,True,2) #Standard parameters
+    output_ssbwe_1, output_ssbwe_2, time_ssbwe_vect = PySSBWE.SSBWE(spec_vect_test,freq_vect_test[1]-freq_vect_test[0],2,10,True,2)
+    output_ssbwe_1, output_ssbwe_2, time_ssbwe_vect = PySSBWE.SSBWE(spec_vect_test,freq_vect_test[1]-freq_vect_test[0],3,5,True,2)
+    output_ssbwe_1, output_ssbwe_2, time_ssbwe_vect = PySSBWE.SSBWE(spec_vect_test,freq_vect_test[1]-freq_vect_test[0],3,10,True,0) #AIC to estimate the order of the model
+    output_ssbwe_1, output_ssbwe_2, time_ssbwe_vect = PySSBWE.SSBWE(spec_vect_test,freq_vect_test[1]-freq_vect_test[0],3,10,True,2)
+    output_ssbwe_1, output_ssbwe_2, time_ssbwe_vect = PySSBWE.SSBWE(spec_vect_test,freq_vect_test[1]-freq_vect_test[0],3,10,False,2) #To be used for the rest of the test
 except:
     assert False, 'PySSBWE.SSBWE NOK!'
 

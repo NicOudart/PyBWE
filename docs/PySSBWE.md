@@ -116,7 +116,7 @@ This can for instance be done by subtracting a "free-space" (without any targets
 
 ## Functions
 
-### PySSBWE.AIC(sv,N,noise_type="white")
+### PySSBWE.AIC(sv,N)
 
 The PySSBWE.AIC function estimates the ideal state-space model order from the spectrum's Hankel matrix singular values, using AIC.
 See Akaike (1974). This order corresponds to the number of singular values selected as being part of the signal's subspace, and is ideally equal to the number of target echoes in the radar signal.
@@ -127,16 +127,11 @@ See Akaike (1974). This order corresponds to the number of singular values selec
 
 * N: _integer_ number of samples in the spectrum.
 
-* noise_type: (optional) _string_, "white" if the spectrum is affected by a white-noise, "colored" if the spectrum is affected by a colored-noise.
-
 **Outputs:**
 
 * output_order: _integer_ ideal state-space model order according to AIC.
 
-**Notes:**
-The type of noise ("white" or "colored") is an optional input. The noise will be considered "white" by default.
-
-### PySSBWE.SSBWE(spec,df,extra_factor,zp_factor,side_cut=True,order=0,noise_type="white")
+### PySSBWE.SSBWE(spec,df,extra_factor,zp_factor,side_cut=True,order=0)
 
 The PySSBWE.SSBWE function applies the State-Space Bandwidth Extrapolation (SSBWE) to a radar signal's spectrum.
 The State-Space model is estimated using two methods:
@@ -160,8 +155,6 @@ Both models' results are returned by the function.
 * side_cut: (optional) _boolean_, 5% of samples are cut on each side of the spectrum if True.
 
 * order: (optional) _integer_ order of the state-space model (number of selected singular value, ideally equal to the number of radar targets), if =0 the order is estimated using AIC.
-
-* noise_type: (optional) _string_, "white" if the spectrum is affected by a white-noise, "colored" if the spectrum is affected by a colored-noise.
 
 **Outputs:**
 
@@ -199,7 +192,7 @@ The PySSBWE.statespace_extrapolation function extrapolates forward a spectrum gi
 This function only extrapolates a spectrum forward. 
 To extrapolate a spectrum backward, you must flip the spectrum, fit a state-space model to it, extrapolate it forward, and eventually flip it again.
 
-### PySSBWE.statespace_model(y,order=0,noise_type="white")
+### PySSBWE.statespace_model(y,order=0)
 
 The PySSBWE.statespace_model function fits a state-space model to a spectrum.
 The State-Space model is estimated using two methods:
@@ -215,8 +208,6 @@ Both models are returned by the function.
 * y: _complex 1D array_ containing the spectrum to be modelled.
 
 * order: (optional) _integer_ order of the state-space model (number of selected singular value, ideally equal to the number of radar targets), if =0 the order is estimated using AIC.
-
-* noise_type: (optional) _string_, "white" if the spectrum is affected by a white-noise, "colored" if the spectrum is affected by a colored-noise.
 
 **Outputs:**
 
@@ -518,12 +509,12 @@ Nextra = round(((3*N)-N)//2)+1
 
 Fit a state-space model to the spectrum for forward extrapolation:
 ~~~bash
-[A1_f,B1_f,C1_f,A2_f,B2_f,C2_f] = PySSBWE.statespace_model(spec_vect,noise_type="white")
+[A1_f,B1_f,C1_f,A2_f,B2_f,C2_f] = PySSBWE.statespace_model(spec_vect)
 ~~~
 
 Fit a state-space model to the flipped spectrum for backward extrapolation:
 ~~~bash
-[A1_b,B1_b,C1_b,A2_b,B2_b,C2_b] = PySSBWE.statespace_model(spec_vect_b,noise_type="white")
+[A1_b,B1_b,C1_b,A2_b,B2_b,C2_b] = PySSBWE.statespace_model(spec_vect_b)
 ~~~
 
 Forward extrapolation of the spectrum (obtained with method 1 and 2):

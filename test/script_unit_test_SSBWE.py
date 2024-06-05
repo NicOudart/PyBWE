@@ -53,10 +53,9 @@ try:
 except ValueError:
     assert True
 
-#Check on the test dataset the order estimation with AIC for different noise types:
+#Check on the test dataset the order estimation with AIC:
 try:
-    A1,B1,C1,A2,B2,C2 = PySSBWE.statespace_model(spec_vect_test,0,"white")
-    A1,B1,C1,A2,B2,C2 = PySSBWE.statespace_model(spec_vect_test,0,"colored")
+    A1,B1,C1,A2,B2,C2 = PySSBWE.statespace_model(spec_vect_test,0)
 except:
     assert False, 'PySSBWE.statespace_model NOK!'
 

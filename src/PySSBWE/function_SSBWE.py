@@ -23,9 +23,6 @@
 #              part of the spectrum has been reconstructed by Hilbert transform.
 #   -order (optional): order of the model, by default the order will be
 #                      estimated by AIC.
-#   -noise_type (optional): noise corrupting the spectrum, "white" for a
-#                white-noise only, "colored" if a colored noise is present,
-#                "white" by default.
 
 #-Outputs:
 #   -output_ssbwe_1: extrapolated spectrum using SSBWE method 1
@@ -51,7 +48,7 @@ from .function_statespace_extrapolation import statespace_extrapolation
 
 #Function definition:-----------------------------------------------------------
 
-def SSBWE(spec,df,extra_factor,zp_factor,side_cut=True,order=0,noise_type="white"):
+def SSBWE(spec,df,extra_factor,zp_factor,side_cut=True,order=0):
 
     #Cutting 5% of frequencies on each side of the spectrum:
     if side_cut==True:
@@ -75,10 +72,10 @@ def SSBWE(spec,df,extra_factor,zp_factor,side_cut=True,order=0,noise_type="white
     y_extra_2[Nextra:Nextra+N] = y #Method 2
 
     #Fit a state-space model to spectrum y for forward extrapolation:
-    [A1_f,B1_f,C1_f,A2_f,B2_f,C2_f] = statespace_model(y,order,noise_type)
+    [A1_f,B1_f,C1_f,A2_f,B2_f,C2_f] = statespace_model(y,order)
 
     #Fit a state-space model to spectrum y for backward extrapolation:
-    [A1_b,B1_b,C1_b,A2_b,B2_b,C2_b] = statespace_model(y_b,order,noise_type)
+    [A1_b,B1_b,C1_b,A2_b,B2_b,C2_b] = statespace_model(y_b,order)
 
     #Forward extrapolation of spectrum y:
     y_extra_1_f = statespace_extrapolation(y,A1_f,B1_f,C1_f,Nextra) #Method 1

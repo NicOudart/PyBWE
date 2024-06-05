@@ -105,10 +105,10 @@ N = len(spec_vect)
 Nextra = round(((3*N)-N)//2)+1
 
 #Fit a state-space model to the spectrum for forward extrapolation:
-[A1_f,B1_f,C1_f,A2_f,B2_f,C2_f] = PySSBWE.statespace_model(spec_vect,noise_type="white")
+[A1_f,B1_f,C1_f,A2_f,B2_f,C2_f] = PySSBWE.statespace_model(spec_vect)
 
 #Fit a state-space model to the flipped spectrum for backward extrapolation:
-[A1_b,B1_b,C1_b,A2_b,B2_b,C2_b] = PySSBWE.statespace_model(spec_vect_b,noise_type="white")
+[A1_b,B1_b,C1_b,A2_b,B2_b,C2_b] = PySSBWE.statespace_model(spec_vect_b)
 
 #State-space extrapolation:-----------------------------------------------------
 

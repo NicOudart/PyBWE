@@ -9,9 +9,6 @@
 #   -y: spectrum data vector
 #   -order (optional): order of the model, by default the order will be
 #                      estimated by AIC.
-#   -noise_type (optional): noise corrupting the spectrum, "white" for a
-#                white-noise only, "colored" if a colored noise is present,
-#                "white" by default.
 
 #-Outputs:
     #-A1: model's "state matrix" estimated from the observability matrix
@@ -43,7 +40,7 @@ from .function_AIC import AIC
 
 #Function definition:-----------------------------------------------------------
 
-def statespace_model(y,order=0,noise_type="white"):
+def statespace_model(y,order=0):
 
     #Check if the order of the model is strictly positive:
     if order<0:
@@ -71,7 +68,7 @@ def statespace_model(y,order=0,noise_type="white"):
 
     #Estimate the order of the model using Akaike's Information Criterion:
     if order==0:
-        order = AIC(S,N,noise_type)
+        order = AIC(S,N)
     #Else use the order defined by the user.
 
     #Create a diagonal matrix from the singular values, transpose V:
