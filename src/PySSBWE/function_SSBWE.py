@@ -22,7 +22,9 @@
 #              case of radars working in time-domain, or in case the imaginary
 #              part of the spectrum has been reconstructed by Hilbert transform.
 #   -order (optional): order of the model, by default the order will be
-#                      estimated by AIC.
+#                      estimated by the selected criterions (order=0).
+#   -criterion (optional): criterion for the order determination (ignored if
+#                          order > 0), 'aic' (default) / 'mdl' / 'two_line_fit'.
 
 #-Outputs:
 #   -output_ssbwe_1: extrapolated spectrum using SSBWE method 1
@@ -35,7 +37,8 @@
 #   -The estimation of the state-space model from the observability or the
 #    controllability matrices should yield very similar results. We name the 1st
 #    estimation technique "method 1", and the 2nd "method 2".
-#   -AIC = "Akaike's Information Criterion", see Akaike (1974).
+#   -AIC = "Akaike's Information Criterion".
+#   -MDL = "Minimum Description Length".
 
 ################################################################################
 
@@ -48,7 +51,7 @@ from .function_statespace_extrapolation import statespace_extrapolation
 
 #Function definition:-----------------------------------------------------------
 
-def SSBWE(spec,df,extra_factor,zp_factor,side_cut=True,order=0):
+def SSBWE(spec,df,extra_factor,zp_factor,side_cut=True,order=0,criterion='aic'):
 
     #Cutting 5% of frequencies on each side of the spectrum:
     if side_cut==True:
@@ -72,10 +75,10 @@ def SSBWE(spec,df,extra_factor,zp_factor,side_cut=True,order=0):
     y_extra_2[Nextra:Nextra+N] = y #Method 2
 
     #Fit a state-space model to spectrum y for forward extrapolation:
-    [A1_f,B1_f,C1_f,A2_f,B2_f,C2_f] = statespace_model(y,order)
+    [A1_f,B1_f,C1_f,A2_f,B2_f,C2_f] = statespace_model(y,order,criterion)
 
     #Fit a state-space model to spectrum y for backward extrapolation:
-    [A1_b,B1_b,C1_b,A2_b,B2_b,C2_b] = statespace_model(y_b,order)
+    [A1_b,B1_b,C1_b,A2_b,B2_b,C2_b] = statespace_model(y_b,order,criterion)
 
     #Forward extrapolation of spectrum y:
     y_extra_1_f = statespace_extrapolation(y,A1_f,B1_f,C1_f,Nextra) #Method 1

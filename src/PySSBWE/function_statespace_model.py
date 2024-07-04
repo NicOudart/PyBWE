@@ -8,7 +8,9 @@
 #-Inputs:
 #   -y: spectrum data vector
 #   -order (optional): order of the model, by default the order will be
-#                      estimated by AIC.
+#                      estimated by the selected criterions.
+#   -criterion (optional): criterion for the order determination (ignored if
+#                          order > 0), 'aic' (default) / 'mdl' / 'two_line_fit'.
 
 #-Outputs:
     #-A1: model's "state matrix" estimated from the observability matrix
@@ -23,7 +25,8 @@
 #   -The estimation of the state-space model from the observability or the
 #    controllability matrices should yield very similar results. We name the 1st
 #    estimation technique "method 1", and the 2nd "method 2".
-#   -AIC = "Akaike's Information Criterion", see Akaike (1974).
+#   -AIC = "Akaike's Information Criterion".
+#   -MDL = "Minimum Description Length".
 
 ################################################################################
 
@@ -37,10 +40,12 @@ from numpy.linalg import matrix_power as mp
 from scipy.linalg import fractional_matrix_power as fmp
 
 from .function_AIC import AIC
+from .function_MDL import MDL
+from .function_two_line_fit import two_line_fit
 
 #Function definition:-----------------------------------------------------------
 
-def statespace_model(y,order=0):
+def statespace_model(y,order=0,criterion='aic'):
 
     #Check if the order of the model is strictly positive:
     if order<0:
@@ -68,7 +73,14 @@ def statespace_model(y,order=0):
 
     #Estimate the order of the model using Akaike's Information Criterion:
     if order==0:
-        order = AIC(S,N)
+        if criterion=='aic':
+            order = AIC(S,N)
+        elif criterion=='mdl':
+            order = MDL(S,N)
+        elif criterion=='two_line_fit':
+            order = two_line_fit(S)
+        else:
+            raise ValueError("The name of the criterion is unknown")
     #Else use the order defined by the user.
 
     #Create a diagonal matrix from the singular values, transpose V:
