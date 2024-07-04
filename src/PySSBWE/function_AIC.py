@@ -28,7 +28,7 @@ def AIC(sv,N):
     Q = len(sv)
 
     #Initialize the information criteria's list:
-    IC = np.zeros(Q)
+    IC = np.zeros(Q-1)
 
     #Retrieve the module of the singular values:
     lam = abs(sv)

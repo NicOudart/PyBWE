@@ -28,7 +28,7 @@ def MDL(sv,N):
     Q = len(sv)
 
     #Initialize the information criteria's list:
-    IC = np.zeros(Q)
+    IC = np.zeros(Q-1)
 
     #Retrieve the module of the singular values:
     lam=abs(sv)
@@ -44,7 +44,7 @@ def MDL(sv,N):
         lik = num/den
 
         #Calculate MDL for this order:
-        crit = -N*(Q - ord)*np.log(lik) + .5*ord*(2*Q - ord)*np.log(N)
+        crit = -N*(Q - ord)*np.log(lik) + 0.5*ord*(2*Q - ord)*np.log(N)
 
         #Add this MDL to the criteria's list:
         IC[ord-1] = crit

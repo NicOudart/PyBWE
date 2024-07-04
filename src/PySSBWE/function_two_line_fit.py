@@ -31,7 +31,7 @@ def two_line_fit(sv):
     Q = len(sv)
 
     #Initialize the two-line fit criteria's list:
-    TLF = np.zeros(Q)
+    TLF = np.zeros(Q-1)
 
     #Calculate the mean of singular values:
     sv_mean = np.mean(sv)
