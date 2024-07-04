@@ -1,13 +1,17 @@
 ## Credits
 
-© Nicolas OUDART (2023)
+© Nicolas OUDART
+
+Contributions from the WISDOM science team: Valérie CIARLETTI, Alice LE GALL, Emile BRIGHI.
+
+Contributions from interns: Eloa EGUILUZ-BLANCO, Nathan GILLES-LORDET (2024).
 
 LATMOS/IPSL, UVSQ Université Paris-Saclay, Guyancourt, France
 
 ## Citation
 
-OUDART Nicolas (2023), PyBWE: Python tools for Bandwidth Extrapolation of radar signals (2023.12).
-DOI: 10.5281/zenodo.10259201
+OUDART Nicolas (2024), PyBWE: Python tools for Bandwidth Extrapolation of radar signals.
+DOI: 10.5281/zenodo.11253430
 
 ## License
 
