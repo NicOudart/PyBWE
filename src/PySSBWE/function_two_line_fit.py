@@ -31,10 +31,10 @@ def two_line_fit(sv):
     Q = len(sv)
 
     #Initialize the two-line fit criteria's list:
-    TLF = np.zeros(Q-1)
+    TLF = np.zeros(Q-2)
 
-    #Calculate the mean of singular values:
-    sv_mean = np.mean(sv)
+    #Calculate the total sum of squares of singular values:
+    SSTot = np.sum((sv-np.mean(sv))**2)
 
     #Retrieve the total number of singular values:
     N = np.arange(Q)
@@ -43,14 +43,14 @@ def two_line_fit(sv):
     sv_fit = np.zeros(Q)
 
     #For increasing model order fit 2 lines to the singular values:
-    for idx_model in range(1,Q):
+    for idx_model in range(1,Q-1):
 
         #Separate the sigular values in "signal" and "noise" groups:
-        sv_sig = sv[:idx_model]
+        sv_sig = sv[:idx_model+1]
         sv_noise = sv[idx_model:]
 
         #Select the indices corresponding corresponding to these groups:
-        N_sig = N[:idx_model]
+        N_sig = N[:idx_model+1]
         N_noise = N[idx_model:]
 
         #Linear regression of each group:
@@ -58,19 +58,19 @@ def two_line_fit(sv):
         reg_noise = linregress(N_noise,sv_noise)
 
         #Calculate linear fit values for each group:
-        sv_fit[:idx_model] = reg_sig.intercept + reg_sig.slope*N_sig
-        sv_fit[idx_model:] = reg_noise.intercept + reg_noise.slope*N_noise
+        sv_sig_fit = reg_sig.intercept + reg_sig.slope*N_sig
+        sv_noise_fit = reg_noise.intercept + reg_noise.slope*N_noise
 
         #Calculate the error between the linear fits and the singular values:
-        error_fit = np.sum(np.abs(sv_fit-sv))
+        error_fit = np.sum(np.abs(sv_sig-sv_sig_fit))+np.sum(np.abs(sv_noise-sv_noise_fit))
         #Calculate the R2 coefficient of the linear fits:
-        R2_fit = 1 - np.sum((sv-sv_fit)**2)/np.sum((sv-sv_mean)**2)
+        R2_fit = 1 - (np.sum((sv_sig-sv_sig_fit)**2)+np.sum((sv_noise-sv_noise_fit)**2))/SSTot
 
         #If the error is not zero add R2/error to the :
         if error_fit!=0:
             TLF[idx_model-1] = R2_fit/error_fit
 
     #Choose the order of the model by maximizing the criterion:
-    output_order = np.argmax(TLF)
+    output_order = np.argmax(TLF)+1
 
     return output_order
