@@ -55,7 +55,19 @@ except ValueError:
 
 #Check on the test dataset the order estimation with AIC:
 try:
-    A1,B1,C1,A2,B2,C2 = PySSBWE.statespace_model(spec_vect_test,0)
+    A1,B1,C1,A2,B2,C2 = PySSBWE.statespace_model(spec_vect_test,0,'aic')
+except:
+    assert False, 'PySSBWE.statespace_model NOK!'
+
+#Check on the test dataset the order estimation with MDL:
+try:
+    A1,B1,C1,A2,B2,C2 = PySSBWE.statespace_model(spec_vect_test,0,'mdl')
+except:
+    assert False, 'PySSBWE.statespace_model NOK!'
+
+#Check on the test dataset the order estimation with the two-line fit approach:
+try:
+    A1,B1,C1,A2,B2,C2 = PySSBWE.statespace_model(spec_vect_test,0,'two_line_fit')
 except:
     assert False, 'PySSBWE.statespace_model NOK!'
 

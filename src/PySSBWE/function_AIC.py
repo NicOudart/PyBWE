@@ -4,7 +4,7 @@
 #This function allows you to estimate the order of a State Space BWE (SSBWE)
 #model from the SVD of its Hankel matrix, based on Akaike's Information
 #Criterion (AIC).
-#References: Wax & Kailath (1985).
+#References: Akaike (1974) and Wax & Kailath (1985).
 
 #-Inputs:
 #   -sv: vector of the Hankel matrix singular values, in decreasing order

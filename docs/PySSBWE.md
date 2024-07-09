@@ -26,6 +26,10 @@ This function calls several other functions from the package, that you can call 
 
 * **PySSBWE.AIC:** estimates the ideal order for a spectrum's state-space model using Akaike's Information Criterion.
 
+* **PySSBWE.MDL:** estimates the ideal order for a spectrum's state-space model using the Minimum Description Length criterion.
+
+* **PySSBWE.two_line_fit:** estimates the ideal order for a spectrum's state-space model using the "two-line fit" method.
+
 * **PySSBWE.statespace_extrapolation:** extrapolates forward, backward or both a spectrum, given an AR model.
 
 In addition, this package also contains a function that can be used to retrieve information on the different targets' echoes from a spectrum's state-space model:
@@ -47,7 +51,7 @@ import PySSBWE
 The idea behind the state-space identification of the SSBWE technique is to seperate the singular values of signal from the singular values of noise in the input spectrum's Hankel matrix.
 The ideal order of a state-space model corresponds to the number of selected singular values being part of the signal sub-space. It is directly the number of complex sine-waves composing the spectrum, also equal to the number of targets sounded by the radar.
 If you have an a priori knowledge of the number of targets, you directly set the order of the model.
-If not, you can estimate it with Akaike's Information Criterion (AIC, see Akaike (1974)), implemented in PySSBWE, as recommended by Piou (1999).
+If not, you can estimate it with Akaike's Information Criterion (AIC, see Akaike (1974)), implemented in PySSBWE, as recommended by Piou (1999). Other criteria are also available.
 
 The stability of the model not being guaranteed in the case of the SSBWE, a wrong estimation of the ideal model order can lead to diverging extrapolations, and thus to very high errors in time-domain.
 
@@ -119,7 +123,7 @@ This can for instance be done by subtracting a "free-space" (without any targets
 ### PySSBWE.AIC(sv,N)
 
 The PySSBWE.AIC function estimates the ideal state-space model order from the spectrum's Hankel matrix singular values, using AIC.
-See Akaike (1974). This order corresponds to the number of singular values selected as being part of the signal's subspace, and is ideally equal to the number of target echoes in the radar signal.
+See Akaike (1974) and Wax & Kailath (1985). This order corresponds to the number of singular values selected as being part of the signal's subspace, and is ideally equal to the number of target echoes in the radar signal.
 
 **Inputs:**
 
@@ -131,7 +135,22 @@ See Akaike (1974). This order corresponds to the number of singular values selec
 
 * output_order: _integer_ ideal state-space model order according to AIC.
 
-### PySSBWE.SSBWE(spec,df,extra_factor,zp_factor,side_cut=True,order=0)
+### PySSBWE.MDL(sv,N)
+
+The PySSBWE.MDL function estimates the ideal state-space model order from the spectrum's Hankel matrix singular values, using MDL.
+See Wax & Kailath (1985). This order corresponds to the number of singular values selected as being part of the signal's subspace, and is ideally equal to the number of target echoes in the radar signal.
+
+**Inputs:**
+
+* sv: _float 1D array_ of the spectrum's Hankel matrix singular values, in decreasing order.
+
+* N: _integer_ number of samples in the spectrum.
+
+**Outputs:**
+
+* output_order: _integer_ ideal state-space model order according to MDL.
+
+### PySSBWE.SSBWE(spec,df,extra_factor,zp_factor,side_cut=True,order=0,criterion='aic')
 
 The PySSBWE.SSBWE function applies the State-Space Bandwidth Extrapolation (SSBWE) to a radar signal's spectrum.
 The State-Space model is estimated using two methods:
@@ -154,7 +173,9 @@ Both models' results are returned by the function.
 
 * side_cut: (optional) _boolean_, 5% of samples are cut on each side of the spectrum if True.
 
-* order: (optional) _integer_ order of the state-space model (number of selected singular value, ideally equal to the number of radar targets), if =0 the order is estimated using AIC.
+* order: (optional) _integer_ order of the state-space model (number of selected singular value, ideally equal to the number of radar targets), if = 0 the order is estimated by the selected criterion (AIC by default).
+
+* criterion: (optional) _string_ name of the method / criterion to use for the order estimation if order = 0 ('aic' = Akaike's Information Criterion / 'mdl' = Minimum Description Length / 'two_line_fit' = two-line fit approach).
 
 **Outputs:**
 
@@ -166,7 +187,7 @@ Both models' results are returned by the function.
 
 **Notes:**
 Unlike the classic BWE (or the PBWE), where the Burg algorithm guaranties the stability of the model, the stability of the state-space model is not guaranteed.
-The order of the model is by default estimated using AIC. It can also be set by the user.
+The order of the model is by default estimated using AIC. It can also be set by the user, or estimated with another method.
 
 ### PySSBWE.statespace_extrapolation(y,A,B,C,Nextra)
 
@@ -192,7 +213,7 @@ The PySSBWE.statespace_extrapolation function extrapolates forward a spectrum gi
 This function only extrapolates a spectrum forward. 
 To extrapolate a spectrum backward, you must flip the spectrum, fit a state-space model to it, extrapolate it forward, and eventually flip it again.
 
-### PySSBWE.statespace_model(y,order=0)
+### PySSBWE.statespace_model(y,order=0,criterion='aic')
 
 The PySSBWE.statespace_model function fits a state-space model to a spectrum.
 The State-Space model is estimated using two methods:
@@ -207,7 +228,9 @@ Both models are returned by the function.
 
 * y: _complex 1D array_ containing the spectrum to be modelled.
 
-* order: (optional) _integer_ order of the state-space model (number of selected singular value, ideally equal to the number of radar targets), if =0 the order is estimated using AIC.
+* order: (optional) _integer_ order of the state-space model (number of selected singular value, ideally equal to the number of radar targets), if = 0 the order is estimated by the selected criterion (AIC by default).
+
+* criterion: (optional) _string_ name of the method / criterion to use for the order estimation if order = 0 ('aic' = Akaike's Information Criterion / 'mdl' = Minimum Description Length / 'two_line_fit' = two-line fit approach).
 
 **Outputs:**
 
@@ -225,7 +248,7 @@ Both models are returned by the function.
 
 **Notes:**
 Unlike the Burg algorithm which guaranties the stability of the model, the stability of the state-space model is not guaranteed.
-The order of the model is by default estimated using AIC. It can also be set by the user.
+The order of the model is by default estimated using AIC. It can also be set by the user, or estimated with another method.
 
 ### PySSBWE.statespace_properties(A,B,C,df,f1)
 
@@ -250,6 +273,19 @@ The PySSBWE.statespace_properties function retrieves the different echoes proper
 * td: _float 1D array_ containing the estimated echoes time-delays [s].
 
 * dec: _float_1D_array_ containing the estimated echoes frequency-decay [1/Hz].
+
+### PySSBWE.two_line_fit(sv)
+
+The PySSBWE.two_line_fit function estimates the ideal state-space model order from the spectrum's Hankel matrix singular values, using a "two-line fit" approach.
+See Brindise & Vlachos (2017). This order corresponds to the number of singular values selected as being part of the signal's subspace, and is ideally equal to the number of target echoes in the radar signal.
+
+**Inputs:**
+
+* sv: _float 1D array_ of the spectrum's Hankel matrix singular values, in decreasing order.
+
+**Outputs:**
+
+* output_order: _integer_ ideal state-space model order according to the "two-line fit" approach.
 
 ## Example
 
@@ -285,7 +321,7 @@ The State-Space Bandwidth Extrapolation (SSBWE) is applied to this radar's signa
 
 From the state-space model of the spectrum, the properties of each echo (amplitude, time-delay, frequency-domain decay) can be estimated. This is done in the last part of this example.
 
-In the following example the order of the model (= number of echoes) is estimated using AIC. The order can also be forced by the user in the PySSBWE functions statespace_model and SSBWE with an optional parameter "order" if the number of echoes is known.
+In the following example the order of the model (= number of echoes) is estimated using AIC. Other criteria can be selected. The order can also be forced by the user in the PySSBWE functions statespace_model and SSBWE with an optional parameter "order" if the number of echoes is known.
 
 2 methods can be used to fit a state-space model to a spectrum:
 
@@ -628,6 +664,10 @@ Here is an example of figure displayed with this command for method 1:
 ## References
 
 * [Akaike (1974)](https://doi.org/10.1109/TAC.1974.1100705)
+
+* [Wax & Kailath (1985)](https://doi.org/10.1109/TASSP.1985.1164557)
+
+* [Brindise & Vlachos (2017)](https://doi.org/10.1007/s00348-017-2320-3)
 
 * [Cuomo (1992)](https://apps.dtic.mil/sti/tr/pdf/ADA258462.pdf)
 
