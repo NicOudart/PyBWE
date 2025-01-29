@@ -151,7 +151,7 @@ for dist in list_dist_targets:
             spec_vect_wn = hilbert(spec_vect_wn)[::2]
 
             #Application of the BWE:
-            output_bwe, time_bwe_vect = PyBWE.BWE(spec_vect_wn,df=5e6,extra_factor=3,model_order=0.33,zp_factor=10,side_cut=True)
+            output_bwe, time_bwe_vect = PyBWE.BWE(spec_vect_wn,df=5e6,extra_factor=3,model_order=0.33,zp_factor=10,side_cut=True,method='burg')
 
             #Testing the BWE:---------------------------------------------------
 

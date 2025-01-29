@@ -10,7 +10,7 @@ The BWE works this way:
 
 * The input is the frequency-domain spectrum of the radar's reponse signal from a series of targets. In this situation, the signal should in theory be a sum of complex sine-waves.
 
-* An autoregressive (AR) model is fitted to this spectrum, using the Burg algorithm. The order of the model is a user-defined parameter.
+* An autoregressive (AR) model is fitted to this spectrum, using the Burg or the Modified Covariance algorithm. The order of the model is a user-defined parameter.
 
 * This model is used to extrapolate the spectrum forward and backward. The extrapolating factor is a user-defined parameter.
 
@@ -22,6 +22,8 @@ The PyBWE package contains the **PyBWE.BWE** function, allowing you to apply the
 This function calls several other functions from the package, that you can call independently if needed:
 
 * **PyBWE.burg:** fits an AR model to a spectrum, using the Burg algorithm.
+
+* **PyBWE.mcov:** fits an AR model to a spectrum, using the Modified Covariance algorithm.
 
 * **PyBWE.ar_extrapolation:** extrapolates forward, backward or both a spectrum, given an AR model.
 
@@ -145,6 +147,22 @@ The PyBWE.burg function fits an AR model to a spectrum, using the Burg algorithm
 * e: _float_ estimated white-noise variance.
 
 * rc: _complex 1D array_ containing the Burg algorithm's reflection coefficients.
+
+### PyBWE.mcov(x,p)
+
+The PyBWE.mcov function fits an AR model to a spectrum, using the Modified Covariance algorithm.
+
+**Inputs:**
+
+* x: _complex 1D array_ containing the spectrum to be modelled.
+
+* p: _integer_ order of the AR model.
+
+**Outputs:**
+
+* a: _complex 1D array_ containing the AR model coefficients.
+
+* e: _float_ estimated white-noise variance.
 
 ### PyBWE.BWE(spec,df,extra_factor,model_order,zp_factor,side_cut=True)
 
@@ -286,6 +304,11 @@ Cut 5% of samples on each side of the spectrum:
 side_cut = True
 ~~~
 
+Method to determine the AR model:
+~~~bash
+method = 'burg'
+~~~
+
 Calculate the original spectrum's frequency step:
 ~~~bash
 df = freq_vect[1]-freq_vect[0]
@@ -293,7 +316,7 @@ df = freq_vect[1]-freq_vect[0]
 
 Application of the BWE to the spectrum:
 ~~~bash
-output_bwe, time_bwe_vect = PyBWE.BWE(spec_vect,df,extra_factor,model_order,zp_factor,side_cut)
+output_bwe, time_bwe_vect = PyBWE.BWE(spec_vect,df,extra_factor,model_order,zp_factor,side_cut,method)
 ~~~
 
 output_bwe contains the time-domain radar sounding after BWE, ready to be displayed with time axis time_bwe_vect.

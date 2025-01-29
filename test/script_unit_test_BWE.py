@@ -58,6 +58,28 @@ a,e,rc = PyBWE.burg(spec_vect_test,2)
 #Check the AR model's coefficients:
 assert (abs(abs(a[0])-2)<1e-3)and(abs(abs(a[1])-1)<1e-3), 'PyBWE.burg NOK!'
 
+#Test function mcov:------------------------------------------------------------
+
+#Check the error message if the model order is too low:
+try:
+    a,e = PyBWE.mcov(np.zeros(2),0)
+    assert False, 'PyBWE.mcov NOK!'
+except ValueError:
+    assert True
+
+#Check the error message if the model order is too high:
+try:
+    a,e = PyBWE.mcov(np.zeros(2),3)
+    assert False, 'PyBWE.mcov NOK!'
+except ValueError:
+    assert True
+
+#Application of the mcov function to the test dataset:
+a,e = PyBWE.mcov(spec_vect_test,2)
+
+#Check the AR model's coefficients:
+assert (abs(abs(a[0])-2)<1e-3)and(abs(abs(a[1])-1)<1e-3), 'PyBWE.mcov NOK!'
+
 #Test function ar_extrapolation:------------------------------------------------
 
 #Check the error message if the number of coefficients is too high:

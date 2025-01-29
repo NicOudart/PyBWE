@@ -87,12 +87,14 @@ model_order = 0.33
 zp_factor = 10
 #Cut 5% of samples on each side of the spectrum:
 side_cut = True
+#Method to determine the AR model:
+method = 'burg'
 
 #Calculate the original spectrum's frequency step:
 df = freq_vect[1]-freq_vect[0]
 
 #Application of the BWE to the spectrum:
-output_bwe, time_bwe_vect = PyBWE.BWE(spec_vect,df,extra_factor,model_order,zp_factor,side_cut)
+output_bwe, time_bwe_vect = PyBWE.BWE(spec_vect,df,extra_factor,model_order,zp_factor,side_cut,method)
 
 #Figure display:----------------------------------------------------------------
 

@@ -33,7 +33,7 @@ The unit test scripts for packages PyBWE, PyPBWE and PySSBWE follow different st
 
 ### Modelling functions
 
-For the modelling functions PyBWE.burg, PyPBWE.polar_burg and PySSBWE.statespace_model, we follow this strategy:
+For the modelling functions PyBWE.burg, PyBWE.mcov, PyPBWE.polar_burg and PySSBWE.statespace_model, we follow this strategy:
 
 * Check the error messages if the input order for the model is too high or too low.
 

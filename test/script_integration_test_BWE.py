@@ -33,11 +33,12 @@ spec_vect_test = np.exp(1j*4*pi*freq_vect_test/3e8)+np.exp(1j*4*pi*1.1*freq_vect
 
 #Check PyBWE.BWE on the test dataset with different parameters:
 try:
-    output_bwe, time_bwe_vect = PyBWE.BWE(spec_vect_test,freq_vect_test[1]-freq_vect_test[0],3,0.33,10,True) #Standard parameters
-    output_bwe, time_bwe_vect = PyBWE.BWE(spec_vect_test,freq_vect_test[1]-freq_vect_test[0],2,0.33,10,True)
-    output_bwe, time_bwe_vect = PyBWE.BWE(spec_vect_test,freq_vect_test[1]-freq_vect_test[0],3,0.1,10,True)
-    output_bwe, time_bwe_vect = PyBWE.BWE(spec_vect_test,freq_vect_test[1]-freq_vect_test[0],3,0.33,5,True)
-    output_bwe, time_bwe_vect = PyBWE.BWE(spec_vect_test,freq_vect_test[1]-freq_vect_test[0],3,0.33,10,False) #To be used for the rest of the test
+    output_bwe, time_bwe_vect = PyBWE.BWE(spec_vect_test,freq_vect_test[1]-freq_vect_test[0],3,0.33,10,True,'burg') #Standard parameters
+    output_bwe, time_bwe_vect = PyBWE.BWE(spec_vect_test,freq_vect_test[1]-freq_vect_test[0],2,0.33,10,True,'burg')
+    output_bwe, time_bwe_vect = PyBWE.BWE(spec_vect_test,freq_vect_test[1]-freq_vect_test[0],3,0.1,10,True,'burg')
+    output_bwe, time_bwe_vect = PyBWE.BWE(spec_vect_test,freq_vect_test[1]-freq_vect_test[0],3,0.33,5,True,'burg')
+    output_bwe, time_bwe_vect = PyBWE.BWE(spec_vect_test,freq_vect_test[1]-freq_vect_test[0],3,0.33,5,True,'mcov')
+    output_bwe, time_bwe_vect = PyBWE.BWE(spec_vect_test,freq_vect_test[1]-freq_vect_test[0],3,0.33,10,False,'burg') #To be used for the rest of the test
 except:
     assert False, 'PyBWE.BWE NOK!'
 

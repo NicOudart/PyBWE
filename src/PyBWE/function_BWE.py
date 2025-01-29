@@ -21,6 +21,7 @@
 #              each side of the spectrum. This greatly improves result in the
 #              case of radars working in time-domain, or in case the imaginary
 #              part of the spectrum has been reconstructed by Hilbert transform.
+#   -method (optional): name of the method to determine the AR model.
 
 #-Outputs:
 #   -output_bwe: time-domain signal output after BWE application
@@ -38,11 +39,12 @@ import numpy as np
 from statistics import variance as var
 
 from .function_burg import burg
+from .function_mcov import mcov
 from .function_ar_extrapolation import ar_extrapolation
 
 #Function definition:-----------------------------------------------------------
 
-def BWE(spec,df,extra_factor,model_order,zp_factor,side_cut=True):
+def BWE(spec,df,extra_factor,model_order,zp_factor,side_cut=True,method='burg'):
 
     #Cutting 5% of frequencies on each side of the spectrum:
     if side_cut==True:
@@ -54,8 +56,13 @@ def BWE(spec,df,extra_factor,model_order,zp_factor,side_cut=True):
     #Order of the model expressed as a number of samples:
     model_order_nb = round(model_order*N)
 
-    #Fit an AR model to the spectrum using the Burg algorithm:
-    ar_coeff,ar_var,ar_rc = burg(spec,model_order_nb)
+    #Fit an AR model to the spectrum using the desired algorithm:
+    if method=='burg': 
+        ar_coeff,ar_var,ar_rc = burg(spec,model_order_nb)
+    elif method=='mcov':
+        ar_coeff,ar_var = mcov(spec,model_order_nb)
+    else:
+        raise ValueError("This method does not exist")
 
     #Number of samples to be extrapolated on each side of the spectrum:
     Nextra = round(((extra_factor*N)-N)//2)+1
