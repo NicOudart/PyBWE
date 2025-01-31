@@ -164,7 +164,7 @@ The PyBWE.mcov function fits an AR model to a spectrum, using the Modified Covar
 
 * e: _float_ estimated white-noise variance.
 
-### PyBWE.BWE(spec,df,extra_factor,model_order,zp_factor,side_cut=True)
+### PyBWE.BWE(spec,df,extra_factor,model_order,zp_factor,side_cut=True,method='burg')
 
 The PyBWE.BWE function applies the Bandwidth Extrapolation to a radar signal's spectrum.
 
@@ -181,6 +181,8 @@ The PyBWE.BWE function applies the Bandwidth Extrapolation to a radar signal's s
 * zp_factor: _float_ factor between the zero-padded and original spectrum's bandwidth.
 
 * side_cut: (optional) _boolean_, 5% of samples are cut on each side of the spectrum if True.
+
+* method: (optional) _string_ name of the method to determine the AR model ('burg' for Burg, or 'mcov' for Modified Covariance).
 
 **Outputs:**
 
