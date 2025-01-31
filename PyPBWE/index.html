@@ -1,0 +1,907 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="Python tools for Bandwidth Extrapolation of radar signals" name="description"/>
+<meta content="Nicolas OUDART" name="author"/>
+<link href="https://nicoudart.github.io/PyBWE/PyPBWE/" rel="canonical"/>
+<link href="../Logo_PyBWE.ico" rel="icon"/>
+<meta content="mkdocs-1.1.2, mkdocs-material-7.2.3" name="generator"/>
+<title>PyPBWE - PyBWE</title>
+<link href="../assets/stylesheets/main.f7f47774.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/palette.3f5d1f46.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+</head>
+<body data-md-color-accent="yellow" data-md-color-primary="blue" data-md-color-scheme="default" dir="ltr">
+<script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+<script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#pypbwe-package">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="PyBWE" class="md-header__button md-logo" data-md-component="logo" href=".." title="PyBWE">
+<img alt="logo" src="../Logo_PyBWE.svg"/>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            PyBWE
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              PyPBWE
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Dark mode" class="md-option" data-md-color-accent="yellow" data-md-color-media="" data-md-color-primary="blue" data-md-color-scheme="default" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_2" hidden="" title="Dark mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69z"></path></svg>
+</label>
+<input aria-label="Light mode" class="md-option" data-md-color-accent="yellow" data-md-color-media="" data-md-color-primary="blue" data-md-color-scheme="slate" id="__palette_2" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Light mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69z"></path></svg>
+</label>
+</form>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</label>
+<nav aria-label="Search" class="md-search__options">
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/NicOudart/PyBWE/" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+</div>
+<div class="md-source__repository">
+    NicOudart/PyBWE
+  </div>
+</a>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary md-nav--integrated" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="PyBWE" class="md-nav__button md-logo" data-md-component="logo" href=".." title="PyBWE">
+<img alt="logo" src="../Logo_PyBWE.svg"/>
+</a>
+    PyBWE
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/NicOudart/PyBWE/" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+</div>
+<div class="md-source__repository">
+    NicOudart/PyBWE
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="..">
+        Home
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../installation/">
+        Installation
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3">
+        User Guide
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="User Guide" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+          User Guide
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../PyBWE/">
+        PyBWE
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+          PyPBWE
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+        PyPBWE
+      </a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#description">
+    Description
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#importation">
+    Importation
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#recommendations">
+    Recommendations
+  </a>
+<nav aria-label="Recommendations" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-order-of-the-ar-model">
+    The order of the AR model
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-extrapolation-factor">
+    The extrapolation factor
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-effect-of-side-lobes">
+    The effect of side-lobes
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-effect-of-distortions">
+    The effect of distortions
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-effect-of-noise">
+    The effect of noise
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#electromagnetic-interferences">
+    Electromagnetic interferences
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cross-talk">
+    Cross-talk
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#functions">
+    Functions
+  </a>
+<nav aria-label="Functions" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pypbwepbwespec_matdfextra_factormodel_orderzp_factorside_cuttrue">
+    PyPBWE.PBWE(spec_mat,df,extra_factor,model_order,zp_factor,side_cut=True)
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pypbwepolar_burgxp">
+    PyPBWE.polar_burg(X,p)
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pypbwepolar_extrapolationxthetafthetabmextraextra_modeboth">
+    PyPBWE.polar_extrapolation(X,Thetaf,Thetab,Mextra,extra_mode='both')
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#example">
+    Example
+  </a>
+<nav aria-label="Example" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#presentation-of-the-scenario">
+    Presentation of the scenario
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-synthetic-signal-generation">
+    The synthetic signal generation
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-application-of-the-pbwe">
+    The application of the PBWE:
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#display-of-the-pbwe-results">
+    Display of the PBWE results:
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#manual-extrapolation">
+    Manual extrapolation:
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#display-of-the-extrapolation-result">
+    Display of the extrapolation result:
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#references">
+    References
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../PySSBWE/">
+        PySSBWE
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" id="__nav_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_4">
+        Tests
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Tests" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
+          Tests
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../unit_integration_tests/">
+        Unit and integration tests
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../performance_tests/">
+        Performance tests
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../community/">
+        Community guidelines
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../references/">
+        References
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../credits/">
+        Credits
+      </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<a class="md-content__button md-icon" href="https://github.com/NicOudart/PyBWE/edit/main/docs/PyPBWE.md" title="Edit this page">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"></path></svg>
+</a>
+<h1 id="pypbwe-package">PyPBWE package</h1>
+<h2 id="description">Description</h2>
+<p>The PyPBWE package is an "advanced" package of this library.
+It allows you to apply the Polarimetric Bandwidth Extrapolation (PBWE) technique as defined by Suwa and Iwamoto (2003,2007) to any set of multi-polarimetric-channel radar spectra.
+The PBWE is a super-resolution technique, as it yields a better range resolution in time-domain than classic spectral estimation techniques (FFT).
+It is a multi-channel version of the classic Bandwidth Extrapolation (BWE), taking advantage of the polarimetric capabilities of a radar.</p>
+<p>The PBWE works this way:</p>
+<ul>
+<li>
+<p>The input is a set of frequency-domain spectra of the radar's reponse signals from a series of targets, received by different polarimetric channels of the instrument. In this situation, each channel signal should in theory be a sum of complex sine-waves.</p>
+</li>
+<li>
+<p>A set of autoregressive (AR) models is fitted to this set of spectra, using a multi-channel version of the Burg algorithm. The order of the model is a user-defined parameter.</p>
+</li>
+<li>
+<p>These models are used to extrapolate each spectrum forward and backward. The extrapolating factor is a user-defined parameter.</p>
+</li>
+<li>
+<p>The super-resolved time-domain soundings for each channel are obtained by IFFT. Zero-padding can be used for time-domain interpolation (this process is purely aesthetic).</p>
+</li>
+</ul>
+<p>Each spectrum's extrapolation factor is equal to the resolution enhancement factor after IFFT.</p>
+<p>The multi-channel version of the Burg algorithm used by the PBWE accounts for the targets' echoes information present in each polarimetric channel: the principle of this technique consists in extrapolating each polarimetric channel with a weighted sum of previous/next samples not only using this channel but also the others.
+For this reason, in the case where a target's scattering coefficients are different and non-zero for at least two polarimetric channels of the radar, we expect the PBWE to perform better than the BWE.</p>
+<p>The PyPBWE package contains the <strong>PyPBWE.PBWE</strong> function, allowing you to apply the PBWE directly to a given set of multi-polarimetric-channel radar spectra and get a super-resolved sounding per channel.
+This function calls several other functions from the package, that you can call independently if needed:</p>
+<ul>
+<li>
+<p><strong>PyPBWE.polar_burg:</strong> fits an AR model to each polarimetric channel of a spectrum, using a multi-channel version of the Burg algorithm.</p>
+</li>
+<li>
+<p><strong>PyPBWE.polar_extrapolation:</strong> extrapolates forward, backward or both a multi-polarimetric-channel spectrum, given a set of AR models.</p>
+</li>
+</ul>
+<h2 id="importation">Importation</h2>
+<p>Once the library is installed, the PyPBWE package can simply be imported:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>import<span class="w"> </span>PyPBWE
+</span></code></pre></div>
+<h2 id="recommendations">Recommendations</h2>
+<h3 id="the-order-of-the-ar-model">The order of the AR model</h3>
+<p>In theory, the ideal order of an AR model depends on the number of complex sine-waves composing the spectrum.
+However, in practical cases, a higher order is required to obtain good results in presence of noise.
+For the BWE, Cuomo (1992) recommends an order equal to ⅓ of the number of samples in the spectrum. This is also what we recommend for PBWE.</p>
+<h3 id="the-extrapolation-factor">The extrapolation factor</h3>
+<p>In theory, a sum of sine-wave can be extrapolated infinitely.
+However, in practical cases, errors accumulate with the extrapolation.
+For the BWE, Cuomo (1992) recommends an extrapolation factor of maximum 3. 
+Higher values can be tried for the PBWE, as the model is expected to be more robust, but the results must be interpreted cautiously.</p>
+<h3 id="the-effect-of-side-lobes">The effect of side-lobes</h3>
+<p>In the case of a radar signal spectrum obtained by FFT, 2 effects must be mitigated before PBWE:</p>
+<ul>
+<li>
+<p>If a window was applied to any signal channel, it must be inverted.</p>
+</li>
+<li>
+<p>The application of the FFT generates side-lobes effects on the borders of a spectrum. For this reason, Cuomo (1992) recommends to remove 5% of frequencies on each side of a spectrum before PBWE. The same goes for PBWE.</p>
+</li>
+</ul>
+<p>In the case of a radar measuring only the real-part of each frequency spectrum, the imaginary part can be reconstructed by Hilbert transform.
+The FFT being part of Hilbert transform implementations, errors can also be expected on the border of reconstructed spectra.
+We thus also recommend to cut 5% of samples on each side of each polarimetric channel spectrum in this case.</p>
+<p>The PyPBWE.PBWE function allows you to remove 5% of samples on each side of a spectrum before PBWE.</p>
+<h3 id="the-effect-of-distortions">The effect of distortions</h3>
+<p>The PBWE technique is based on the assumption that a target response signal will be a complex sine-wave of the same frequency (but potentially different amplitudes) in all polarimetric channels of a radar.
+In many practical applications, a radar response signal can differ from this model, due to various distortion effects.
+Such distortions can make the application of the direct application of the PBWE impossible.
+We thus recommend to correct distortions prior to a PBWE application.</p>
+<p>Different solutions are possible for different sources of distortion:</p>
+<ul>
+<li>
+<p><strong>Effect of the antennas gain:</strong>
+No antenna can transmit all frequencies with the same gain. This will cause distortions of sine-waves in a radar spectrum.
+You can try to compensate for this effect with a calibration radar measurement on a "perfect reflector" (a metallic sphere or a large metallic plate).
+From the spectrum of the echo from such target, the antennas gain can be determined, and inverted in all other radar measurements.
+This process is sometimes called "whitening" and is described in Oudart et al. (2021).
+As different temperatures can lead to significantly different amplitudes over a radar's bandwidth, for a successful whitening process we recommend to apply first a temperature correction (as the one described in Hervé et al. (2020)).
+If necessary, we recommend to apply this process for all polarimetric channels of the radar.</p>
+</li>
+<li>
+<p><strong>Effect of the ionosphere:</strong>
+The ionosphere of any planet has a frequency-dependent attenuation effect on electromagnetic waves. This will cause distortions of sine-waves in a radar spectrum. 
+This effect can be compensated using a ionospheric model.
+For instance Gambacorta et al. (2022) used a ionospheric Gamma model before applying the PBWE to MARSIS (Mars Express) soundings.
+If necessary, we recommend to apply this process for all polarimetric channels of the radar.</p>
+</li>
+<li>
+<p><strong>Effect of subsurface attenuations:</strong>
+When a radar signal is transmitted through a sub-surface, it is affected by different frequency-dependent attenuations (absorption, scattering...).
+It can thus be expected that deeper echoes in a high-loss subsurface will not be correctly reconstructed by PBWE.
+We recommend to use the PySSBWE package, as the SSBWE (State-Space Bandwidth Extrapolation) technique accounts for such attenuations.</p>
+</li>
+</ul>
+<h3 id="the-effect-of-noise">The effect of noise</h3>
+<p>The presence of noise in a signal impact the quality of the AR model determined by the Burg algorithm.
+For this reason, a high level of noise will impact the BWE results (echoes amplitudes and time-delays), as demonstrated in Oudart et al. (2021).
+We expect this effect to be lower for the PBWE than for the BWE in the case of targets having different non-zero scattering coefficients in at least two polarimetric channels of the radar.</p>
+<h3 id="electromagnetic-interferences">Electromagnetic interferences</h3>
+<p>EM interferences can cause peaks in the measured radar spectrum. Such peaks will impair the AR modelling of the signal.
+The effect can be mitigated by detecting outliers in the spectrum, and then replacing them by interpolation, as proposed by Raguso et al. (2018).
+If necessary, we recommend to apply this process for all polarimetric channels of the radar using the multi-channel Burg algorithm and extrapolation.</p>
+<h3 id="cross-talk">Cross-talk</h3>
+<p>If the emission and reception antennas / channels are not the same, a cross-talk phenomenon can generate unwanted signals in the radar response.
+It is recommended to remove such effects prior to the application of the BWE.
+This can for instance be done by subtracting a "free-space" (without any targets) calibration signal to any radar response.
+We thus recommend to acquire a "free-space" measurement for each polarimetric channel of the radar, and to subtract it to any radar response coming from this channel.</p>
+<h2 id="functions">Functions</h2>
+<h3 id="pypbwepbwespec_matdfextra_factormodel_orderzp_factorside_cuttrue">PyPBWE.PBWE(spec_mat,df,extra_factor,model_order,zp_factor,side_cut=True)</h3>
+<p>The PyPBWE.PBWE function applies the Polarimetric Bandwidth Extrapolation to a radar polarimetric channels spectra.</p>
+<p><strong>Inputs:</strong></p>
+<ul>
+<li>
+<p>spec_mat: <em>complex 2D array</em>, each row containing the spectrum of a polarimetric channel to be extrapolated.</p>
+</li>
+<li>
+<p>df: <em>float</em> frequency step corresponding to spec_mat [Hz].</p>
+</li>
+<li>
+<p>extra_factor: <em>float</em> factor between the extrapolated and the original spectra's bandwidths.</p>
+</li>
+<li>
+<p>model_order: <em>float</em> order of the AR models for extrapolation, expressed as a ratio of the original spectra's bandwidth.</p>
+</li>
+<li>
+<p>zp_factor: <em>float</em> factor between the zero-padded and original spectra's bandwidth.</p>
+</li>
+<li>
+<p>side_cut: (optional) <em>boolean</em>, 5% of samples are cut on each side of each spectra if True.</p>
+</li>
+</ul>
+<p><strong>Outputs:</strong></p>
+<ul>
+<li>
+<p>output_pbwe: <em>complex 2D array</em>, each row containing the time-domain radar signal of a polarimetric channel after PBWE.</p>
+</li>
+<li>
+<p>time_pbwe_vect: <em>float 1D array</em> containing the time axis corresponding to output_pbwe [s].</p>
+</li>
+</ul>
+<p><strong>Notes:</strong>
+In this implementation, the time-domain output signal is scaled by the number of samples in each polarimetric channel's spectrum.
+A Hamming window is applied to each spectrum before IFFT.</p>
+<h3 id="pypbwepolar_burgxp">PyPBWE.polar_burg(X,p)</h3>
+<p>The PyPBWE.polar_burg function fits an AR model to each polarimetric channel's spectrum, using a multi-channel version of the Burg algorithm.</p>
+<p><strong>Inputs:</strong></p>
+<ul>
+<li>
+<p>X: <em>complex 2D array</em>, each row containing the spectrum of a polarimetric channel to be modelled.</p>
+</li>
+<li>
+<p>p: <em>integer</em> order of the AR models.</p>
+</li>
+</ul>
+<p><strong>Outputs:</strong></p>
+<ul>
+<li>
+<p>Thetaf: <em>complex 2D array</em> containing the coefficients of the multi-channel AR forward model.</p>
+</li>
+<li>
+<p>Thetab: <em>complex 2D array</em> containing the coefficients of the multi-channel AR backward model.</p>
+</li>
+<li>
+<p>err: <em>float 1D array</em> of prediction errors (forward/backward). </p>
+</li>
+</ul>
+<h3 id="pypbwepolar_extrapolationxthetafthetabmextraextra_modeboth">PyPBWE.polar_extrapolation(X,Thetaf,Thetab,Mextra,extra_mode='both')</h3>
+<p>The PyPBWE.polar_extrapolation function extrapolates a set of polarimetric channel spectra given their multi-channel AR model, forward, backward or both.</p>
+<p><strong>Inputs:</strong></p>
+<ul>
+<li>
+<p>X: <em>complex 2D array</em>, each row containing the spectrum of a polarimetric channel to be extrapolated.</p>
+</li>
+<li>
+<p>Thetaf: <em>complex 2D array</em> containing the coefficients of the multi-channel AR forward model.</p>
+</li>
+<li>
+<p>Thetab: <em>complex 2D array</em> containing the coefficients of the multi-channel AR backward model.</p>
+</li>
+<li>
+<p>Mextra: <em>integer</em> number of samples to be extrapolated forward, backward or both for each channel.</p>
+</li>
+<li>
+<p>extra_mode: (optional) <em>string</em> containing the extrapolation mode, "forward"/"backward"/"both".</p>
+</li>
+</ul>
+<p><strong>Outputs:</strong></p>
+<ul>
+<li>
+<p>X_extra: <em>complex 2D array</em>, each row containing the extrapolated spectrum of a polarimetric channel.</p>
+</li>
+<li>
+<p>X_forward: <em>complex 2D array</em>, each row containing the forward extrapolation of a polarimetric channel.</p>
+</li>
+<li>
+<p>X_backward: <em>complex 2D array</em>, each row containing the backward extrapolation of a polarimetric channel.</p>
+</li>
+</ul>
+<h2 id="example">Example</h2>
+<p>2 example scripts are proposed with the same synthetic radar scenario for the PyBWE package:</p>
+<ul>
+<li>
+<p>An application of PyPBWE.PBWE on a synthetic radar signal is proposed in <em>examples/script_example_PyPBWE_PBWE.py</em>.</p>
+</li>
+<li>
+<p>A manual use of PyPBWE.polar_burg and PyPBWE.polar_extrapolation on a synthetic radar signal is proposed in <em>examples/script_example_PyPBWE_extrapolation.py</em>.</p>
+</li>
+</ul>
+<p>In the following, these 2 scripts are explained as a single tutorial:</p>
+<h3 id="presentation-of-the-scenario">Presentation of the scenario</h3>
+<p>The synthetic radar signal example (inspired by the WISDOM GPR of the ExoMars rover mission, Ciarletti et al. (2017)):</p>
+<ul>
+<li>
+<p>A SFCW (Stepped Frequency Continuous Wave) radar working between 0.5 and 3 GHz measures a 1001 frequencies spectrum when sounding.</p>
+</li>
+<li>
+<p>This radar can transmit and receive signals in two linear polarizations named 0 and 1. This leads to 4 polirization channels: 2 co-polar named 00 and 11 (emission and reception in the same polarization), and 2 cross-polar named 01 and 10 (emission and reception in different polarizations). For simplicity, we will only consider the co-polar channels 00 and 11 in this example.</p>
+</li>
+<li>
+<p>Only the In-phase component (real part of the spectrum) is measured, the Quadrature component (imaginary part of the spectrum) is reconstructed by Hilbert transform.</p>
+</li>
+<li>
+<p>Two targets in free-space are seperated by 5 cm, slightly below the radar's free-space resolution. These targets generate echoes of given complex amplitudes in the radar's signal, or complex sine-waves in the measured spectrum.</p>
+</li>
+<li>
+<p>The measured spectrum is corrupted by a white-noise of standard deviation 10X smaller than the complex sine-waves' amplitudes.</p>
+</li>
+</ul>
+<p>The Polarimetric Bandwidth Extrapolation (PBWE) is applied to this radar's signal using the PyBWE function_PBWE:</p>
+<ul>
+<li>
+<p>Most of the estimation errors when reconstructing a complex spectrum with the Hilbert transform are on the far sides of the spectrum. For this reason, we cut 5% of frequencies on each side of the spectrum before PBWE. We would do the same for a radar working in time-domain, as most errors in FFT estimation are also on each side of the multi-channel spectrum. This process is useless for a radar working in the frequency-domain and measuring both In-Phase and Quadrature components of the spectrum.</p>
+</li>
+<li>
+<p>We then fit an AR model to the multi-channel spectrum, with an order equal to ⅓ of the spectrum samples, as recommended by Cuomo (1992).</p>
+</li>
+<li>
+<p>We use this model to extrapolate the spectrum on each side, to obtain a bandwidth 3X larger (maximum extrapolation factor recommended by Cuomo (1992)). A bandwidth X3 yields a resolution X3 better in time-domain.</p>
+</li>
+<li>
+<p>The extrapolated multi-channel spectrum is eventually converted to a one time-domain signal per channel with IFFT, and zero-padding to interpolate the signal X10. This interpolation is purely aesthetic.</p>
+</li>
+</ul>
+<p>This scenario requires the following libraries:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>import<span class="w"> </span>matplotlib.pyplot<span class="w"> </span>as<span class="w"> </span>plt
+</span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>import<span class="w"> </span>numpy<span class="w"> </span>as<span class="w"> </span>np
+</span><span id="__span-1-3"><a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a>from<span class="w"> </span>math<span class="w"> </span>import<span class="w"> </span>pi
+</span><span id="__span-1-4"><a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a>from<span class="w"> </span>scipy.signal<span class="w"> </span>import<span class="w"> </span>hilbert
+</span><span id="__span-1-5"><a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a>
+</span><span id="__span-1-6"><a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a>import<span class="w"> </span>PyPBWE
+</span></code></pre></div>
+<h3 id="the-synthetic-signal-generation">The synthetic signal generation</h3>
+<p>In this section we describe how to generate analytically a synthetic radar sounding to test the PyPBWE package.</p>
+<p>Generate a vector of 1001 frequencies between 0.5 and 3 GHz:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="nv">freq_vect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.linspace<span class="o">(</span><span class="m">0</span>.5e9,3e9,1001<span class="o">)</span>
+</span></code></pre></div></p>
+<p>Distance (m) between two radar targets in free-space (returning two echoes) and the radar:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="nv">dist_target1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>
+</span><span id="__span-3-2"><a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="nv">dist_target2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>.07
+</span></code></pre></div></p>
+<p>Amplitude associated with each target echo for each polarimetric channel:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="nv">amp_target1_00</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>
+</span><span id="__span-4-2"><a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="nv">amp_target2_00</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>
+</span><span id="__span-4-3"><a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="nv">amp_target1_11</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>
+</span><span id="__span-4-4"><a href="#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="nv">amp_target2_11</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>-1
+</span></code></pre></div></p>
+<p>Generate a sum of two complex sine-waves corresponding to the targets' echoes (each with an amplitude of 1), for the 00 channel:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="nv">spec_vect_00</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>amp_target1_00*np.exp<span class="o">(</span>1j*4*pi*dist_target1*freq_vect/3e8<span class="o">))</span>+<span class="o">(</span>amp_target2_00*np.exp<span class="o">(</span>1j*4*pi*dist_target2*freq_vect/3e8<span class="o">))</span>
+</span></code></pre></div></p>
+<p>Generate a sum of two complex sine-waves corresponding to the targets' echoes (with amplitudes of 1 and -1), for the 11 channel:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="nv">spec_vect_11</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>amp_target1_11*np.exp<span class="o">(</span>1j*4*pi*dist_target1*freq_vect/3e8<span class="o">))</span>+<span class="o">(</span>amp_target2_11*np.exp<span class="o">(</span>1j*4*pi*dist_target2*freq_vect/3e8<span class="o">))</span>
+</span></code></pre></div></p>
+<p>Only keep the real part of the spectrum (In-phase component) for the 2 channels:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="nv">spec_vect_00</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.real<span class="o">(</span>spec_vect_00<span class="o">)</span>
+</span><span id="__span-7-2"><a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="nv">spec_vect_11</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.real<span class="o">(</span>spec_vect_11<span class="o">)</span>
+</span></code></pre></div></p>
+<p>Add a white noise (standard deviation 0.1) to each spectrum signal:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="nv">wn_vect_00</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.random.normal<span class="o">(</span><span class="m">0</span>,0.1,spec_vect_00.shape<span class="o">)</span>
+</span><span id="__span-8-2"><a href="#__codelineno-8-2" id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="nv">wn_vect_11</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.random.normal<span class="o">(</span><span class="m">0</span>,0.1,spec_vect_11.shape<span class="o">)</span>
+</span><span id="__span-8-3"><a href="#__codelineno-8-3" id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="nv">spec_vect_00</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>wn_vect_00
+</span><span id="__span-8-4"><a href="#__codelineno-8-4" id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="nv">spec_vect_11</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>wn_vect_11
+</span></code></pre></div></p>
+<p>Reconstruct a complex signal with the Hilbert transform for the 2 channels:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="nv">spec_vect_00</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>hilbert<span class="o">(</span>spec_vect_00<span class="o">)[</span>::2<span class="o">]</span>
+</span><span id="__span-9-2"><a href="#__codelineno-9-2" id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="nv">spec_vect_11</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>hilbert<span class="o">(</span>spec_vect_11<span class="o">)[</span>::2<span class="o">]</span>
+</span><span id="__span-9-3"><a href="#__codelineno-9-3" id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="nv">freq_vect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>freq_vect<span class="o">[</span>::2<span class="o">]</span>
+</span></code></pre></div></p>
+<p>Assemble the 2 spectrum channels into a single matrix:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="nv">spec_mat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.vstack<span class="o">((</span>spec_vect_00,spec_vect_11<span class="o">))</span>
+</span></code></pre></div></p>
+<p>This is the matrix of signals to which we will apply the PBWE.</p>
+<h3 id="the-application-of-the-pbwe">The application of the PBWE:</h3>
+<p>The PBWE can be applied directly to the multi-channel spectrum using the PyPBWE.PBWE function.</p>
+<p>Extrapolation factor (=&lt; 3 recommended by Cuomo (1992)):
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="nv">extra_factor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span>
+</span></code></pre></div></p>
+<p>Order of the model as a ratio of the total number of samples in each spectrum (= 0.33 recommended by Cuomo (1992)):
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="nv">model_order</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>.33
+</span></code></pre></div></p>
+<p>Zero-padding factor (= time domain interpolation factor):
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a href="#__codelineno-13-1" id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="nv">zp_factor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span>
+</span></code></pre></div></p>
+<p>Cut 5% of samples on each side of the 2 spectra:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a href="#__codelineno-14-1" id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="nv">side_cut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>True
+</span></code></pre></div></p>
+<p>Calculate the spectrum's frequency step:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a href="#__codelineno-15-1" id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="nv">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>freq_vect<span class="o">[</span><span class="m">1</span><span class="o">]</span>-freq_vect<span class="o">[</span><span class="m">0</span><span class="o">]</span>
+</span></code></pre></div></p>
+<p>Application of the PBWE to the 2 polarimetric channels' spectra:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a href="#__codelineno-16-1" id="__codelineno-16-1" name="__codelineno-16-1"></a>output_pbwe,<span class="w"> </span><span class="nv">time_pbwe_vect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>PyPBWE.PBWE<span class="o">(</span>spec_mat,df,extra_factor,model_order,zp_factor,side_cut<span class="o">)</span>
+</span></code></pre></div></p>
+<p>output_bwe matrix contains the time-domain radar soundings after PBWE, ready to be displayed with time axis time_pbwe_vect.</p>
+<h3 id="display-of-the-pbwe-results">Display of the PBWE results:</h3>
+<p>In this section we display the PBWE results compared to the original radar soundings for polarimetric channels 00 and 11.</p>
+<p>Generate a time vector corresponding to the time-domain transform:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a href="#__codelineno-17-1" id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="nv">time_vect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.linspace<span class="o">(</span><span class="m">0</span>,1/df,zp_factor*np.shape<span class="o">(</span>spec_mat<span class="o">)[</span><span class="m">1</span><span class="o">])</span>
+</span></code></pre></div></p>
+<p>Display the original radar sounding and the PBWE version for channel 00:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a href="#__codelineno-18-1" id="__codelineno-18-1" name="__codelineno-18-1"></a>plt.figure<span class="o">(</span><span class="nv">figsize</span><span class="o">=(</span><span class="m">12</span>.75,5<span class="o">))</span>
+</span><span id="__span-18-2"><a href="#__codelineno-18-2" id="__codelineno-18-2" name="__codelineno-18-2"></a>
+</span><span id="__span-18-3"><a href="#__codelineno-18-3" id="__codelineno-18-3" name="__codelineno-18-3"></a>plt.subplot<span class="o">(</span><span class="m">1</span>,2,1<span class="o">)</span>
+</span><span id="__span-18-4"><a href="#__codelineno-18-4" id="__codelineno-18-4" name="__codelineno-18-4"></a>plt.plot<span class="o">(</span>time_vect*1e9,abs<span class="o">(</span><span class="m">1</span>.85*np.fft.fft<span class="o">(</span>spec_mat<span class="o">[</span><span class="m">0</span>,:<span class="o">]</span>*np.hamming<span class="o">(</span>len<span class="o">(</span>spec_mat<span class="o">[</span><span class="m">0</span>,:<span class="o">]))</span>,zp_factor*len<span class="o">(</span>spec_mat<span class="o">[</span><span class="m">0</span>,:<span class="o">])))</span>/len<span class="o">(</span>spec_mat<span class="o">[</span><span class="m">0</span>,:<span class="o">])</span>,<span class="s1">'k-'</span><span class="o">)</span>
+</span><span id="__span-18-5"><a href="#__codelineno-18-5" id="__codelineno-18-5" name="__codelineno-18-5"></a>plt.plot<span class="o">(</span>time_pbwe_vect*1e9,abs<span class="o">(</span>output_pbwe<span class="o">[</span><span class="m">0</span>,:<span class="o">])</span>,<span class="s1">'r-'</span><span class="o">)</span>
+</span><span id="__span-18-6"><a href="#__codelineno-18-6" id="__codelineno-18-6" name="__codelineno-18-6"></a>plt.xlim<span class="o">([</span><span class="m">5</span>,9<span class="o">])</span>
+</span><span id="__span-18-7"><a href="#__codelineno-18-7" id="__codelineno-18-7" name="__codelineno-18-7"></a>plt.ylim<span class="o">([</span>-0.05,1.3<span class="o">])</span>
+</span><span id="__span-18-8"><a href="#__codelineno-18-8" id="__codelineno-18-8" name="__codelineno-18-8"></a>plt.xlabel<span class="o">(</span><span class="s1">'Time delays (ns)'</span><span class="o">)</span>
+</span><span id="__span-18-9"><a href="#__codelineno-18-9" id="__codelineno-18-9" name="__codelineno-18-9"></a>plt.ylabel<span class="o">(</span><span class="s1">'Normalized amplitude'</span><span class="o">)</span>
+</span><span id="__span-18-10"><a href="#__codelineno-18-10" id="__codelineno-18-10" name="__codelineno-18-10"></a>plt.legend<span class="o">([</span><span class="s1">'Original radar sounding'</span>,<span class="s1">'Radar sounding after PBWE'</span><span class="o">]</span>,<span class="w"> </span><span class="nv">loc</span><span class="w"> </span><span class="o">=</span><span class="s1">'best'</span><span class="o">)</span>
+</span><span id="__span-18-11"><a href="#__codelineno-18-11" id="__codelineno-18-11" name="__codelineno-18-11"></a>plt.title<span class="o">(</span><span class="s1">'PBWE application - Polar channel 00'</span><span class="o">)</span>
+</span><span id="__span-18-12"><a href="#__codelineno-18-12" id="__codelineno-18-12" name="__codelineno-18-12"></a>plt.grid<span class="o">()</span>
+</span></code></pre></div></p>
+<p>Display the original radar sounding and the PBWE version for channel 00:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a href="#__codelineno-19-1" id="__codelineno-19-1" name="__codelineno-19-1"></a>plt.subplot<span class="o">(</span><span class="m">1</span>,2,2<span class="o">)</span>
+</span><span id="__span-19-2"><a href="#__codelineno-19-2" id="__codelineno-19-2" name="__codelineno-19-2"></a>plt.plot<span class="o">(</span>time_vect*1e9,abs<span class="o">(</span><span class="m">1</span>.85*np.fft.fft<span class="o">(</span>spec_mat<span class="o">[</span><span class="m">1</span>,:<span class="o">]</span>*np.hamming<span class="o">(</span>len<span class="o">(</span>spec_mat<span class="o">[</span><span class="m">1</span>,:<span class="o">]))</span>,zp_factor*len<span class="o">(</span>spec_mat<span class="o">[</span><span class="m">1</span>,:<span class="o">])))</span>/len<span class="o">(</span>spec_mat<span class="o">[</span><span class="m">1</span>,:<span class="o">])</span>,<span class="s1">'k-'</span><span class="o">)</span>
+</span><span id="__span-19-3"><a href="#__codelineno-19-3" id="__codelineno-19-3" name="__codelineno-19-3"></a>plt.plot<span class="o">(</span>time_pbwe_vect*1e9,abs<span class="o">(</span>output_pbwe<span class="o">[</span><span class="m">1</span>,:<span class="o">])</span>,<span class="s1">'r-'</span><span class="o">)</span>
+</span><span id="__span-19-4"><a href="#__codelineno-19-4" id="__codelineno-19-4" name="__codelineno-19-4"></a>plt.xlim<span class="o">([</span><span class="m">5</span>,9<span class="o">])</span>
+</span><span id="__span-19-5"><a href="#__codelineno-19-5" id="__codelineno-19-5" name="__codelineno-19-5"></a>plt.ylim<span class="o">([</span>-0.05,1.3<span class="o">])</span>
+</span><span id="__span-19-6"><a href="#__codelineno-19-6" id="__codelineno-19-6" name="__codelineno-19-6"></a>plt.xlabel<span class="o">(</span><span class="s1">'Time delays (ns)'</span><span class="o">)</span>
+</span><span id="__span-19-7"><a href="#__codelineno-19-7" id="__codelineno-19-7" name="__codelineno-19-7"></a>plt.ylabel<span class="o">(</span><span class="s1">'Normalized amplitude'</span><span class="o">)</span>
+</span><span id="__span-19-8"><a href="#__codelineno-19-8" id="__codelineno-19-8" name="__codelineno-19-8"></a>plt.legend<span class="o">([</span><span class="s1">'Original radar sounding'</span>,<span class="s1">'Radar sounding after PBWE'</span><span class="o">]</span>,<span class="w"> </span><span class="nv">loc</span><span class="w"> </span><span class="o">=</span><span class="s1">'best'</span><span class="o">)</span>
+</span><span id="__span-19-9"><a href="#__codelineno-19-9" id="__codelineno-19-9" name="__codelineno-19-9"></a>plt.title<span class="o">(</span><span class="s1">'PBWE application - Polar channel 11'</span><span class="o">)</span>
+</span><span id="__span-19-10"><a href="#__codelineno-19-10" id="__codelineno-19-10" name="__codelineno-19-10"></a>plt.grid<span class="o">()</span>
+</span><span id="__span-19-11"><a href="#__codelineno-19-11" id="__codelineno-19-11" name="__codelineno-19-11"></a>
+</span><span id="__span-19-12"><a href="#__codelineno-19-12" id="__codelineno-19-12" name="__codelineno-19-12"></a>plt.tight_layout<span class="o">()</span>
+</span><span id="__span-19-13"><a href="#__codelineno-19-13" id="__codelineno-19-13" name="__codelineno-19-13"></a>plt.show<span class="o">()</span>
+</span></code></pre></div></p>
+<p>(The X 1.85 factor in amplitude corresponds to the compensation for the Hamming window).</p>
+<p>Here is an example of figure displayed with this command:</p>
+<p><a href="Figure_example_PyBWE_PBWE.png"><img src="https://github.com/NicOudart/PyBWE/raw/main/docs/figures/Figure_example_PyBWE_PBWE.png"/></a></p>
+<h3 id="manual-extrapolation">Manual extrapolation:</h3>
+<p>If you want to model and extrapolate the multi-channel spectrum manually, it can also be done using the PyPBWE.polar_burg and PyPBWE.polar_extrapolation functions.</p>
+<p>Cutting 5% of frequencies on each side of the spectrum:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a href="#__codelineno-20-1" id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="nv">spec_mat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>spec_mat<span class="o">[</span>:,round<span class="o">(</span>np.shape<span class="o">(</span>spec_mat<span class="o">)[</span><span class="m">1</span><span class="o">]</span>*0.05<span class="o">)</span>:np.shape<span class="o">(</span>spec_mat<span class="o">)[</span><span class="m">1</span><span class="o">]</span>-round<span class="o">(</span>np.shape<span class="o">(</span>spec_mat<span class="o">)[</span><span class="m">1</span><span class="o">]</span>*0.05<span class="o">)]</span>
+</span><span id="__span-20-2"><a href="#__codelineno-20-2" id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="nv">freq_vect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>freq_vect<span class="o">[</span>round<span class="o">(</span>len<span class="o">(</span>freq_vect<span class="o">)</span>*0.05<span class="o">)</span>:len<span class="o">(</span>freq_vect<span class="o">)</span>-round<span class="o">(</span>len<span class="o">(</span>freq_vect<span class="o">)</span>*0.05<span class="o">)]</span>
+</span></code></pre></div></p>
+<p>Retrieve the number of polarimetric channels:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a href="#__codelineno-21-1" id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="nv">Npol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.shape<span class="o">(</span>spec_mat<span class="o">)[</span><span class="m">0</span><span class="o">]</span>
+</span></code></pre></div></p>
+<p>Retrieve the new number of samples in the spectrum:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-22-1"><a href="#__codelineno-22-1" id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="nv">M</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.shape<span class="o">(</span>spec_mat<span class="o">)[</span><span class="m">1</span><span class="o">]</span>
+</span></code></pre></div></p>
+<p>Set the multichannel AR model's order as ⅓ of the number of samples:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-23-1"><a href="#__codelineno-23-1" id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="nv">model_order_nb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>round<span class="o">(</span><span class="m">0</span>.33*M<span class="o">)</span>
+</span></code></pre></div></p>
+<p>Fit a multichannel AR model to spec_mat:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-24-1"><a href="#__codelineno-24-1" id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="o">[</span>Thetaf,Thetab,err<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>PyPBWE.polar_burg<span class="o">(</span>spec_mat,model_order_nb<span class="o">)</span>
+</span></code></pre></div></p>
+<p>Number of samples to be extrapolated on each side of the multichannel spectrum to get an extrapolation factor of 3:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a href="#__codelineno-25-1" id="__codelineno-25-1" name="__codelineno-25-1"></a><span class="nv">Mextra</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>round<span class="o">(((</span><span class="m">3</span>*M<span class="o">)</span>-M<span class="o">)</span>//2<span class="o">)</span>+1
+</span></code></pre></div></p>
+<p>Extrapolation of spec_mat on each side of the multichannel spectrum:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-26-1"><a href="#__codelineno-26-1" id="__codelineno-26-1" name="__codelineno-26-1"></a>spec_mat_extra,spec_mat_extra_forward,spec_mat_extra_backward<span class="w"> </span><span class="o">=</span><span class="w"> </span>PyPBWE.polar_extrapolation<span class="o">(</span>spec_mat,Thetaf,Thetab,Mextra,<span class="s2">"both"</span><span class="o">)</span>
+</span></code></pre></div></p>
+<p>spec_mat_extra is the extrapolated multichannel spectrum on both sides, spec_mat_extra_forward and spec_mat_extra_backward are the forward and backward extrapolations of this multichannel spectrum.</p>
+<h3 id="display-of-the-extrapolation-result">Display of the extrapolation result:</h3>
+<p>In this section, we display the polarimetric extrapolated spectra (channels 00 and 11), along with the expected spectra (noise-free) after extrapolation for comparison.</p>
+<p>Generate the expected spectrum after extrapolation for comparison:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-27-1"><a href="#__codelineno-27-1" id="__codelineno-27-1" name="__codelineno-27-1"></a><span class="nv">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>freq_vect<span class="o">[</span><span class="m">1</span><span class="o">]</span>-freq_vect<span class="o">[</span><span class="m">0</span><span class="o">]</span>
+</span><span id="__span-27-2"><a href="#__codelineno-27-2" id="__codelineno-27-2" name="__codelineno-27-2"></a><span class="nv">freq_vect_expected</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.linspace<span class="o">(</span>freq_vect<span class="o">[</span><span class="m">0</span><span class="o">]</span>-<span class="o">(</span>df*<span class="o">(</span>Mextra-2<span class="o">))</span>,freq_vect<span class="o">[</span>-1<span class="o">]</span>+<span class="o">(</span>df*Mextra<span class="o">)</span>,M+<span class="o">(</span>Mextra*2<span class="o">))</span>
+</span><span id="__span-27-3"><a href="#__codelineno-27-3" id="__codelineno-27-3" name="__codelineno-27-3"></a><span class="nv">spec_vect_expected_00</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.exp<span class="o">(</span>1j*4*pi*dist_target1*freq_vect_expected/3e8<span class="o">)</span>+np.exp<span class="o">(</span>1j*4*pi*dist_target2*freq_vect_expected/3e8<span class="o">)</span>
+</span><span id="__span-27-4"><a href="#__codelineno-27-4" id="__codelineno-27-4" name="__codelineno-27-4"></a><span class="nv">spec_vect_expected_11</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.exp<span class="o">(</span>1j*4*pi*dist_target1*freq_vect_expected/3e8<span class="o">)</span>-np.exp<span class="o">(</span>1j*4*pi*dist_target2*freq_vect_expected/3e8<span class="o">)</span>
+</span></code></pre></div></p>
+<p>Display the expected spectrum after extrapolation for the 00 and 11 channels:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-28-1"><a href="#__codelineno-28-1" id="__codelineno-28-1" name="__codelineno-28-1"></a>plt.figure<span class="o">(</span><span class="nv">figsize</span><span class="o">=(</span><span class="m">10</span>,6<span class="o">))</span>
+</span><span id="__span-28-2"><a href="#__codelineno-28-2" id="__codelineno-28-2" name="__codelineno-28-2"></a>
+</span><span id="__span-28-3"><a href="#__codelineno-28-3" id="__codelineno-28-3" name="__codelineno-28-3"></a>plt.subplot<span class="o">(</span><span class="m">2</span>,1,1<span class="o">)</span>
+</span><span id="__span-28-4"><a href="#__codelineno-28-4" id="__codelineno-28-4" name="__codelineno-28-4"></a>plt.plot<span class="o">(</span>freq_vect_expected*1e-9,np.real<span class="o">(</span>spec_vect_expected_00<span class="o">)</span>,<span class="s1">'r-'</span><span class="o">)</span>
+</span><span id="__span-28-5"><a href="#__codelineno-28-5" id="__codelineno-28-5" name="__codelineno-28-5"></a>plt.plot<span class="o">(</span>freq_vect_expected*1e-9,abs<span class="o">(</span>spec_vect_expected_00<span class="o">)</span>,<span class="s1">'k-'</span><span class="o">)</span>
+</span><span id="__span-28-6"><a href="#__codelineno-28-6" id="__codelineno-28-6" name="__codelineno-28-6"></a>plt.axvspan<span class="o">((</span>freq_vect<span class="o">[</span><span class="m">0</span><span class="o">]</span>-<span class="o">(</span>df*<span class="o">(</span>Mextra-2<span class="o">)))</span>*1e-9,<span class="w"> </span><span class="o">(</span>freq_vect<span class="o">[</span><span class="m">0</span><span class="o">]</span>-df<span class="o">)</span>*1e-9,<span class="w"> </span><span class="nv">facecolor</span><span class="o">=</span><span class="s1">'k'</span>,<span class="w"> </span><span class="nv">alpha</span><span class="o">=</span><span class="m">0</span>.1<span class="o">)</span>
+</span><span id="__span-28-7"><a href="#__codelineno-28-7" id="__codelineno-28-7" name="__codelineno-28-7"></a>plt.axvspan<span class="o">((</span>freq_vect<span class="o">[</span>-1<span class="o">]</span>+df<span class="o">)</span>*1e-9,<span class="w"> </span><span class="o">(</span>freq_vect<span class="o">[</span>-1<span class="o">]</span>+<span class="o">(</span>df*Mextra<span class="o">))</span>*1e-9,<span class="w"> </span><span class="nv">facecolor</span><span class="o">=</span><span class="s1">'k'</span>,<span class="w"> </span><span class="nv">alpha</span><span class="o">=</span><span class="m">0</span>.1<span class="o">)</span>
+</span><span id="__span-28-8"><a href="#__codelineno-28-8" id="__codelineno-28-8" name="__codelineno-28-8"></a>plt.xlim<span class="o">([(</span>freq_vect<span class="o">[</span><span class="m">0</span><span class="o">]</span>-<span class="o">(</span>df*<span class="o">(</span>Mextra-2<span class="o">)))</span>*1e-9,<span class="o">(</span>freq_vect<span class="o">[</span>-1<span class="o">]</span>+<span class="o">(</span>df*Mextra<span class="o">))</span>*1e-9<span class="o">])</span>
+</span><span id="__span-28-9"><a href="#__codelineno-28-9" id="__codelineno-28-9" name="__codelineno-28-9"></a>plt.ylim<span class="o">([</span>-2.5,3<span class="o">])</span>
+</span><span id="__span-28-10"><a href="#__codelineno-28-10" id="__codelineno-28-10" name="__codelineno-28-10"></a>plt.xlabel<span class="o">(</span><span class="s1">'Frequency (GHz)'</span><span class="o">)</span>
+</span><span id="__span-28-11"><a href="#__codelineno-28-11" id="__codelineno-28-11" name="__codelineno-28-11"></a>plt.ylabel<span class="o">(</span><span class="s1">'Amplitude'</span><span class="o">)</span>
+</span><span id="__span-28-12"><a href="#__codelineno-28-12" id="__codelineno-28-12" name="__codelineno-28-12"></a>plt.legend<span class="o">([</span><span class="s1">'Real part'</span>,<span class="s1">'Modulus'</span><span class="o">]</span>,loc<span class="o">=</span><span class="s1">'upper left'</span>,ncol<span class="o">=</span><span class="m">2</span><span class="o">)</span>
+</span><span id="__span-28-13"><a href="#__codelineno-28-13" id="__codelineno-28-13" name="__codelineno-28-13"></a>plt.title<span class="o">(</span><span class="s1">'Expected spectrum after extrapolation - Polar channel 00'</span><span class="o">)</span>
+</span><span id="__span-28-14"><a href="#__codelineno-28-14" id="__codelineno-28-14" name="__codelineno-28-14"></a>plt.grid<span class="o">()</span>
+</span><span id="__span-28-15"><a href="#__codelineno-28-15" id="__codelineno-28-15" name="__codelineno-28-15"></a>
+</span><span id="__span-28-16"><a href="#__codelineno-28-16" id="__codelineno-28-16" name="__codelineno-28-16"></a>plt.subplot<span class="o">(</span><span class="m">2</span>,1,2<span class="o">)</span>
+</span><span id="__span-28-17"><a href="#__codelineno-28-17" id="__codelineno-28-17" name="__codelineno-28-17"></a>plt.plot<span class="o">(</span>freq_vect_expected*1e-9,np.real<span class="o">(</span>spec_vect_expected_11<span class="o">)</span>,<span class="s1">'r-'</span><span class="o">)</span>
+</span><span id="__span-28-18"><a href="#__codelineno-28-18" id="__codelineno-28-18" name="__codelineno-28-18"></a>plt.plot<span class="o">(</span>freq_vect_expected*1e-9,abs<span class="o">(</span>spec_vect_expected_11<span class="o">)</span>,<span class="s1">'k-'</span><span class="o">)</span>
+</span><span id="__span-28-19"><a href="#__codelineno-28-19" id="__codelineno-28-19" name="__codelineno-28-19"></a>plt.axvspan<span class="o">((</span>freq_vect<span class="o">[</span><span class="m">0</span><span class="o">]</span>-<span class="o">(</span>df*<span class="o">(</span>Mextra-2<span class="o">)))</span>*1e-9,<span class="w"> </span><span class="o">(</span>freq_vect<span class="o">[</span><span class="m">0</span><span class="o">]</span>-df<span class="o">)</span>*1e-9,facecolor<span class="o">=</span><span class="s1">'k'</span>,alpha<span class="o">=</span><span class="m">0</span>.1<span class="o">)</span>
+</span><span id="__span-28-20"><a href="#__codelineno-28-20" id="__codelineno-28-20" name="__codelineno-28-20"></a>plt.axvspan<span class="o">((</span>freq_vect<span class="o">[</span>-1<span class="o">]</span>+df<span class="o">)</span>*1e-9,<span class="w"> </span><span class="o">(</span>freq_vect<span class="o">[</span>-1<span class="o">]</span>+<span class="o">(</span>df*Mextra<span class="o">))</span>*1e-9,facecolor<span class="o">=</span><span class="s1">'k'</span>,alpha<span class="o">=</span><span class="m">0</span>.1<span class="o">)</span>
+</span><span id="__span-28-21"><a href="#__codelineno-28-21" id="__codelineno-28-21" name="__codelineno-28-21"></a>plt.xlim<span class="o">([(</span>freq_vect<span class="o">[</span><span class="m">0</span><span class="o">]</span>-<span class="o">(</span>df*<span class="o">(</span>Mextra-2<span class="o">)))</span>*1e-9,<span class="o">(</span>freq_vect<span class="o">[</span>-1<span class="o">]</span>+<span class="o">(</span>df*Mextra<span class="o">))</span>*1e-9<span class="o">])</span>
+</span><span id="__span-28-22"><a href="#__codelineno-28-22" id="__codelineno-28-22" name="__codelineno-28-22"></a>plt.ylim<span class="o">([</span>-2.5,3<span class="o">])</span>
+</span><span id="__span-28-23"><a href="#__codelineno-28-23" id="__codelineno-28-23" name="__codelineno-28-23"></a>plt.xlabel<span class="o">(</span><span class="s1">'Frequency (GHz)'</span><span class="o">)</span>
+</span><span id="__span-28-24"><a href="#__codelineno-28-24" id="__codelineno-28-24" name="__codelineno-28-24"></a>plt.ylabel<span class="o">(</span><span class="s1">'Amplitude'</span><span class="o">)</span>
+</span><span id="__span-28-25"><a href="#__codelineno-28-25" id="__codelineno-28-25" name="__codelineno-28-25"></a>plt.legend<span class="o">([</span><span class="s1">'Real part'</span>,<span class="s1">'Modulus'</span><span class="o">]</span>,loc<span class="o">=</span><span class="s1">'upper left'</span>,ncol<span class="o">=</span><span class="m">2</span><span class="o">)</span>
+</span><span id="__span-28-26"><a href="#__codelineno-28-26" id="__codelineno-28-26" name="__codelineno-28-26"></a>plt.title<span class="o">(</span><span class="s1">'Expected spectrum after extrapolation - Polar channel 11'</span><span class="o">)</span>
+</span><span id="__span-28-27"><a href="#__codelineno-28-27" id="__codelineno-28-27" name="__codelineno-28-27"></a>plt.grid<span class="o">()</span>
+</span><span id="__span-28-28"><a href="#__codelineno-28-28" id="__codelineno-28-28" name="__codelineno-28-28"></a>
+</span><span id="__span-28-29"><a href="#__codelineno-28-29" id="__codelineno-28-29" name="__codelineno-28-29"></a>plt.tight_layout<span class="o">()</span>
+</span><span id="__span-28-30"><a href="#__codelineno-28-30" id="__codelineno-28-30" name="__codelineno-28-30"></a>plt.show<span class="o">()</span>
+</span></code></pre></div></p>
+<p>Here is an example of figure displayed with this command:</p>
+<p><a href="Figure_example_PyPBWE_extrapolation_1.png"><img src="https://github.com/NicOudart/PyBWE/raw/main/docs/figures/Figure_example_PyPBWE_extrapolation_1.png"/></a></p>
+<p>Generate a vector of frequencies for the forward and backward extrapolations:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-29-1"><a href="#__codelineno-29-1" id="__codelineno-29-1" name="__codelineno-29-1"></a><span class="nv">freq_vect_forward</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.linspace<span class="o">(</span>freq_vect<span class="o">[</span>-1<span class="o">]</span>+df,freq_vect<span class="o">[</span>-1<span class="o">]</span>+<span class="o">(</span>df*Mextra<span class="o">)</span>,Mextra<span class="o">)</span>
+</span><span id="__span-29-2"><a href="#__codelineno-29-2" id="__codelineno-29-2" name="__codelineno-29-2"></a><span class="nv">freq_vect_backward</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.linspace<span class="o">(</span>freq_vect<span class="o">[</span><span class="m">0</span><span class="o">]</span>-<span class="o">(</span>df*<span class="o">(</span>Mextra-2<span class="o">))</span>,freq_vect<span class="o">[</span><span class="m">0</span><span class="o">]</span>-df,Mextra<span class="o">)</span>
+</span></code></pre></div></p>
+<p>Display the original radar spectrum and the extrapolation for the 00 and 11 channels:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-30-1"><a href="#__codelineno-30-1" id="__codelineno-30-1" name="__codelineno-30-1"></a>plt.figure<span class="o">(</span><span class="nv">figsize</span><span class="o">=(</span><span class="m">11</span>,6<span class="o">))</span>
+</span><span id="__span-30-2"><a href="#__codelineno-30-2" id="__codelineno-30-2" name="__codelineno-30-2"></a>
+</span><span id="__span-30-3"><a href="#__codelineno-30-3" id="__codelineno-30-3" name="__codelineno-30-3"></a>plt.subplot<span class="o">(</span><span class="m">2</span>,1,1<span class="o">)</span>
+</span><span id="__span-30-4"><a href="#__codelineno-30-4" id="__codelineno-30-4" name="__codelineno-30-4"></a>plt.plot<span class="o">(</span>freq_vect*1e-9,np.real<span class="o">(</span>spec_mat<span class="o">[</span><span class="m">0</span>,:<span class="o">])</span>,<span class="s1">'r-'</span><span class="o">)</span>
+</span><span id="__span-30-5"><a href="#__codelineno-30-5" id="__codelineno-30-5" name="__codelineno-30-5"></a>plt.plot<span class="o">(</span>freq_vect*1e-9,abs<span class="o">(</span>spec_mat<span class="o">[</span><span class="m">0</span>,:<span class="o">])</span>,<span class="s1">'k-'</span><span class="o">)</span>
+</span><span id="__span-30-6"><a href="#__codelineno-30-6" id="__codelineno-30-6" name="__codelineno-30-6"></a>plt.plot<span class="o">(</span>freq_vect_backward*1e-9,np.real<span class="o">(</span>spec_mat_extra_backward<span class="o">[</span><span class="m">0</span>,:<span class="o">])</span>,<span class="s1">'y-'</span><span class="o">)</span>
+</span><span id="__span-30-7"><a href="#__codelineno-30-7" id="__codelineno-30-7" name="__codelineno-30-7"></a>plt.plot<span class="o">(</span>freq_vect_backward*1e-9,abs<span class="o">(</span>spec_mat_extra_backward<span class="o">[</span><span class="m">0</span>,:<span class="o">])</span>,<span class="s1">'g-'</span><span class="o">)</span>
+</span><span id="__span-30-8"><a href="#__codelineno-30-8" id="__codelineno-30-8" name="__codelineno-30-8"></a>plt.plot<span class="o">(</span>freq_vect_forward*1e-9,np.real<span class="o">(</span>spec_mat_extra_forward<span class="o">[</span><span class="m">0</span>,:<span class="o">])</span>,<span class="s1">'c-'</span><span class="o">)</span>
+</span><span id="__span-30-9"><a href="#__codelineno-30-9" id="__codelineno-30-9" name="__codelineno-30-9"></a>plt.plot<span class="o">(</span>freq_vect_forward*1e-9,abs<span class="o">(</span>spec_mat_extra_forward<span class="o">[</span><span class="m">0</span>,:<span class="o">])</span>,<span class="s1">'b-'</span><span class="o">)</span>
+</span><span id="__span-30-10"><a href="#__codelineno-30-10" id="__codelineno-30-10" name="__codelineno-30-10"></a>plt.xlim<span class="o">([(</span>freq_vect<span class="o">[</span><span class="m">0</span><span class="o">]</span>-<span class="o">(</span>df*<span class="o">(</span>Mextra-2<span class="o">)))</span>*1e-9,<span class="o">(</span>freq_vect<span class="o">[</span>-1<span class="o">]</span>+<span class="o">(</span>df*Mextra<span class="o">))</span>*1e-9<span class="o">])</span>
+</span><span id="__span-30-11"><a href="#__codelineno-30-11" id="__codelineno-30-11" name="__codelineno-30-11"></a>plt.ylim<span class="o">([</span>-3.6,2.3<span class="o">])</span>
+</span><span id="__span-30-12"><a href="#__codelineno-30-12" id="__codelineno-30-12" name="__codelineno-30-12"></a>plt.xlabel<span class="o">(</span><span class="s1">'Frequency (GHz)'</span><span class="o">)</span>
+</span><span id="__span-30-13"><a href="#__codelineno-30-13" id="__codelineno-30-13" name="__codelineno-30-13"></a>plt.ylabel<span class="o">(</span><span class="s1">'Amplitude'</span><span class="o">)</span>
+</span><span id="__span-30-14"><a href="#__codelineno-30-14" id="__codelineno-30-14" name="__codelineno-30-14"></a>plt.legend<span class="o">([</span><span class="s1">'Original radar spectrum (real part)'</span>,<span class="s1">'Original radar spectrum (modulus)'</span>,<span class="s1">'Backward extrapolation (real part)'</span>,<span class="s1">'Backward extrapolation (modulus)'</span>,<span class="s1">'Forward extrapolation (real part)'</span>,<span class="s1">'Forward extrapolation (modulus)'</span><span class="o">]</span>,loc<span class="w"> </span><span class="o">=</span><span class="s1">'lower center'</span>,ncol<span class="o">=</span><span class="m">3</span><span class="o">)</span>
+</span><span id="__span-30-15"><a href="#__codelineno-30-15" id="__codelineno-30-15" name="__codelineno-30-15"></a>plt.title<span class="o">(</span><span class="s1">'Spectrum polarimetric extrapolation - Polar channel 00'</span><span class="o">)</span>
+</span><span id="__span-30-16"><a href="#__codelineno-30-16" id="__codelineno-30-16" name="__codelineno-30-16"></a>plt.grid<span class="o">()</span>
+</span><span id="__span-30-17"><a href="#__codelineno-30-17" id="__codelineno-30-17" name="__codelineno-30-17"></a>
+</span><span id="__span-30-18"><a href="#__codelineno-30-18" id="__codelineno-30-18" name="__codelineno-30-18"></a>plt.subplot<span class="o">(</span><span class="m">2</span>,1,2<span class="o">)</span>
+</span><span id="__span-30-19"><a href="#__codelineno-30-19" id="__codelineno-30-19" name="__codelineno-30-19"></a>plt.plot<span class="o">(</span>freq_vect*1e-9,np.real<span class="o">(</span>spec_mat<span class="o">[</span><span class="m">1</span>,:<span class="o">])</span>,<span class="s1">'r-'</span><span class="o">)</span>
+</span><span id="__span-30-20"><a href="#__codelineno-30-20" id="__codelineno-30-20" name="__codelineno-30-20"></a>plt.plot<span class="o">(</span>freq_vect*1e-9,abs<span class="o">(</span>spec_mat<span class="o">[</span><span class="m">1</span>,:<span class="o">])</span>,<span class="s1">'k-'</span><span class="o">)</span>
+</span><span id="__span-30-21"><a href="#__codelineno-30-21" id="__codelineno-30-21" name="__codelineno-30-21"></a>plt.plot<span class="o">(</span>freq_vect_backward*1e-9,np.real<span class="o">(</span>spec_mat_extra_backward<span class="o">[</span><span class="m">1</span>,:<span class="o">])</span>,<span class="s1">'y-'</span><span class="o">)</span>
+</span><span id="__span-30-22"><a href="#__codelineno-30-22" id="__codelineno-30-22" name="__codelineno-30-22"></a>plt.plot<span class="o">(</span>freq_vect_backward*1e-9,abs<span class="o">(</span>spec_mat_extra_backward<span class="o">[</span><span class="m">1</span>,:<span class="o">])</span>,<span class="s1">'g-'</span><span class="o">)</span>
+</span><span id="__span-30-23"><a href="#__codelineno-30-23" id="__codelineno-30-23" name="__codelineno-30-23"></a>plt.plot<span class="o">(</span>freq_vect_forward*1e-9,np.real<span class="o">(</span>spec_mat_extra_forward<span class="o">[</span><span class="m">1</span>,:<span class="o">])</span>,<span class="s1">'c-'</span><span class="o">)</span>
+</span><span id="__span-30-24"><a href="#__codelineno-30-24" id="__codelineno-30-24" name="__codelineno-30-24"></a>plt.plot<span class="o">(</span>freq_vect_forward*1e-9,abs<span class="o">(</span>spec_mat_extra_forward<span class="o">[</span><span class="m">1</span>,:<span class="o">])</span>,<span class="s1">'b-'</span><span class="o">)</span>
+</span><span id="__span-30-25"><a href="#__codelineno-30-25" id="__codelineno-30-25" name="__codelineno-30-25"></a>plt.xlim<span class="o">([(</span>freq_vect<span class="o">[</span><span class="m">0</span><span class="o">]</span>-<span class="o">(</span>df*<span class="o">(</span>Mextra-2<span class="o">)))</span>*1e-9,<span class="o">(</span>freq_vect<span class="o">[</span>-1<span class="o">]</span>+<span class="o">(</span>df*Mextra<span class="o">))</span>*1e-9<span class="o">])</span>
+</span><span id="__span-30-26"><a href="#__codelineno-30-26" id="__codelineno-30-26" name="__codelineno-30-26"></a>plt.ylim<span class="o">([</span>-3.6,2.3<span class="o">])</span>
+</span><span id="__span-30-27"><a href="#__codelineno-30-27" id="__codelineno-30-27" name="__codelineno-30-27"></a>plt.xlabel<span class="o">(</span><span class="s1">'Frequency (GHz)'</span><span class="o">)</span>
+</span><span id="__span-30-28"><a href="#__codelineno-30-28" id="__codelineno-30-28" name="__codelineno-30-28"></a>plt.ylabel<span class="o">(</span><span class="s1">'Amplitude'</span><span class="o">)</span>
+</span><span id="__span-30-29"><a href="#__codelineno-30-29" id="__codelineno-30-29" name="__codelineno-30-29"></a>plt.legend<span class="o">([</span><span class="s1">'Original radar spectrum (real part)'</span>,<span class="s1">'Original radar spectrum (modulus)'</span>,<span class="s1">'Backward extrapolation (real part)'</span>,<span class="s1">'Backward extrapolation (modulus)'</span>,<span class="s1">'Forward extrapolation (real part)'</span>,<span class="s1">'Forward extrapolation (modulus)'</span><span class="o">]</span>,loc<span class="w"> </span><span class="o">=</span><span class="s1">'lower center'</span>,ncol<span class="o">=</span><span class="m">3</span><span class="o">)</span>
+</span><span id="__span-30-30"><a href="#__codelineno-30-30" id="__codelineno-30-30" name="__codelineno-30-30"></a>plt.title<span class="o">(</span><span class="s1">'Spectrum polarimetric extrapolation - Polar channel 11'</span><span class="o">)</span>
+</span><span id="__span-30-31"><a href="#__codelineno-30-31" id="__codelineno-30-31" name="__codelineno-30-31"></a>plt.grid<span class="o">()</span>
+</span><span id="__span-30-32"><a href="#__codelineno-30-32" id="__codelineno-30-32" name="__codelineno-30-32"></a>
+</span><span id="__span-30-33"><a href="#__codelineno-30-33" id="__codelineno-30-33" name="__codelineno-30-33"></a>plt.tight_layout<span class="o">()</span>
+</span><span id="__span-30-34"><a href="#__codelineno-30-34" id="__codelineno-30-34" name="__codelineno-30-34"></a>plt.show<span class="o">()</span>
+</span></code></pre></div></p>
+<p>Here is an example of figure displayed with this command:</p>
+<p><a href="Figure_example_PyPBWE_extrapolation_2.png"><img src="https://github.com/NicOudart/PyBWE/raw/main/docs/figures/Figure_example_PyPBWE_extrapolation_2.png"/></a></p>
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p><a href="https://apps.dtic.mil/sti/tr/pdf/ADA258462.pdf">Cuomo (1992)</a></p>
+</li>
+<li>
+<p><a href="https://doi.org/10.1109/IGARSS.2003.1295505">Suwa and Iwamoto (2003)</a></p>
+</li>
+<li>
+<p><a href="https://doi.org/10.1109/TGRS.2006.885406">Suwa and Iwamoto (2007)</a></p>
+</li>
+<li>
+<p><a href="https://doi.org/10.1089/ast.2016.1532">Ciarletti et al. (2017)</a></p>
+</li>
+<li>
+<p><a href="https://doi.org/10.1109/MetroAeroSpace.2018.8453529">Raguso et al. (2018)</a></p>
+</li>
+<li>
+<p><a href="https://doi.org/10.1016/j.pss.2020.104939">Hervé et al. (2020)</a></p>
+</li>
+<li>
+<p><a href="https://doi.org/10.1016/j.pss.2021.105173">Oudart et al. (2021)</a></p>
+</li>
+<li>
+<p><a href="https://doi.org/10.1109/TGRS.2022.3216893">Gambacorta et al. (2022)</a></p>
+</li>
+</ul>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<nav aria-label="Footer" class="md-footer__inner md-grid">
+<a aria-label="Previous: PyBWE" class="md-footer__link md-footer__link--prev" href="../PyBWE/" rel="prev">
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</div>
+<div class="md-footer__title">
+<div class="md-ellipsis">
+<span class="md-footer__direction">
+                Previous
+              </span>
+              PyBWE
+            </div>
+</div>
+</a>
+<a aria-label="Next: PySSBWE" class="md-footer__link md-footer__link--next" href="../PySSBWE/" rel="next">
+<div class="md-footer__title">
+<div class="md-ellipsis">
+<span class="md-footer__direction">
+                Next
+              </span>
+              PySSBWE
+            </div>
+</div>
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"></path></svg>
+</div>
+</a>
+</nav>
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-footer-copyright">
+<div class="md-footer-copyright__highlight">
+            Copyright © 2023 Nicolas OUDART
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+          Material for MkDocs
+        </a>
+</div>
+<div class="md-footer-social">
+<a class="md-footer-social__link" href="https://github.com/NicOudart" rel="noopener" target="_blank" title="Nicolas OUDART on GitHub">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+</a>
+<a class="md-footer-social__link" href="https://www.researchgate.net/profile/Nicolas-Oudart" rel="noopener" target="_blank" title="Nicolas OUDART on ResearchGate">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M0 32v448h448V32H0zm262.2 334.4c-6.6 3-33.2 6-50-14.2-9.2-10.6-25.3-33.3-42.2-63.6-8.9 0-14.7 0-21.4-.6v46.4c0 23.5 6 21.2 25.8 23.9v8.1c-6.9-.3-23.1-.8-35.6-.8-13.1 0-26.1.6-33.6.8v-8.1c15.5-2.9 22-1.3 22-23.9V225c0-22.6-6.4-21-22-23.9V193c25.8 1 53.1-.6 70.9-.6 31.7 0 55.9 14.4 55.9 45.6 0 21.1-16.7 42.2-39.2 47.5 13.6 24.2 30 45.6 42.2 58.9 7.2 7.8 17.2 14.7 27.2 14.7v7.3zm22.9-135c-23.3 0-32.2-15.7-32.2-32.2V167c0-12.2 8.8-30.4 34-30.4s30.4 17.9 30.4 17.9l-10.7 7.2s-5.5-12.5-19.7-12.5c-7.9 0-19.7 7.3-19.7 19.7v26.8c0 13.4 6.6 23.3 17.9 23.3 14.1 0 21.5-10.9 21.5-26.8h-17.9v-10.7h30.4c0 20.5 4.7 49.9-34 49.9zm-116.5 44.7c-9.4 0-13.6-.3-20-.8v-69.7c6.4-.6 15-.6 22.5-.6 23.3 0 37.2 12.2 37.2 34.5 0 21.9-15 36.6-39.7 36.6z"></path></svg>
+</a>
+<a class="md-footer-social__link" href="https://www.linkedin.com/in/nicolas-oudart-683aab109/" rel="noopener" target="_blank" title="Nicolas OUDART on LinkedIn">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.indexes", "toc.integrate", "toc.follow", "content.code.copy", "content.code.annotate"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.709b4209.min.js", "version": "v2.4"}</script>
+<script src="../assets/javascripts/bundle.29db7785.min.js"></script>
+</body>
+</html>
